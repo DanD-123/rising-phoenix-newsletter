@@ -256,7 +256,7 @@
                 
                 <section>
                     <h3 class="text-xs font-black uppercase tracking-[0.3em] text-evo-red mb-2 border-l-4 border-evo-red pl-4">Term Dates & Holidays 2026/7</h3>
-                    <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-8 italic bg-gray-100 dark:bg-gray-800 p-3 rounded border-l-4 border-evo-gold">Click on any date or event below to add it directly to your Google Calendar.</p>
+                    <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-8 italic bg-gray-100 dark:bg-gray-800 p-3 rounded border-l-4 border-evo-gold">Click on any date or event below to add it directly to your Google Calendar! Past events are hidden automatically.</p>
                     <div class="space-y-4">
                         <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Christmas+Holiday&dates=20261221/20270102" target="_blank" data-end-date="2027-01-01" class="calendar-event block bg-gray-50 dark:bg-gray-800/50 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 flex justify-between items-center hover:border-evo-gold transition group cursor-pointer">
                             <div>
@@ -266,7 +266,7 @@
                             <span class="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded text-[10px] font-black uppercase dark:text-gray-300">Holiday</span>
                         </a>
 
-                        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700">
+                        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 block-term">
                             <h4 class="text-xl font-black italic uppercase text-evo-gold mb-6 tracking-tighter">// Spring Term 2026/7</h4>
                             <ul class="space-y-2">
                                 <li>
@@ -320,7 +320,7 @@
                             </ul>
                         </div>
 
-                        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700">
+                        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 block-term">
                             <h4 class="text-xl font-black italic uppercase text-evo-gold mb-6 tracking-tighter">// Summer Term 2026/7</h4>
                             <ul class="space-y-2">
                                 <li>
@@ -707,7 +707,7 @@
                         <svg class="w-4 h-4 absolute right-4 top-3.5 text-gray-400 group-hover:text-evo-gold transition pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
 
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgFK_ObKUiZD4vtlXhcmA5hqgmuoaps5mW_qr-LDSH8mHOsQ/viewform?usp=dialog" target="_blank" class="evo-btn text-xs px-6 py-3 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition whitespace-nowrap inline-flex items-center justify-center">Become A Wrtier</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgFK_ObKUiZD4vtlXhcmA5hqgmuoaps5mW_qr-LDSH8mHOsQ/viewform?usp=dialog" target="_blank" class="evo-btn text-xs px-6 py-3 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition whitespace-nowrap inline-flex items-center justify-center">Become A Writer</a>
                 </div>
 
                 <button id="mobile-menu-button" class="md:hidden text-dark-text dark:text-white focus:outline-none p-2 shrink-0">
@@ -848,7 +848,7 @@
                     <a href="#" class="text-3xl font-extrabold tracking-widest uppercase text-dark-text dark:text-white mb-6 block">
                         <span class="brand-slash">//</span> RISING <span class="brand-slash">//</span> <span class="text-evo-gold">PHOENIX</span>
                     </a>
-                    <p class="text-sm mt-6 text-gray-500 dark:text-gray-400 max-w-sm leading-relaxed font-medium">The Rising <span class="brand-slash text-sm">//</span> Phoenix is a year 12 run school newsletter. Dan D 12.11 Site Developer Elleanore P 12.11 Organiser.  Isabelle Wright 12. Head of Club </p>
+                    <p class="text-sm mt-6 text-gray-500 dark:text-gray-400 max-w-sm leading-relaxed font-medium">The Rising <span class="brand-slash text-sm">//</span> Phoenix is a year 12 run school newsletter. Dan D 12.11 Site Developer. Elleanore P 12.11 Organiser. Isabelle Wright 12. Head of Club</p>
                 </div>
                 <div>
                     <h4 class="text-dark-text dark:text-white font-black uppercase text-xs tracking-widest mb-6 text-evo-gold">Quick Links</h4>
@@ -1011,7 +1011,6 @@
         
         // ---------------- DYNAMIC CALENDAR LOGIC ----------------
         function updateDynamicCalendar() {
-            // Evaluates dynamically on load. Any event with a data-end-date before today will be permanently hidden from the list.
             const today = new Date();
             today.setHours(0,0,0,0);
             
@@ -1022,9 +1021,22 @@
                     if (endDate < today) {
                         if(el.tagName.toLowerCase() === 'a' && el.parentElement.tagName.toLowerCase() === 'li') {
                             el.parentElement.style.display = 'none';
+                            el.parentElement.classList.add('past-event');
                         } else {
                             el.style.display = 'none';
+                            el.classList.add('past-event');
                         }
+                    }
+                }
+            });
+
+            // Hide the entire Term block if all its events are in the past
+            document.querySelectorAll('.rounded-3xl.block-term').forEach(card => {
+                const events = card.querySelectorAll('li');
+                if (events.length > 0) {
+                    const pastEvents = card.querySelectorAll('li.past-event');
+                    if (events.length === pastEvents.length) {
+                        card.style.display = 'none';
                     }
                 }
             });
