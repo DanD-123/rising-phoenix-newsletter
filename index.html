@@ -15,15 +15,16 @@
                             sans: ['Inter', 'sans-serif'],
                         },
                         colors: {
-                            'evo-gold': '#E6B325', 
-                            'evo-red': '#700000', /* Updated to exact crimson hex */
-                            'evo-cream': '#FFFDF5', /* Soft off-white for cards */
-                            'dark-text': '#0B1120', /* Deepened for maximum contrast on light cards */
+                            'evo-gold': '#D4AF37', 
+                            'evo-red': '#700000', /* Updated to specific crimson hex */
+                            'evo-cream': '#FFFDF5', /* Added off-white for cards to contrast red bg */
+                            'dark-text': '#111827', 
                             'pastel-grey': '#E5E7EB',
+                            'evo-accent': '#700000' 
                         },
                         boxShadow: {
                             'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
-                            'glow': '0 0 15px rgba(230, 179, 37, 0.4)' 
+                            'glow': '0 0 15px rgba(212, 175, 55, 0.4)' 
                         }
                     }
                 }
@@ -33,16 +34,16 @@
     <script src="https://cdn.tailwindcss.com" onload="setupTailwind()"></script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
         
         body {
-            background-color: #700000; /* Deep Red Background */
-            color: #FFFDF5; 
+            background-color: #700000; /* Deep Crimson Background */
+            color: #FFFDF5; /* Default readable text */
             overflow-x: hidden; 
         }
         
         .dark body {
-            background-color: #0f1115; /* Deep dark background for dark mode */
+            background-color: #111827;
             color: #F3F4F6;
         }
 
@@ -56,45 +57,55 @@
 
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #700000; }
-        .dark ::-webkit-scrollbar-track { background: #0f1115; }
-        ::-webkit-scrollbar-thumb { background: #E6B325; border-radius: 4px; }
-        .dark ::-webkit-scrollbar-thumb { background: #700000; } /* Crimson scroll thumb in dark mode */
-        ::-webkit-scrollbar-thumb:hover { background: #c5981d; }
+        .dark ::-webkit-scrollbar-track { background: #1F2937; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+        .dark ::-webkit-scrollbar-thumb { background: #700000; }
+        ::-webkit-scrollbar-thumb:hover { background: #B5952F; }
 
         ::selection {
-            background-color: #E6B325; 
-            color: #111827;
+            background-color: #D4AF37; 
+            color: #ffffff;
         }
 
         .brand-slash {
-            color: #E6B325 !important; 
+            color: #D4AF37 !important; 
             font-style: italic;
             font-weight: 900;
             margin-right: 0.15rem; 
             margin-left: 0.15rem;
             display: inline-block;
+            transform: skewX(-10deg); 
         }
 
-        .nav-pill {
-            background: transparent;
-            color: #FFFDF5;
-            border: 1px solid rgba(255, 253, 245, 0.3);
-            padding: 10px 32px;
-            border-radius: 9999px;
-            font-weight: 700;
+        .nav-tab {
+            position: relative;
+            background: #FFFDF5; /* Cream tab on light mode */
+            color: #111827;
+            padding: 12px 24px;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            font-weight: 800;
             text-transform: uppercase;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             letter-spacing: 0.05em;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            top: -2px; 
+            border: 1px solid #f3f4f6;
+            border-top: none;
             cursor: pointer;
         }
-        .nav-pill:hover, .nav-pill.active {
-            background-color: #E6B325;
-            color: #111827;
-            border-color: #E6B325;
+        .dark .nav-tab {
+            background: #1F2937;
+            border-color: #374151;
+            color: #E5E7EB;
+        }
+
+        .nav-tab:hover, .group:hover .nav-tab-trigger {
+            top: 2px; 
+            background-color: #D4AF37; 
+            box-shadow: none;
+            color: black; 
         }
 
         .category-menu {
@@ -102,14 +113,14 @@
             position: absolute;
             top: 100%;
             left: 0;
-            margin-top: 10px;
-            background: #FFFDF5;
+            background: #FFFDF5; /* Cream bg on light mode */
             min-width: 450px;
             box-shadow: 0 20px 40px -5px rgba(0,0,0,0.3);
-            border-radius: 24px;
+            border-radius: 0 0 16px 16px;
             padding: 24px;
             z-index: 40;
-            border: 2px solid #E6B325; 
+            border: 1px solid #f3f4f6;
+            border-top: 4px solid #D4AF37; 
             pointer-events: auto;
             opacity: 0;
             transform: translateY(-10px);
@@ -117,8 +128,11 @@
         }
         .dark .category-menu {
             background: #1F2937;
-            border-color: #700000; /* Crimson accent */
+            border-color: #374151;
+            border-top-color: #D4AF37; 
+            box-shadow: 0 20px 40px -5px rgba(112,0,0,0.2); /* Dark mode red glow */
         }
+
         .group:hover .category-menu {
             display: grid;
             opacity: 1;
@@ -127,24 +141,46 @@
             gap: 32px;
         }
 
+        .evo-card {
+            background-color: #FFFDF5; /* Cream cards on light mode */
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid transparent;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .dark .evo-card {
+            background-color: #1F2937;
+            border-color: #374151;
+        }
+
+        .evo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.3); 
+            border-color: rgba(212, 175, 55, 0.3); 
+        }
+        .dark .evo-card:hover {
+            border-color: rgba(112, 0, 0, 0.5); /* Crimson border on hover dark mode */
+            box-shadow: 0 20px 40px -5px rgba(112, 0, 0, 0.2); 
+        }
+
         .evo-btn {
-            background-color: #E6B325; 
-            color: #111827; 
+            background-color: #D4AF37; 
+            color: #000000; 
             padding: 0.75rem 2.5rem;
-            font-weight: 800;
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
-            border-radius: 9999px;
         }
         .evo-btn:hover {
             background-color: #111827; 
-            color: #FFFDF5; 
+            color: #ffffff; 
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.4); 
         }
         .dark .evo-btn:hover {
-            background-color: #700000;
+            background-color: #700000; /* Crimson button hover dark mode */
             color: #FFFDF5;
         }
 
@@ -155,197 +191,197 @@
             background-size: 1em 1em;
             padding-right: 2.5rem;
             appearance: none;
-            color: #111827;
         }
         .dark .filter-select {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            color: #FFFDF5;
         }
 
         .modal-overlay {
-            background-color: rgba(17, 24, 39, 0.8);
+            background-color: rgba(17, 24, 39, 0.85);
             backdrop-filter: blur(8px);
         }
     </style>
 </head>
-<body class="antialiased selection:bg-evo-gold selection:text-dark-text transition-colors duration-300">
+<body class="antialiased selection:bg-evo-gold selection:text-white dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
 
     <div class="fixed top-28 right-6 z-[90] flex flex-col space-y-4">
-        <button onclick="handleGlobalBack()" class="bg-evo-cream dark:bg-gray-800/90 text-dark-text dark:text-white p-3 rounded-full shadow-xl border border-black/10 dark:border-evo-red/50 hover:scale-110 transition-all duration-300 group" title="Back">
+        <button onclick="handleGlobalBack()" class="bg-[#FFFDF5]/90 dark:bg-gray-800/90 backdrop-blur-sm text-dark-text dark:text-white p-3 rounded-full shadow-lg border border-white/50 dark:border-evo-red/50 hover:bg-white dark:hover:border-evo-red hover:scale-110 transition-all duration-300 group" title="Back">
             <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
         </button>
-        <button onclick="resetToHome()" class="bg-evo-gold text-dark-text p-3 rounded-full shadow-xl hover:bg-black hover:text-evo-gold dark:hover:bg-evo-red dark:hover:text-white hover:scale-110 transition-all duration-300" title="Home">
+        <button onclick="resetToHome()" class="bg-evo-gold/90 backdrop-blur-sm text-black p-3 rounded-full shadow-lg hover:bg-black hover:text-evo-gold dark:hover:bg-evo-red dark:hover:text-white hover:scale-110 transition-all duration-300" title="Home">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
         </button>
     </div>
 
-    <button onclick="toggleDarkMode()" class="fixed bottom-6 right-6 z-[100] bg-evo-cream dark:bg-gray-800 text-dark-text dark:text-evo-red p-4 rounded-full shadow-2xl border-2 border-black/5 dark:border-evo-red/50 hover:scale-110 transition-transform duration-300" title="Toggle Dark Mode">
+    <button onclick="toggleDarkMode()" class="fixed bottom-6 right-6 z-[100] bg-[#FFFDF5] dark:bg-gray-800 text-dark-text dark:text-evo-red p-4 rounded-full shadow-2xl border-2 border-gray-100 dark:border-evo-red/50 hover:scale-110 transition-transform duration-300" title="Toggle Dark Mode">
         <svg id="theme-sun" class="w-6 h-6 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
         <svg id="theme-moon" class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
     </button>
 
     <div id="login-modal" class="hidden fixed inset-0 z-[100] modal-overlay flex justify-center items-center p-4">
-        <div class="bg-evo-cream dark:bg-gray-800 p-10 rounded-3xl max-w-sm w-full shadow-2xl border border-black/10 dark:border-evo-red/50 relative animate-fade-in-up">
-            <button onclick="closeLogin()" class="absolute top-4 right-4 text-gray-400 hover:text-black dark:hover:text-evo-red transition">
+        <div class="bg-[#FFFDF5] dark:bg-gray-800 p-10 rounded-2xl max-w-sm w-full shadow-2xl border-t-8 border-evo-gold dark:border-evo-red relative animate-fade-in-up">
+            <button onclick="closeLogin()" class="absolute top-4 right-4 text-gray-400 hover:text-black dark:hover:text-white transition">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <h2 class="text-3xl font-black uppercase mb-2 text-center text-dark-text dark:text-white">Developer</h2>
+            <h2 class="text-3xl font-black uppercase mb-2 text-center italic tracking-tighter text-dark-text dark:text-white">Developer</h2>
             <p class="text-center text-xs font-bold text-evo-gold dark:text-evo-red uppercase tracking-widest mb-8">Secure Access</p>
-            <div id="login-error" class="hidden bg-red-50 text-red-600 p-3 rounded-lg text-xs font-bold mb-6 text-center">Invalid Credentials</div>
+            <div id="login-error" class="hidden bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-3 rounded-lg text-xs font-bold mb-6 text-center border border-red-100 dark:border-red-900">Invalid Credentials</div>
             <form id="login-form" class="space-y-5">
                 <div>
                     <label class="block text-[10px] font-black uppercase text-gray-400 tracking-wider mb-2">Username</label>
-                    <input type="text" id="username" class="w-full bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-evo-gold text-dark-text dark:text-white font-medium shadow-sm">
+                    <input type="text" id="username" class="w-full bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-evo-gold focus:bg-white dark:focus:ring-evo-red transition font-bold text-sm text-dark-text dark:text-white">
                 </div>
                 <div>
                     <label class="block text-[10px] font-black uppercase text-gray-400 tracking-wider mb-2">Password</label>
-                    <input type="password" id="password" class="w-full bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-evo-gold text-dark-text dark:text-white font-medium shadow-sm">
+                    <input type="password" id="password" class="w-full bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-evo-gold focus:bg-white dark:focus:ring-evo-red transition font-bold text-sm text-dark-text dark:text-white">
                 </div>
-                <button type="submit" class="w-full evo-btn mt-2 shadow-lg">Login</button>
+                <button type="submit" class="w-full evo-btn mt-2 rounded-lg shadow-lg">Login</button>
             </form>
         </div>
     </div>
 
-    <div id="key-dates-modal" class="hidden fixed inset-0 z-[150] bg-evo-cream dark:bg-gray-900 flex flex-col animate-fade-in-up overflow-hidden">
-        <div class="flex justify-between items-center p-6 md:p-8 border-b border-black/10 dark:border-evo-red/30 bg-evo-cream/90 dark:bg-gray-900/90 backdrop-blur sticky top-0 z-50">
+    <div id="key-dates-modal" class="hidden fixed inset-0 z-[150] bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl flex flex-col animate-fade-in-up overflow-hidden">
+        <div class="flex justify-between items-center p-6 md:p-8 border-b border-gray-100/50 dark:border-evo-red/20 bg-white/80 dark:bg-gray-900/80 backdrop-blur sticky top-0 z-50">
             <div class="flex items-center gap-4 md:gap-8">
-                <button onclick="closeKeyDatesModal()" class="text-dark-text dark:text-white hover:text-evo-gold dark:hover:text-evo-red p-3 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md rounded-full transition group border border-gray-100 dark:border-gray-700">
+                <button onclick="closeKeyDatesModal()" class="text-dark-text dark:text-white hover:text-evo-red dark:hover:text-evo-gold p-3 bg-gray-50 dark:bg-gray-800 shadow-sm hover:shadow-md rounded-full transition group border border-gray-100 dark:border-gray-700" title="Back">
                     <svg class="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 </button>
                 <button onclick="resetToHome()" class="hidden md:flex items-center gap-2 hover:opacity-80 transition group shrink-0 min-w-0">
                     <img src="./logo.png" alt="Logo" class="h-8 w-auto object-contain drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/200x80?text=Logo'"> 
                     <span class="font-extrabold uppercase text-lg text-dark-text dark:text-white">
-                        THE PHOENIX RISING
+                        <span class="brand-slash text-lg">//</span> Rising <span class="brand-slash text-lg">//</span> <span class="text-evo-gold group-hover:text-dark-text dark:group-hover:text-evo-red transition-colors duration-300">Phoenix</span>
                     </span>
                 </button>
             </div>
-            <h2 class="text-2xl md:text-4xl font-black uppercase text-dark-text dark:text-white text-right truncate pl-4">
-                 Key Dates
+            <h2 class="text-2xl md:text-5xl font-black uppercase italic text-dark-text dark:text-white text-right tracking-tighter truncate pl-4">
+                 <span class="brand-slash">//</span> Key <span class="text-evo-gold dark:text-evo-red">Dates</span>
             </h2>
         </div>
-        <div class="flex-1 overflow-y-auto p-8 md:p-16 bg-white/50 dark:bg-gray-900">
-            <div class="max-w-4xl mx-auto space-y-12 pb-24 text-dark-text dark:text-white">
+        
+        <div class="flex-1 overflow-y-auto p-8 md:p-16 text-dark-text dark:text-white">
+            <div class="max-w-4xl mx-auto space-y-12 pb-24">
+                
                 <section>
-                    <h3 class="text-sm font-bold uppercase tracking-widest text-evo-red dark:text-evo-red mb-2 pl-4">Term Dates & Holidays 2026/7</h3>
-                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-8 bg-white dark:bg-gray-800 p-4 rounded-xl border border-black/5 shadow-sm">Click on any date or event below to add it directly to your Google Calendar! Past events are hidden automatically.</p>
+                    <h3 class="text-xs font-black uppercase tracking-[0.3em] text-evo-red dark:text-evo-gold mb-2 border-l-4 border-evo-red dark:border-evo-gold pl-4">Term Dates & Holidays 2026/7</h3>
+                    <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-8 italic bg-gray-100 dark:bg-gray-800 p-3 rounded border-l-4 border-evo-gold dark:border-evo-red">Click on any date or event below to add it directly to your Google Calendar! Past events are hidden automatically.</p>
                     <div class="space-y-4">
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Christmas+Holiday&dates=20261221/20270102" target="_blank" data-end-date="2027-01-01" class="calendar-event block bg-white dark:bg-gray-800 p-6 rounded-2xl border border-black/5 dark:border-gray-700 flex justify-between items-center hover:border-evo-gold dark:hover:border-evo-red transition shadow-sm group cursor-pointer">
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Christmas+Holiday&dates=20261221/20270102" target="_blank" data-end-date="2027-01-01" class="calendar-event block bg-gray-50 dark:bg-gray-800/50 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 flex justify-between items-center hover:border-evo-gold dark:hover:border-evo-red transition shadow-sm group cursor-pointer">
                             <div>
-                                <h4 class="font-bold text-lg text-dark-text dark:text-white group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Christmas Holiday</h4>
-                                <p class="text-sm text-gray-500 font-medium mt-1">Mon 21 Dec 2026 - Fri 1 Jan 2027</p>
+                                <h4 class="font-black text-lg text-dark-text dark:text-white group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Christmas Holiday</h4>
+                                <p class="text-sm text-gray-500 uppercase font-bold tracking-wider">Mon 21 Dec 2026 - Fri 1 Jan 2027</p>
                             </div>
-                            <span class="px-4 py-1 bg-evo-gold text-dark-text rounded-full text-xs font-bold uppercase shadow-sm">Holiday</span>
+                            <span class="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded text-[10px] font-black uppercase text-dark-text dark:text-gray-300">Holiday</span>
                         </a>
 
-                        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border border-black/5 dark:border-gray-700 block-term">
-                            <h4 class="text-xl font-bold uppercase text-evo-gold dark:text-evo-red mb-6 tracking-wide">Spring Term 2026/7</h4>
-                            <ul class="space-y-3">
+                        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 block-term">
+                            <h4 class="text-xl font-black italic uppercase text-evo-gold dark:text-evo-red mb-6 tracking-tighter">// Spring Term 2026/7</h4>
+                            <ul class="space-y-2 text-dark-text dark:text-white">
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=ACADEMY+DAY+2&dates=20270104/20270105" target="_blank" data-end-date="2027-01-04" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition">
-                                        <span class="font-bold text-evo-red dark:text-evo-red min-w-[120px] text-sm group-hover:text-evo-gold transition">Jan 4, 2027</span>
-                                        <span class="font-semibold text-dark-text dark:text-white text-sm group-hover:text-evo-gold transition">Monday - ACADEMY DAY 2</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=ACADEMY+DAY+2&dates=20270104/20270105" target="_blank" data-end-date="2027-01-04" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
+                                        <span class="font-black text-evo-red dark:text-evo-gold min-w-[100px] text-sm group-hover:text-evo-gold transition">Jan 4, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Monday - ACADEMY DAY 2</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Students+Return&dates=20270105/20270106" target="_blank" data-end-date="2027-01-05" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition">
-                                        <span class="font-bold text-evo-red dark:text-evo-red min-w-[120px] text-sm group-hover:text-evo-gold transition">Jan 5, 2027</span>
-                                        <span class="font-semibold text-dark-text dark:text-white text-sm group-hover:text-evo-gold transition">Tuesday - Students Return</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Students+Return&dates=20270105/20270106" target="_blank" data-end-date="2027-01-05" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
+                                        <span class="font-black text-evo-red dark:text-evo-gold min-w-[100px] text-sm group-hover:text-evo-gold transition">Jan 5, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Tuesday - Students Return</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=ACADEMY+DAY+3&dates=20270202/20270203" target="_blank" data-end-date="2027-02-02" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition">
-                                        <span class="font-bold text-evo-red dark:text-evo-red min-w-[120px] text-sm group-hover:text-evo-gold transition">Feb 2, 2027</span>
-                                        <span class="font-semibold text-dark-text dark:text-white text-sm group-hover:text-evo-gold transition">Tuesday - ACADEMY DAY 3</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=ACADEMY+DAY+3&dates=20270202/20270203" target="_blank" data-end-date="2027-02-02" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
+                                        <span class="font-black text-evo-red dark:text-evo-gold min-w-[100px] text-sm group-hover:text-evo-gold transition">Feb 2, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Tuesday - ACADEMY DAY 3</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Break+up+for+February+half-term&dates=20270212/20270213" target="_blank" data-end-date="2027-02-12" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition">
-                                        <span class="font-bold text-evo-red dark:text-evo-red min-w-[120px] text-sm group-hover:text-evo-gold transition">Feb 12, 2027</span>
-                                        <span class="font-semibold text-dark-text dark:text-white text-sm group-hover:text-evo-gold transition">Friday - Break up for February half-term</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Break+up+for+February+half-term&dates=20270212/20270213" target="_blank" data-end-date="2027-02-12" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
+                                        <span class="font-black text-evo-red dark:text-evo-gold min-w-[100px] text-sm group-hover:text-evo-gold transition">Feb 12, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Friday - Break up for February half-term</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=February+half-term+holiday&dates=20270215/20270220" target="_blank" data-end-date="2027-02-19" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition text-gray-500">
-                                        <span class="font-bold min-w-[120px] text-sm group-hover:text-evo-gold transition">Feb 15 - 19</span>
-                                        <span class="font-medium text-sm group-hover:text-evo-gold transition">February half-term holiday</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=February+half-term+holiday&dates=20270215/20270220" target="_blank" data-end-date="2027-02-19" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition italic opacity-80 hover:opacity-100">
+                                        <span class="font-black min-w-[100px] text-sm group-hover:text-evo-gold transition">Feb 15 - 19</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">February half-term holiday</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Students+return+for+Spring+Term+2&dates=20270222/20270223" target="_blank" data-end-date="2027-02-22" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition">
-                                        <span class="font-bold text-evo-red dark:text-evo-red min-w-[120px] text-sm group-hover:text-evo-gold transition">Feb 22, 2027</span>
-                                        <span class="font-semibold text-dark-text dark:text-white text-sm group-hover:text-evo-gold transition">Monday - All students return for Spring Term 2</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Students+return+for+Spring+Term+2&dates=20270222/20270223" target="_blank" data-end-date="2027-02-22" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
+                                        <span class="font-black text-evo-red dark:text-evo-gold min-w-[100px] text-sm group-hover:text-evo-gold transition">Feb 22, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Monday - All students return for Spring Term 2</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Final+day+of+Spring+Term&dates=20270325/20270326" target="_blank" data-end-date="2027-03-25" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition">
-                                        <span class="font-bold text-evo-red dark:text-evo-red min-w-[120px] text-sm group-hover:text-evo-gold transition">Mar 25, 2027</span>
-                                        <span class="font-semibold text-dark-text dark:text-white text-sm group-hover:text-evo-gold transition">Thursday - Final day of Spring Term</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Final+day+of+Spring+Term&dates=20270325/20270326" target="_blank" data-end-date="2027-03-25" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
+                                        <span class="font-black text-evo-red dark:text-evo-gold min-w-[100px] text-sm group-hover:text-evo-gold transition">Mar 25, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Thursday - Final day of Spring Term</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Easter+Holiday&dates=20270326/20270410" target="_blank" data-end-date="2027-04-09" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition text-gray-500">
-                                        <span class="font-bold min-w-[120px] text-sm group-hover:text-evo-gold transition">Mar 26 - Apr 9</span>
-                                        <span class="font-medium text-sm group-hover:text-evo-gold transition">Easter Holiday (inc. Good Friday & Easter Monday)</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Easter+Holiday&dates=20270326/20270410" target="_blank" data-end-date="2027-04-09" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition italic opacity-80 hover:opacity-100">
+                                        <span class="font-black min-w-[100px] text-sm group-hover:text-evo-gold transition">Mar 26 - Apr 9</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Easter Holiday (inc. Good Friday & Easter Monday)</span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
 
-                        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border border-black/5 dark:border-gray-700 block-term">
-                            <h4 class="text-xl font-bold uppercase text-evo-gold dark:text-evo-red mb-6 tracking-wide">Summer Term 2026/7</h4>
-                            <ul class="space-y-3">
+                        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 block-term">
+                            <h4 class="text-xl font-black italic uppercase text-evo-gold dark:text-evo-red mb-6 tracking-tighter">// Summer Term 2026/7</h4>
+                            <ul class="space-y-2 text-dark-text dark:text-white">
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=All+students+return+for+Summer+Term+1&dates=20270412/20270413" target="_blank" data-end-date="2027-04-12" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition">
-                                        <span class="font-bold text-evo-red dark:text-evo-red min-w-[120px] text-sm group-hover:text-evo-gold transition">Apr 12, 2027</span>
-                                        <span class="font-semibold text-dark-text dark:text-white text-sm group-hover:text-evo-gold transition">Monday - All students return for Summer Term 1</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=All+students+return+for+Summer+Term+1&dates=20270412/20270413" target="_blank" data-end-date="2027-04-12" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
+                                        <span class="font-black text-evo-red dark:text-evo-gold min-w-[100px] text-sm group-hover:text-evo-gold transition">Apr 12, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Monday - All students return for Summer Term 1</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=INSET+DAY+4&dates=20270414/20270415" target="_blank" data-end-date="2027-04-14" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition">
-                                        <span class="font-bold text-evo-red dark:text-evo-red min-w-[120px] text-sm group-hover:text-evo-gold transition">Apr 14, 2027</span>
-                                        <span class="font-semibold text-dark-text dark:text-white text-sm group-hover:text-evo-gold transition">Wednesday - INSET DAY 4</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=INSET+DAY+4&dates=20270414/20270415" target="_blank" data-end-date="2027-04-14" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
+                                        <span class="font-black text-evo-red dark:text-evo-gold min-w-[100px] text-sm group-hover:text-evo-gold transition">Apr 14, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Wednesday - INSET DAY 4</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=May+Bank+Holiday&dates=20270503/20270504" target="_blank" data-end-date="2027-05-03" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition">
-                                        <span class="font-bold text-evo-red dark:text-evo-red min-w-[120px] text-sm group-hover:text-evo-gold transition">May 3, 2027</span>
-                                        <span class="font-semibold text-dark-text dark:text-white text-sm group-hover:text-evo-gold transition">Monday - May Bank Holiday</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=May+Bank+Holiday&dates=20270503/20270504" target="_blank" data-end-date="2027-05-03" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
+                                        <span class="font-black text-evo-red dark:text-evo-gold min-w-[100px] text-sm group-hover:text-evo-gold transition">May 3, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Monday - May Bank Holiday</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Break+up+for+May+half-term&dates=20270528/20270529" target="_blank" data-end-date="2027-05-28" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition">
-                                        <span class="font-bold text-evo-red dark:text-evo-red min-w-[120px] text-sm group-hover:text-evo-gold transition">May 28, 2027</span>
-                                        <span class="font-semibold text-dark-text dark:text-white text-sm group-hover:text-evo-gold transition">Friday - Break up for the May half-term</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Break+up+for+May+half-term&dates=20270528/20270529" target="_blank" data-end-date="2027-05-28" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
+                                        <span class="font-black text-evo-red dark:text-evo-gold min-w-[100px] text-sm group-hover:text-evo-gold transition">May 28, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Friday - Break up for the May half-term</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=May+half-term+holiday&dates=20270531/20270605" target="_blank" data-end-date="2027-06-04" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition text-gray-500">
-                                        <span class="font-bold min-w-[120px] text-sm group-hover:text-evo-gold transition">May 31 - Jun 4</span>
-                                        <span class="font-medium text-sm group-hover:text-evo-gold transition">May half-term holiday</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=May+half-term+holiday&dates=20270531/20270605" target="_blank" data-end-date="2027-06-04" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition italic opacity-80 hover:opacity-100">
+                                        <span class="font-black min-w-[100px] text-sm group-hover:text-evo-gold transition">May 31 - Jun 4</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">May half-term holiday</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=INSET+DAY+5&dates=20270607/20270608" target="_blank" data-end-date="2027-06-07" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition">
-                                        <span class="font-bold text-evo-red dark:text-evo-red min-w-[120px] text-sm group-hover:text-evo-gold transition">Jun 7, 2027</span>
-                                        <span class="font-semibold text-dark-text dark:text-white text-sm group-hover:text-evo-gold transition">Monday - INSET DAY 5</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=INSET+DAY+5&dates=20270607/20270608" target="_blank" data-end-date="2027-06-07" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
+                                        <span class="font-black text-evo-red dark:text-evo-gold min-w-[100px] text-sm group-hover:text-evo-gold transition">Jun 7, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Monday - INSET DAY 5</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Students+return+for+Summer+Term+2&dates=20270608/20270609" target="_blank" data-end-date="2027-06-08" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition">
-                                        <span class="font-bold text-evo-red dark:text-evo-red min-w-[120px] text-sm group-hover:text-evo-gold transition">Jun 8, 2027</span>
-                                        <span class="font-semibold text-dark-text dark:text-white text-sm group-hover:text-evo-gold transition">Tuesday - All students return for Summer Term 2</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Students+return+for+Summer+Term+2&dates=20270608/20270609" target="_blank" data-end-date="2027-06-08" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
+                                        <span class="font-black text-evo-red dark:text-evo-gold min-w-[100px] text-sm group-hover:text-evo-gold transition">Jun 8, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Tuesday - All students return for Summer Term 2</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Break+up+for+Summer+(End+of+Term)&dates=20270720/20270721" target="_blank" data-end-date="2027-07-20" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition">
-                                        <span class="font-bold text-evo-red dark:text-evo-red min-w-[120px] text-sm group-hover:text-evo-gold transition">Jul 20, 2027</span>
-                                        <span class="font-semibold text-dark-text dark:text-white text-sm group-hover:text-evo-gold transition">Tuesday - Break up for Summer (End of Student Term)</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Break+up+for+Summer+(End+of+Term)&dates=20270720/20270721" target="_blank" data-end-date="2027-07-20" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
+                                        <span class="font-black text-evo-red dark:text-evo-gold min-w-[100px] text-sm group-hover:text-evo-gold transition">Jul 20, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Tuesday - Break up for Summer (End of Student Term)</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Academy+Days+4+and+5&dates=20270721/20270723" target="_blank" data-end-date="2027-07-22" class="calendar-event flex flex-col sm:flex-row gap-2 sm:gap-6 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-3 -mx-3 rounded-xl transition">
-                                        <span class="font-bold text-evo-red dark:text-evo-red min-w-[120px] text-sm group-hover:text-evo-gold transition">Jul 21 - 22</span>
-                                        <span class="font-semibold text-dark-text dark:text-white text-sm group-hover:text-evo-gold transition">Wed & Thu - Academy Days 4 and 5</span>
+                                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Academy+Days+4+and+5&dates=20270721/20270723" target="_blank" data-end-date="2027-07-22" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
+                                        <span class="font-black text-evo-red dark:text-evo-gold min-w-[100px] text-sm group-hover:text-evo-gold transition">Jul 21 - 22</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Wed & Thu - Academy Days 4 and 5</span>
                                     </a>
                                 </li>
                             </ul>
@@ -356,77 +392,84 @@
         </div>
     </div>
 
-    <div id="categories-modal" class="hidden fixed inset-0 z-[150] bg-evo-cream dark:bg-gray-900 flex flex-col animate-fade-in-up overflow-hidden">
-        <div class="flex justify-between items-center p-6 md:p-8 border-b border-black/10 dark:border-evo-red/30 bg-evo-cream/90 dark:bg-gray-900/90 backdrop-blur sticky top-0 z-50">
+
+    <div id="categories-modal" class="hidden fixed inset-0 z-[150] bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl flex flex-col animate-fade-in-up overflow-hidden">
+        <div class="flex justify-between items-center p-6 md:p-8 border-b border-gray-100/50 dark:border-evo-red/20 bg-white/80 dark:bg-gray-900/80 backdrop-blur sticky top-0 z-50">
             <div class="flex items-center gap-4 md:gap-8">
-                <button onclick="closeCategoriesModal()" class="text-dark-text dark:text-white hover:text-evo-gold dark:hover:text-evo-red p-3 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md rounded-full transition group border border-gray-100 dark:border-gray-700">
+                <button onclick="closeCategoriesModal()" class="text-dark-text dark:text-white hover:text-evo-red dark:hover:text-evo-gold p-3 bg-gray-50 dark:bg-gray-800 shadow-sm hover:shadow-md rounded-full transition group border border-gray-100 dark:border-gray-700" title="Back">
                     <svg class="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 </button>
                 <button onclick="resetToHome()" class="hidden md:flex items-center gap-2 hover:opacity-80 transition group shrink-0 min-w-0">
                     <img src="./logo.png" alt="Logo" class="h-8 w-auto object-contain drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/200x80?text=Logo'">
                     <span class="font-extrabold uppercase text-lg text-dark-text dark:text-white">
-                        THE PHOENIX RISING
+                        <span class="brand-slash text-lg">//</span> Rising <span class="brand-slash text-lg">//</span> <span class="text-evo-gold group-hover:text-dark-text dark:group-hover:text-evo-red transition-colors duration-300">Phoenix</span>
                     </span>
                 </button>
             </div>
-            <h2 class="text-2xl md:text-4xl font-black uppercase text-dark-text dark:text-white text-right truncate pl-4">
-                 Topics
+            <h2 class="text-2xl md:text-5xl font-black uppercase italic text-dark-text dark:text-white text-right tracking-tighter truncate pl-4">
+                 <span class="brand-slash">//</span> Explore <span class="text-evo-gold dark:text-evo-red">Topics</span>
             </h2>
         </div>
         
-        <div class="flex-1 overflow-y-auto p-8 md:p-16 bg-white/50 dark:bg-gray-900">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto text-dark-text dark:text-white">
-                <button onclick="filterByCategory('Arts')" class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm hover:shadow-xl border border-black/5 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
-                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-400 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-dark-text dark:group-hover:text-white transition">
+        <div class="flex-1 overflow-y-auto p-8 md:p-16">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <button onclick="filterByCategory('Arts')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-white transition">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
                     </div>
                     <div>
-                        <h3 class="text-3xl font-black uppercase group-hover:text-evo-gold dark:group-hover:text-evo-red transition duration-300">Arts</h3>
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Filter By</span>
+                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red dark:group-hover:text-evo-gold transition duration-300">Arts</h3>
                     </div>
                 </button>
 
-                <button onclick="filterByCategory('Current Affairs')" class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm hover:shadow-xl border border-black/5 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
-                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-400 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-dark-text dark:group-hover:text-white transition">
+                <button onclick="filterByCategory('Current Affairs')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-white transition">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
                     </div>
                     <div>
-                        <h3 class="text-3xl font-black uppercase group-hover:text-evo-gold dark:group-hover:text-evo-red transition duration-300">Current Affairs</h3>
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Filter By</span>
+                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red dark:group-hover:text-evo-gold transition duration-300">Current Affairs</h3>
                     </div>
                 </button>
 
-                <button onclick="filterByCategory('Humanities')" class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm hover:shadow-xl border border-black/5 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
-                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-400 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-dark-text dark:group-hover:text-white transition">
+                <button onclick="filterByCategory('Humanities')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-white transition">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
                     <div>
-                        <h3 class="text-3xl font-black uppercase group-hover:text-evo-gold dark:group-hover:text-evo-red transition duration-300">Humanities</h3>
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Filter By</span>
+                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red dark:group-hover:text-evo-gold transition duration-300">Humanities</h3>
                     </div>
                 </button>
 
-                <button onclick="filterByCategory('Opinion Pieces')" class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm hover:shadow-xl border border-black/5 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
-                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-400 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-dark-text dark:group-hover:text-white transition">
+                <button onclick="filterByCategory('Opinion Pieces')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-white transition">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
                     </div>
                     <div>
-                        <h3 class="text-3xl font-black uppercase group-hover:text-evo-gold dark:group-hover:text-evo-red transition duration-300">Opinion Pieces</h3>
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Filter By</span>
+                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red dark:group-hover:text-evo-gold transition duration-300">Opinion Pieces</h3>
                     </div>
                 </button>
 
-                <button onclick="filterByCategory('Science')" class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm hover:shadow-xl border border-black/5 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
-                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-400 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-dark-text dark:group-hover:text-white transition">
+                <button onclick="filterByCategory('Science')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-white transition">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
                     </div>
                     <div>
-                        <h3 class="text-3xl font-black uppercase group-hover:text-evo-gold dark:group-hover:text-evo-red transition duration-300">Science</h3>
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Filter By</span>
+                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red dark:group-hover:text-evo-gold transition duration-300">Science</h3>
                     </div>
                 </button>
 
-                <button onclick="filterByCategory('Tech')" class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm hover:shadow-xl border border-black/5 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
-                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-400 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-dark-text dark:group-hover:text-white transition">
+                <button onclick="filterByCategory('Tech')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-white transition">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                     </div>
                     <div>
-                        <h3 class="text-3xl font-black uppercase group-hover:text-evo-gold dark:group-hover:text-evo-red transition duration-300">Tech</h3>
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Filter By</span>
+                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red dark:group-hover:text-evo-gold transition duration-300">Tech</h3>
                     </div>
                 </button>
             </div>
@@ -434,40 +477,43 @@
     </div>
 
     <div id="dashboard-modal" class="hidden fixed inset-0 z-[100] modal-overlay flex justify-center items-center p-4">
-        <div class="bg-evo-cream dark:bg-gray-800 rounded-3xl w-full max-w-4xl h-[80vh] shadow-2xl border border-black/10 dark:border-evo-red/50 relative flex flex-col overflow-hidden animate-fade-in-up">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-4xl h-[80vh] shadow-2xl border-t-8 border-evo-gold dark:border-evo-red relative flex flex-col overflow-hidden animate-fade-in-up">
             
-            <div class="bg-white dark:bg-gray-900 p-6 border-b border-black/5 dark:border-evo-red/20 flex justify-between items-center sticky top-0 z-10">
+            <div class="bg-gray-50 dark:bg-gray-900 p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 z-10">
                 <div class="flex items-center gap-4">
-                    <button onclick="closeDashboard()" class="text-gray-400 hover:text-dark-text dark:hover:text-white p-2 bg-gray-50 dark:bg-gray-800 rounded-full hover:shadow transition">
+                    <button onclick="closeDashboard()" class="text-gray-400 hover:text-black dark:hover:text-white p-2">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
-                    <button onclick="resetToHome()" class="hidden sm:flex items-center gap-2 hover:opacity-80 transition group border-l border-gray-200 dark:border-gray-600 pl-4">
+                    <button onclick="resetToHome()" class="hidden sm:flex items-center gap-2 hover:opacity-80 transition group border-l border-gray-300 dark:border-gray-600 pl-4">
                         <span class="font-extrabold uppercase text-sm text-dark-text dark:text-white">
-                            THE PHOENIX RISING
+                            <span class="brand-slash text-sm">//</span> Rising <span class="brand-slash text-sm">//</span> <span class="text-evo-gold dark:text-evo-red">Phoenix</span>
                         </span>
                     </button>
                 </div>
                 <div class="text-right">
-                    <h2 class="text-2xl font-black uppercase text-dark-text dark:text-white">Editor <span class="text-evo-gold dark:text-evo-red">Dashboard</span></h2>
+                    <h2 class="text-2xl font-black uppercase italic text-dark-text dark:text-white">Editor <span class="text-evo-gold dark:text-evo-red">Dashboard</span></h2>
                     <p id="connection-status" class="text-[10px] font-bold mt-1 text-red-500">○ Disconnected</p>
                 </div>
             </div>
 
-            <div class="flex-1 overflow-y-auto p-6 md:p-8">
+            <div class="flex-1 overflow-y-auto p-6 md:p-8 bg-white dark:bg-gray-800">
                 <div class="flex justify-between items-center mb-8">
-                    <h3 class="text-lg font-bold uppercase tracking-widest text-gray-500">Current Articles</h3>
-                    <button onclick="openAddArticleForm()" class="group flex items-center space-x-3 bg-evo-gold dark:bg-evo-red hover:bg-black text-dark-text dark:text-white px-6 py-3 rounded-full shadow-md transition-all transform hover:-translate-y-1 hover:text-white">
-                        <span class="font-bold uppercase tracking-wider text-sm">Add Article</span>
+                    <h3 class="text-lg font-bold uppercase tracking-widest text-gray-400">Current Articles</h3>
+                    <button onclick="openAddArticleForm()" class="group flex items-center space-x-3 bg-evo-gold hover:bg-black dark:bg-evo-red dark:hover:bg-white dark:hover:text-evo-red text-white px-6 py-3 rounded-lg shadow-lg transition-all transform hover:scale-105">
+                        <div class="bg-white text-evo-gold dark:text-evo-red group-hover:text-black dark:group-hover:text-evo-red rounded-full p-1">
+                            <svg class="w-4 h-4 font-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
+                        </div>
+                        <span class="font-black uppercase tracking-wider text-sm text-black group-hover:text-white dark:text-white dark:group-hover:text-evo-red transition">Add Article</span>
                     </button>
                 </div>
 
                 <div id="dashboard-list" class="space-y-4"></div>
                 
-                <div class="mt-8 pt-8 border-t border-black/5 dark:border-gray-700">
-                    <h4 class="text-xs font-bold uppercase text-gray-400 mb-4">Static Content Preview</h4>
+                <div class="mt-8 pt-8 border-t border-gray-100 dark:border-gray-700">
+                    <h4 class="text-xs font-bold uppercase text-gray-300 mb-4">Static Content Preview</h4>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 opacity-60">
-                         <div class="border border-black/10 dark:border-gray-600 p-4 rounded-xl bg-white dark:bg-gray-700 dark:text-gray-300 shadow-sm"><span class="text-xs font-bold text-evo-red dark:text-evo-red block mb-1">Science</span>Hermione's Handbag</div>
-                         <div class="border border-black/10 dark:border-gray-600 p-4 rounded-xl bg-white dark:bg-gray-700 dark:text-gray-300 shadow-sm"><span class="text-xs font-bold text-evo-red dark:text-evo-red block mb-1">Science</span>Quantum Leap</div>
+                         <div class="border border-gray-200 dark:border-gray-600 p-4 rounded bg-gray-50 dark:bg-gray-700 dark:text-gray-300"><span class="text-xs font-bold text-evo-red dark:text-evo-gold block">Science</span>Hermione's Handbag</div>
+                         <div class="border border-gray-200 dark:border-gray-600 p-4 rounded bg-gray-50 dark:bg-gray-700 dark:text-gray-300"><span class="text-xs font-bold text-evo-red dark:text-evo-gold block">Science</span>Quantum Leap</div>
                     </div>
                  </div>
             </div>
@@ -475,69 +521,69 @@
     </div>
 
     <div id="admin-panel" class="hidden fixed inset-0 z-[110] modal-overlay flex justify-center items-center p-4">
-        <div class="bg-evo-cream dark:bg-gray-800 rounded-3xl w-full max-w-2xl h-[90vh] overflow-y-auto shadow-2xl border border-black/10 dark:border-evo-red/50 relative flex flex-col">
-            <div class="p-6 border-b border-black/5 dark:border-evo-red/20 flex justify-between items-center sticky top-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur z-10">
+        <div class="bg-white dark:bg-gray-800 rounded-xl w-full max-w-2xl h-[90vh] overflow-y-auto shadow-2xl border-t-4 border-evo-gold dark:border-evo-red relative flex flex-col">
+            <div class="p-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center sticky top-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur z-10">
                 <div class="flex items-center gap-4">
-                    <button onclick="backToDashboard()" class="text-xs font-bold uppercase text-gray-500 hover:text-evo-red flex items-center bg-gray-50 dark:bg-gray-800 px-3 py-2 rounded-full transition hover:shadow">
+                    <button onclick="backToDashboard()" class="text-xs font-bold uppercase text-gray-400 hover:text-evo-red flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                         Back
                     </button>
-                    <button onclick="resetToHome()" class="hidden sm:flex items-center gap-2 hover:opacity-80 transition group border-l border-gray-200 dark:border-gray-600 pl-4">
+                    <button onclick="resetToHome()" class="hidden sm:flex items-center gap-2 hover:opacity-80 transition group border-l border-gray-300 dark:border-gray-600 pl-4">
                         <span class="font-extrabold uppercase text-xs text-dark-text dark:text-white">
-                            THE PHOENIX RISING
+                            <span class="brand-slash text-xs">//</span> Rising <span class="brand-slash text-xs">//</span> <span class="text-evo-gold dark:text-evo-red">Phoenix</span>
                         </span>
                     </button>
                 </div>
-                <h2 class="text-2xl font-black uppercase dark:text-white">New <span class="text-evo-gold dark:text-evo-red">Article</span></h2>
+                <h2 class="text-2xl font-black uppercase italic dark:text-white">New <span class="text-evo-gold dark:text-evo-red">Article</span></h2>
             </div>
             
-            <div class="p-8 flex-1 text-dark-text dark:text-white">
+            <div class="p-8 flex-1">
                 <form id="article-form" class="space-y-6">
                     <div class="grid grid-cols-1 gap-6">
                         <div>
-                            <label class="block text-xs font-bold uppercase mb-2 text-gray-500">Title</label>
-                            <input type="text" id="post-title" required class="w-full bg-white dark:bg-gray-700 border border-black/10 dark:border-gray-600 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-evo-gold dark:focus:ring-evo-red font-bold shadow-sm" placeholder="E.g. The Future of AI">
+                            <label class="block text-xs font-bold uppercase mb-1 text-gray-500">Title</label>
+                            <input type="text" id="post-title" required class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold dark:focus:ring-evo-red font-bold dark:text-white" placeholder="E.g. The Future of AI">
                         </div>
                         
                         <div>
                             <label class="block text-xs font-bold uppercase mb-2 text-gray-500">Categories (Select Multiple)</label>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 bg-white dark:bg-gray-700 p-5 rounded-xl border border-black/10 dark:border-gray-600 shadow-sm">
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 bg-gray-50 dark:bg-gray-700 p-4 rounded border border-gray-200 dark:border-gray-600">
                                 <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" name="post-cat" value="Arts" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold">
-                                    <span class="text-sm font-medium">Arts</span>
+                                    <input type="checkbox" name="post-cat" value="Arts" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold dark:focus:ring-evo-red">
+                                    <span class="text-sm font-medium text-dark-text dark:text-gray-200">Arts</span>
                                 </label>
                                 <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" name="post-cat" value="Current Affairs" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold">
-                                    <span class="text-sm font-medium">Current Affairs</span>
+                                    <input type="checkbox" name="post-cat" value="Current Affairs" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold dark:focus:ring-evo-red">
+                                    <span class="text-sm font-medium text-dark-text dark:text-gray-200">Current Affairs</span>
                                 </label>
                                 <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" name="post-cat" value="Humanities" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold">
-                                    <span class="text-sm font-medium">Humanities</span>
+                                    <input type="checkbox" name="post-cat" value="Humanities" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold dark:focus:ring-evo-red">
+                                    <span class="text-sm font-medium text-dark-text dark:text-gray-200">Humanities</span>
                                 </label>
                                 <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" name="post-cat" value="Opinion Pieces" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold">
-                                    <span class="text-sm font-medium">Opinion Pieces</span>
+                                    <input type="checkbox" name="post-cat" value="Opinion Pieces" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold dark:focus:ring-evo-red">
+                                    <span class="text-sm font-medium text-dark-text dark:text-gray-200">Opinion Pieces</span>
                                 </label>
                                 <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" name="post-cat" value="Science" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold">
-                                    <span class="text-sm font-medium">Science</span>
+                                    <input type="checkbox" name="post-cat" value="Science" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold dark:focus:ring-evo-red">
+                                    <span class="text-sm font-medium text-dark-text dark:text-gray-200">Science</span>
                                 </label>
                                 <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" name="post-cat" value="Tech" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold">
-                                    <span class="text-sm font-medium">Tech</span>
+                                    <input type="checkbox" name="post-cat" value="Tech" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold dark:focus:ring-evo-red">
+                                    <span class="text-sm font-medium text-dark-text dark:text-gray-200">Tech</span>
                                 </label>
                             </div>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase mb-2 text-gray-500">Specific Subject (Optional)</label>
-                        <input type="text" id="post-subject" class="w-full bg-white dark:bg-gray-700 border border-black/10 dark:border-gray-600 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-evo-gold dark:focus:ring-evo-red font-bold shadow-sm" placeholder="E.g. Chemistry, History, Art">
+                        <label class="block text-xs font-bold uppercase mb-1 text-gray-500">Specific Subject (Optional)</label>
+                        <input type="text" id="post-subject" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold dark:focus:ring-evo-red font-bold dark:text-white" placeholder="E.g. Chemistry, History, Art">
                     </div>
 
                     <div>
-                         <label class="block text-xs font-bold uppercase mb-2 text-gray-500">Target Year Group</label>
-                         <select id="post-year" class="filter-select w-full bg-white dark:bg-gray-700 border border-black/10 dark:border-gray-600 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-evo-gold dark:focus:ring-evo-red shadow-sm font-medium">
+                         <label class="block text-xs font-bold uppercase mb-1 text-gray-500">Target Year Group</label>
+                         <select id="post-year" class="filter-select w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold dark:focus:ring-evo-red dark:text-white">
                              <option value="All">All Years</option>
                              <option value="Year 7">Year 7</option>
                              <option value="Year 8">Year 8</option>
@@ -551,100 +597,100 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase mb-2 text-gray-500">Image URL</label>
-                        <input type="text" id="post-image" class="w-full bg-white dark:bg-gray-700 border border-black/10 dark:border-gray-600 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-evo-gold dark:focus:ring-evo-red shadow-sm font-medium" placeholder="https://...">
-                        <p class="text-[10px] text-gray-400 mt-2 font-medium">Leave blank for a random placeholder.</p>
+                        <label class="block text-xs font-bold uppercase mb-1 text-gray-500">Image URL</label>
+                        <input type="text" id="post-image" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold dark:focus:ring-evo-red dark:text-white" placeholder="https://...">
+                        <p class="text-[10px] text-gray-400 mt-1">Leave blank for a random placeholder.</p>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase mb-2 text-gray-500">Summary / Content</label>
-                        <textarea id="post-content" required rows="6" class="w-full bg-white dark:bg-gray-700 border border-black/10 dark:border-gray-600 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-evo-gold dark:focus:ring-evo-red shadow-sm font-medium leading-relaxed" placeholder="Write the full article content here..."></textarea>
+                        <label class="block text-xs font-bold uppercase mb-1 text-gray-500">Summary / Content</label>
+                        <textarea id="post-content" required rows="6" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold dark:focus:ring-evo-red dark:text-white" placeholder="Write the full article content here..."></textarea>
                     </div>
 
                     <div>
-                         <label class="block text-xs font-bold uppercase mb-2 text-gray-500">Publisher / Author</label>
-                         <input type="text" id="post-author" value="Editor" class="w-full bg-white dark:bg-gray-700 border border-black/10 dark:border-gray-600 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-evo-gold dark:focus:ring-evo-red shadow-sm font-medium">
+                         <label class="block text-xs font-bold uppercase mb-1 text-gray-500">Publisher / Author</label>
+                         <input type="text" id="post-author" value="Editor" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold dark:focus:ring-evo-red dark:text-white">
                     </div>
 
-                    <div class="pt-6 border-t border-black/5 dark:border-gray-700">
-                        <button type="submit" class="w-full evo-btn text-center text-lg dark:bg-evo-red dark:text-white dark:hover:bg-white dark:hover:text-evo-red">Publish Article</button>
+                    <div class="pt-4 border-t border-gray-100 dark:border-gray-700">
+                        <button type="submit" class="w-full evo-btn text-center rounded dark:bg-evo-red dark:text-white dark:hover:bg-white dark:hover:text-evo-red">Publish Article</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <div id="read-modal" class="hidden fixed inset-0 z-[200] bg-evo-cream dark:bg-gray-900 overflow-y-auto animate-fade-in">
-        <div class="fixed top-0 left-0 w-full bg-evo-cream/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-black/5 dark:border-gray-800 z-50 px-6 py-4 md:px-12 flex justify-between items-center transition-all duration-300 shadow-sm">
+    <div id="read-modal" class="hidden fixed inset-0 z-[200] bg-[#FFFDF5] dark:bg-gray-900 overflow-y-auto animate-fade-in">
+        <div class="fixed top-0 left-0 w-full bg-[#FFFDF5]/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 z-50 px-6 py-4 md:px-12 flex justify-between items-center transition-all duration-300 shadow-sm">
              <div class="flex items-center gap-4 md:gap-8">
-                 <button onclick="closeReader()" class="flex items-center space-x-3 text-dark-text dark:text-white hover:text-evo-gold dark:hover:text-evo-red transition group">
-                    <div class="bg-white dark:bg-gray-800 border border-black/10 dark:border-gray-700 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:border-transparent group-hover:text-black dark:group-hover:text-white p-2 rounded-full transition shadow-sm">
+                 <button onclick="closeReader()" class="flex items-center space-x-3 text-dark-text dark:text-white hover:text-evo-red dark:hover:text-evo-gold transition group">
+                    <div class="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:border-evo-gold dark:group-hover:border-evo-red group-hover:text-black dark:group-hover:text-white p-2 rounded-full transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                     </div>
-                    <span class="font-bold uppercase tracking-widest text-xs hidden sm:block">Back to Feed</span>
+                    <span class="font-black uppercase tracking-widest text-xs hidden sm:block">Back to Feed</span>
                  </button>
-                 <button onclick="resetToHome()" class="hidden md:flex items-center gap-2 hover:opacity-80 transition group shrink-0 min-w-0 border-l border-black/10 dark:border-gray-700 pl-8">
+                 <button onclick="resetToHome()" class="hidden md:flex items-center gap-2 hover:opacity-80 transition group shrink-0 min-w-0 border-l border-gray-200 dark:border-gray-700 pl-8">
                     <img src="./logo.png" alt="Logo" class="h-8 w-auto object-contain drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/200x80?text=Logo'">
                     <span class="font-extrabold uppercase text-sm text-dark-text dark:text-white">
-                        THE PHOENIX RISING
+                        <span class="brand-slash text-sm">//</span> Rising <span class="brand-slash text-sm">//</span> <span class="text-evo-gold group-hover:text-dark-text dark:group-hover:text-evo-red transition-colors duration-300">Phoenix</span>
                     </span>
                  </button>
              </div>
              
-             <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 hidden md:block">
+             <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 hidden md:block">
                  Reading Mode
              </div>
         </div>
 
-        <div class="max-w-5xl mx-auto pt-28 pb-20 px-4 md:px-8">
-             <div class="h-[50vh] md:h-[60vh] w-full rounded-[2rem] overflow-hidden shadow-2xl mb-12 relative group dark:border dark:border-evo-red/20">
+        <div class="max-w-5xl mx-auto pt-24 pb-20 px-4 md:px-8">
+             <div class="h-[50vh] md:h-[65vh] w-full rounded-3xl overflow-hidden shadow-2xl mb-16 relative group border dark:border-gray-800">
                  <img id="reader-image" src="" class="w-full h-full object-cover transition duration-1000 ease-in-out group-hover:scale-105">
-                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                  <div class="absolute bottom-0 left-0 p-8 md:p-16 w-full">
                     <div class="flex flex-wrap gap-3 mb-6">
-                        <span id="reader-category" class="px-4 py-1.5 bg-evo-gold text-dark-text text-[10px] font-black uppercase tracking-widest shadow-lg rounded-full">Category</span>
-                        <span id="reader-year" class="px-4 py-1.5 bg-white/20 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest border border-white/30 rounded-full">Year Group</span>
+                        <span id="reader-category" class="px-4 py-1 bg-evo-gold text-black text-[10px] font-black uppercase tracking-widest shadow-lg rounded-full">Category</span>
+                        <span id="reader-year" class="px-4 py-1 bg-white/20 backdrop-blur-md text-white text-[10px] font-black uppercase tracking-widest border border-white/30 rounded-full">Year Group</span>
                     </div>
-                    <h1 id="reader-title" class="text-3xl md:text-6xl font-black text-white drop-shadow-xl mb-2 leading-tight">Title</h1>
+                    <h1 id="reader-title" class="text-3xl md:text-7xl font-black uppercase italic leading-none text-white drop-shadow-xl mb-2">Title</h1>
                  </div>
              </div>
 
-             <div class="grid grid-cols-1 md:grid-cols-12 gap-12 text-dark-text dark:text-white">
-                 <div class="md:col-span-3 space-y-8 md:sticky md:top-32 h-fit border-t md:border-t-0 md:border-r border-black/10 dark:border-gray-700 pt-8 md:pt-0 pr-4">
+             <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+                 <div class="md:col-span-3 space-y-8 md:sticky md:top-32 h-fit border-t md:border-t-0 md:border-r border-gray-200 dark:border-gray-700 pt-8 md:pt-0 pr-4">
                      <div class="flex items-center space-x-4 md:block md:space-x-0">
-                         <div class="w-14 h-14 bg-white dark:bg-gray-800 border border-black/10 dark:border-gray-700 rounded-full flex items-center justify-center text-gray-400 mb-0 md:mb-4 shadow-sm">
+                         <div class="w-14 h-14 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center text-gray-400 mb-0 md:mb-4 shadow-inner">
                              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                          </div>
                          <div>
-                             <p class="text-[10px] font-bold uppercase text-gray-500 tracking-widest mb-1">Written By</p>
-                             <p id="reader-author" class="font-bold text-base text-dark-text dark:text-white">Author Name</p>
+                             <p class="text-[10px] font-black uppercase text-gray-400 tracking-widest mb-1">Written By</p>
+                             <p id="reader-author" class="font-bold text-dark-text dark:text-white text-base">Author Name</p>
                          </div>
                      </div>
                      
                      <div>
-                         <p class="text-[10px] font-bold uppercase text-gray-500 tracking-widest mb-1">Published On</p>
-                         <p id="reader-date" class="font-bold font-mono text-sm text-evo-red dark:text-evo-gold">Date</p>
+                         <p class="text-[10px] font-black uppercase text-gray-400 tracking-widest mb-1">Published On</p>
+                         <p id="reader-date" class="font-bold text-dark-text dark:text-white font-mono text-sm text-evo-gold dark:text-evo-red">Date</p>
                      </div>
 
-                     <div class="hidden md:block opacity-60">
-                         <hr class="border-black/10 dark:border-gray-700 my-6">
-                         <img src="./logo.png" class="h-12 w-auto mb-4 grayscale dark:invert" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Phoenix'">
+                     <div class="hidden md:block opacity-50">
+                         <hr class="border-gray-200 dark:border-gray-700 my-6">
+                         <img src="./logo.png" class="h-12 w-auto mb-4 opacity-50 grayscale invert dark:invert-0" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Phoenix'">
                          <p class="text-[10px] text-gray-500 font-bold uppercase leading-relaxed">Townley Grammar School<br>Student Rising Phoenix Publication</p>
                      </div>
                  </div>
 
                  <div class="md:col-span-9">
-                     <div id="reader-content" class="prose prose-lg dark:prose-invert max-w-none text-gray-800 dark:text-gray-300 leading-relaxed font-serif first-letter:text-7xl first-letter:font-black first-letter:text-evo-red dark:first-letter:text-evo-gold first-letter:mr-3 first-letter:float-left first-letter:mt-[-10px]">
+                     <div id="reader-content" class="prose prose-lg dark:prose-invert prose-slate max-w-none text-gray-800 dark:text-gray-300 leading-relaxed font-serif first-letter:text-6xl first-letter:font-black first-letter:text-evo-red dark:first-letter:text-evo-gold first-letter:mr-3 first-letter:float-left first-letter:mt-[-10px]">
                      </div>
                      
-                     <div class="mt-20 pt-12 border-t border-black/10 dark:border-gray-700 flex justify-between items-center">
-                         <button onclick="closeReader()" class="text-xs font-bold uppercase text-gray-500 hover:text-evo-gold dark:hover:text-evo-red transition flex items-center gap-2">
-                             <span class="bg-white dark:bg-gray-800 border border-black/10 p-2 rounded-full shadow-sm">←</span> Back to Articles
+                     <div class="mt-20 pt-12 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                         <button onclick="closeReader()" class="text-xs font-bold uppercase text-gray-400 hover:text-evo-red dark:hover:text-evo-gold transition flex items-center gap-2">
+                             <span class="bg-gray-100 dark:bg-gray-800 p-2 rounded-full">←</span> Back to Articles
                          </button>
                          <div class="flex space-x-2">
                              <div class="w-2 h-2 bg-evo-gold rounded-full"></div>
                              <div class="w-2 h-2 bg-evo-red rounded-full"></div>
-                             <div class="w-2 h-2 bg-dark-text dark:bg-white rounded-full"></div>
+                             <div class="w-2 h-2 bg-black dark:bg-white rounded-full"></div>
                          </div>
                      </div>
                  </div>
@@ -652,21 +698,23 @@
         </div>
     </div>
 
-    <header class="bg-evo-cream dark:bg-gray-900 border-b-8 border-dark-text dark:border-evo-red sticky top-0 z-50 shadow-sm">
-        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-            <div class="flex justify-between items-center gap-2 md:gap-6">
-                <button onclick="resetToHome()" class="flex items-center gap-3 sm:gap-6 focus:outline-none hover:opacity-80 transition min-w-0 group shrink-0 cursor-pointer">
-                    <img id="site-logo" src="./logo.png" alt="Townley Logo" class="h-12 md:h-16 w-auto max-w-[100px] sm:max-w-[150px] md:max-w-[200px] object-contain drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/200x80?text=Logo'">
-                    <span class="font-black tracking-tight text-3xl md:text-5xl lg:text-6xl text-dark-text dark:text-white uppercase" style="font-family: Impact, sans-serif;">
-                        The Phoenix Rising
+    <header class="bg-[#FFFDF5]/95 dark:bg-gray-900/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24 gap-2 md:gap-6 overflow-hidden">
+                <button onclick="resetToHome()" class="flex items-center gap-2 md:gap-4 text-base sm:text-lg md:text-2xl lg:text-3xl font-extrabold tracking-widest uppercase text-dark-text dark:text-white focus:outline-none hover:opacity-80 transition min-w-0 group shrink-0 cursor-pointer">
+                    <img id="site-logo" src="./logo.png" alt="Townley Logo" class="h-10 md:h-14 w-auto max-w-[100px] sm:max-w-[150px] md:max-w-[200px] object-contain drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/200x80?text=Logo'">
+                    <span class="truncate shrink">
+                        <span class="brand-slash text-lg md:text-3xl lg:text-4xl mr-1 group-hover:text-evo-red transition-colors duration-300">//</span> Rising <span class="brand-slash text-lg md:text-3xl lg:text-4xl mx-1 group-hover:text-evo-red transition-colors duration-300">//</span> <span class="text-evo-gold group-hover:text-dark-text dark:group-hover:text-white transition-colors duration-300">Phoenix</span>
                     </span>
                 </button>
                 
                 <div class="hidden md:flex items-center space-x-4 lg:space-x-6 shrink-0">
                     <div class="relative hidden lg:block group">
-                        <input type="text" id="nav-search" placeholder="Search..." class="bg-white dark:bg-gray-800 border-2 border-black/10 dark:border-gray-700 rounded-full py-2.5 px-6 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-evo-gold dark:focus:ring-evo-red text-dark-text dark:text-white shadow-inner transition-all w-56">
-                        <svg class="w-4 h-4 absolute right-4 top-3.5 text-gray-400 group-hover:text-evo-gold dark:group-hover:text-evo-red transition pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input type="text" id="nav-search" placeholder="Search..." class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-full py-2.5 px-5 text-sm font-bold focus:ring-2 focus:ring-evo-gold focus:border-transparent text-dark-text dark:text-white w-48 transition-all shadow-inner placeholder-gray-400">
+                        <svg class="w-4 h-4 absolute right-4 top-3.5 text-gray-400 group-hover:text-evo-gold transition pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
+
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgFK_ObKUiZD4vtlXhcmA5hqgmuoaps5mW_qr-LDSH8mHOsQ/viewform?usp=dialog" target="_blank" class="evo-btn text-xs px-6 py-3 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition whitespace-nowrap inline-flex items-center justify-center">Become A Writer</a>
                 </div>
 
                 <button id="mobile-menu-button" class="md:hidden text-dark-text dark:text-white focus:outline-none p-2 shrink-0">
@@ -674,74 +722,67 @@
                 </button>
             </div>
         </div>
-    </header>
 
-    <nav class="hidden md:block max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-        <div class="flex items-center gap-4 border-b border-white/20 pb-6">
-            <button onclick="resetToHome()" class="nav-pill active bg-evo-gold text-dark-text border-evo-gold shadow-md">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                Feed
-            </button>
-            <button onclick="openKeyDatesModal()" class="nav-pill hover:bg-white/10">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                Events
-            </button>
-            
-            <div class="relative group">
-                <button onclick="openCategoriesModal()" class="nav-pill hover:bg-white/10 flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                    Topics
-                </button>
-                <div class="category-menu pointer-events-auto">
-                    <div>
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-evo-red mb-4 border-b border-black/5 dark:border-evo-red/20 pb-2">Categories</h4>
-                        <ul class="space-y-3">
-                            <li><button onclick="filterByCategory('Arts')" class="text-sm font-bold text-dark-text dark:text-white hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Arts</button></li>
-                            <li><button onclick="filterByCategory('Current Affairs')" class="text-sm font-bold text-dark-text dark:text-white hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Current Affairs</button></li>
-                            <li><button onclick="filterByCategory('Humanities')" class="text-sm font-bold text-dark-text dark:text-white hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Humanities</button></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-transparent mb-4 border-b border-black/5 dark:border-evo-red/20 pb-2 select-none">.</h4>
-                        <ul class="space-y-3">
-                            <li><button onclick="filterByCategory('Opinion Pieces')" class="text-sm font-bold text-dark-text dark:text-white hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Opinion Pieces</button></li>
-                            <li><button onclick="filterByCategory('Science')" class="text-sm font-bold text-dark-text dark:text-white hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Science</button></li>
-                            <li><button onclick="filterByCategory('Tech')" class="text-sm font-bold text-dark-text dark:text-white hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Tech</button></li>
-                        </ul>
+        <nav class="hidden md:flex max-w-7xl mx-auto px-8 space-x-4 pointer-events-none pb-0">
+            <div class="pointer-events-auto flex space-x-3">
+                <button onclick="openLatestArticle()" class="nav-tab inline-block hover:text-evo-gold text-gray-700">This Month's Issue</button>
+                <button onclick="openKeyDatesModal()" class="nav-tab inline-block hover:text-evo-gold text-gray-700">Key Dates</button>
+                
+                <div class="relative group">
+                    <button onclick="openCategoriesModal()" class="nav-tab nav-tab-gold text-evo-gold inline-block pointer-events-auto hover:bg-black hover:text-evo-gold flex items-center gap-2 border-b-4 border-evo-gold dark:hover:bg-evo-red dark:hover:border-evo-red">
+                        Categories
+                        <svg class="w-3 h-3 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    
+                    <div class="category-menu pointer-events-auto">
+                        <div>
+                            <h4 class="text-[10px] font-black uppercase tracking-widest text-evo-gold dark:text-evo-red mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Categories</h4>
+                            <ul class="space-y-3">
+                                <li><button onclick="filterByCategory('Arts')" class="text-sm font-bold text-gray-700 dark:text-gray-300 hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Arts</button></li>
+                                <li><button onclick="filterByCategory('Current Affairs')" class="text-sm font-bold text-gray-700 dark:text-gray-300 hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Current Affairs</button></li>
+                                <li><button onclick="filterByCategory('Humanities')" class="text-sm font-bold text-gray-700 dark:text-gray-300 hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Humanities</button></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-[10px] font-black uppercase tracking-widest text-transparent mb-4 border-b border-gray-200 dark:border-gray-700 pb-2 select-none">.</h4>
+                            <ul class="space-y-3">
+                                <li><button onclick="filterByCategory('Opinion Pieces')" class="text-sm font-bold text-gray-700 dark:text-gray-300 hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Opinion Pieces</button></li>
+                                <li><button onclick="filterByCategory('Science')" class="text-sm font-bold text-gray-700 dark:text-gray-300 hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Science</button></li>
+                                <li><button onclick="filterByCategory('Tech')" class="text-sm font-bold text-gray-700 dark:text-gray-300 hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Tech</button></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgFK_ObKUiZD4vtlXhcmA5hqgmuoaps5mW_qr-LDSH8mHOsQ/viewform?usp=dialog" target="_blank" class="nav-pill border-evo-gold text-evo-gold hover:bg-evo-gold hover:text-dark-text ml-auto">
-                Become a Writer
-            </a>
-        </div>
-    </nav>
+        </nav>
 
-    <div id="mobile-menu" class="hidden md:hidden bg-evo-cream dark:bg-gray-800 border-b border-black/10 dark:border-gray-700 absolute w-full shadow-2xl p-4 z-40">
-        <div class="space-y-2">
-            <button onclick="resetToHome()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-bold text-dark-text dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Feed</button>
-            <button onclick="openKeyDatesModal()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-bold text-dark-text dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Key Dates</button>
-            <button onclick="openCategoriesModal()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-bold text-dark-text dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">Categories</button>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgFK_ObKUiZD4vtlXhcmA5hqgmuoaps5mW_qr-LDSH8mHOsQ/viewform?usp=dialog" target="_blank" class="block w-full text-left px-4 py-3 rounded-xl text-base font-bold text-evo-gold dark:text-evo-red hover:bg-gray-100 dark:hover:bg-gray-700">Become a Writer</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-[#FFFDF5] dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 absolute w-full shadow-2xl p-4">
+            <div class="space-y-2">
+                <button onclick="openLatestArticle()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-bold text-dark-text dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-evo-gold dark:hover:text-evo-red">This Month's Issue</button>
+                <button onclick="openKeyDatesModal()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-bold text-dark-text dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-evo-gold dark:hover:text-evo-red">Key Dates</button>
+                <button onclick="openCategoriesModal()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-bold text-dark-text dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-evo-gold dark:hover:text-evo-red">Categories</button>
+            </div>
         </div>
-    </div>
+    </header>
 
-    <main class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-screen">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 min-h-screen">
 
         <div id="home-view" class="transition-opacity duration-500 animate-fade-in-up">
             
-            <section id="this-month" class="mb-16">
-            </section>
+            <section id="this-month" class="mb-24"></section>
 
             <section id="latest" class="mb-24">
-                
-                <div class="flex flex-col xl:flex-row flex-wrap justify-between items-start xl:items-center gap-4 mb-8 bg-black/20 dark:bg-evo-red/10 p-4 rounded-3xl border border-white/10 dark:border-evo-red/20">
-                    <div class="w-full xl:w-auto flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 shrink-0 flex-1">
-                        <div class="relative group flex-1 md:flex-none">
-                            <input type="text" id="search-input" placeholder="Search..." class="w-full md:w-48 bg-evo-cream dark:bg-gray-800 border-2 border-transparent rounded-full py-2.5 px-5 text-sm font-bold focus:outline-none focus:border-evo-gold dark:focus:border-evo-red text-dark-text dark:text-white shadow-sm transition">
+                <div class="flex flex-col xl:flex-row flex-wrap justify-between items-start xl:items-end gap-8 mb-12 border-b border-white/20 dark:border-gray-700 pb-6">
+                    <h2 class="text-3xl md:text-5xl font-black uppercase italic flex items-center mb-6 md:mb-0 tracking-tighter text-white dark:text-white shrink-0">
+                        <span class="brand-slash text-4xl md:text-6xl mr-4">//</span> Latest <span class="text-evo-gold ml-3">Stories</span>
+                    </h2>
+                    
+                    <div class="w-full xl:w-auto flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 shrink-0">
+                        <div class="relative group">
+                            <input type="text" id="search-input" placeholder="Search..." class="w-full md:w-48 bg-[#FFFDF5] dark:bg-gray-800 border border-transparent dark:border-gray-700 rounded-lg py-3 px-4 text-sm font-bold text-dark-text focus:outline-none focus:ring-2 focus:ring-evo-gold placeholder-gray-500 dark:text-white shadow-sm transition">
                         </div>
                         
-                        <select id="filter-year" class="filter-select w-full md:w-40 min-w-[140px] bg-evo-cream dark:bg-gray-800 border-2 border-transparent rounded-full py-2.5 px-5 text-sm font-bold focus:outline-none focus:border-evo-gold dark:focus:border-evo-red shadow-sm cursor-pointer transition">
+                        <select id="filter-year" class="filter-select w-full md:w-40 min-w-[140px] bg-[#FFFDF5] dark:bg-gray-800 border border-transparent dark:border-gray-700 rounded-lg py-3 px-4 text-sm font-bold text-dark-text focus:outline-none focus:ring-2 focus:ring-evo-gold shadow-sm cursor-pointer hover:border-gray-300 transition dark:text-white">
                              <option value="All">All Years</option>
                              <option value="Year 7">Year 7</option>
                              <option value="Year 8">Year 8</option>
@@ -753,7 +794,7 @@
                              <option value="Staff">Staff</option>
                         </select>
 
-                        <select id="filter-month" class="filter-select w-full md:w-40 min-w-[140px] bg-evo-cream dark:bg-gray-800 border-2 border-transparent rounded-full py-2.5 px-5 text-sm font-bold focus:outline-none focus:border-evo-gold dark:focus:border-evo-red shadow-sm cursor-pointer transition">
+                        <select id="filter-month" class="filter-select w-full md:w-40 min-w-[140px] bg-[#FFFDF5] dark:bg-gray-800 border border-transparent dark:border-gray-700 rounded-lg py-3 px-4 text-sm font-bold text-dark-text focus:outline-none focus:ring-2 focus:ring-evo-gold shadow-sm cursor-pointer hover:border-gray-300 transition dark:text-white">
                             <option value="All">All Months</option>
                             <option value="Jan">January</option>
                             <option value="Feb">February</option>
@@ -769,7 +810,7 @@
                             <option value="Dec">December</option>
                         </select>
 
-                        <select id="filter-category" class="filter-select w-full md:w-48 min-w-[160px] bg-evo-cream dark:bg-gray-800 border-2 border-transparent rounded-full py-2.5 px-5 text-sm font-bold focus:outline-none focus:border-evo-gold dark:focus:border-evo-red shadow-sm cursor-pointer transition">
+                        <select id="filter-category" class="filter-select w-full md:w-64 min-w-[160px] bg-[#FFFDF5] dark:bg-gray-800 border border-transparent dark:border-gray-700 rounded-lg py-3 px-4 text-sm font-bold text-dark-text focus:outline-none focus:ring-2 focus:ring-evo-gold shadow-sm cursor-pointer hover:border-gray-300 transition dark:text-white">
                             <option value="All">All Categories</option>
                             <option value="Arts">Arts</option>
                             <option value="Current Affairs">Current Affairs</option>
@@ -779,58 +820,57 @@
                             <option value="Tech">Tech</option>
                         </select>
                     </div>
-                    <button onclick="resetFilters()" class="text-white/70 hover:text-white font-bold text-sm underline shrink-0 px-4">Clear Filters</button>
                 </div>
                 
-                <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+                <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
                 
-                <div id="no-results" class="hidden text-center py-20 bg-evo-cream dark:bg-gray-800 rounded-3xl border border-black/5 shadow-lg mt-8">
-                    <p class="text-gray-400 font-bold uppercase tracking-widest text-lg mb-4">No Articles Found</p>
-                    <button onclick="resetFilters()" class="evo-btn rounded-full text-sm">Clear All Filters</button>
+                <div id="no-results" class="hidden text-center py-20 bg-[#FFFDF5] dark:bg-gray-800 rounded-3xl border border-transparent dark:border-gray-700 shadow-sm">
+                    <p class="text-gray-500 dark:text-gray-400 font-black uppercase tracking-widest text-xl mb-4">No Data Found</p>
+                    <button onclick="resetFilters()" class="text-evo-gold font-bold underline hover:text-black dark:hover:text-white transition">Clear All Filters</button>
                 </div>
             </section>
         </div>
 
         <div id="search-view" class="hidden animate-fade-in-up">
-            <div class="flex items-center justify-between mb-8 border-b border-white/20 pb-6">
-                <h2 class="text-3xl md:text-4xl font-black uppercase text-white tracking-tight">Search: <span id="search-query-display" class="text-evo-gold dark:text-evo-red">...</span></h2>
-                <button onclick="resetToHome()" class="text-white/80 hover:text-evo-gold dark:hover:text-evo-red font-bold uppercase text-xs tracking-widest flex items-center transition group bg-black/20 px-4 py-2 rounded-full">
+            <div class="flex items-center justify-between mb-12 border-b border-white/20 dark:border-gray-700 pb-6">
+                <h2 class="text-3xl md:text-4xl font-black uppercase italic text-white dark:text-white tracking-tighter">Search: <span id="search-query-display" class="text-evo-gold dark:text-evo-red">...</span></h2>
+                <button onclick="resetToHome()" class="text-white/80 hover:text-evo-gold font-bold uppercase text-xs tracking-widest flex items-center transition group">
                     <span class="mr-2 group-hover:-translate-x-1 transition-transform">&larr;</span> Back to Home
                 </button>
             </div>
             
-            <div id="search-results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+            <div id="search-results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
 
             <div id="search-empty" class="hidden text-center py-32 bg-black/10 rounded-3xl border border-white/10 mt-8">
-                <p class="text-2xl font-black text-white/80 uppercase tracking-widest mb-6">No matching articles found.</p>
+                <p class="text-2xl font-black text-white/90 uppercase tracking-widest mb-6">No matching articles found.</p>
                 <button onclick="resetToHome()" class="evo-btn rounded-full">Return Home</button>
             </div>
         </div>
 
     </main>
 
-    <footer class="bg-black/20 dark:bg-[#0f1115] border-t border-white/10 dark:border-evo-red/20 transition-colors duration-300">
-        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12 text-white/80">
+    <footer class="bg-black/20 dark:bg-gray-900 border-t border-white/10 dark:border-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-2">
-                    <h2 class="text-3xl font-black tracking-tight uppercase text-white mb-6" style="font-family: Impact, sans-serif;">
-                        THE PHOENIX RISING
-                    </h2>
-                    <p class="text-sm mt-6 leading-relaxed font-medium max-w-sm">The Phoenix Rising is a year 12 run school newsletter. Dan D 12.11 Site Developer. Elleanore P 12.11 Organiser. Isabelle Wright 12. Head of Club</p>
+                    <a href="#" class="text-3xl font-extrabold tracking-widest uppercase text-white dark:text-white mb-6 block">
+                        <span class="brand-slash">//</span> RISING <span class="brand-slash">//</span> <span class="text-evo-gold dark:text-evo-red">PHOENIX</span>
+                    </a>
+                    <p class="text-sm mt-6 text-white/70 dark:text-gray-400 max-w-sm leading-relaxed font-medium">The Rising <span class="brand-slash text-sm">//</span> Phoenix is a year 12 run school newsletter. Dan D 12.11 Site Developer. Elleanore P 12.11 Organiser. Isabelle Wright 12. Head of Club</p>
                 </div>
                 <div>
-                    <h4 class="text-white font-bold uppercase text-xs tracking-widest mb-6 text-evo-gold dark:text-evo-red">Quick Links</h4>
-                    <ul class="space-y-4 text-xs font-bold uppercase tracking-wider">
-                        <li><button onclick="resetToHome()" class="hover:text-evo-gold dark:hover:text-evo-red transition text-left uppercase">Feed</button></li>
+                    <h4 class="text-white dark:text-white font-black uppercase text-xs tracking-widest mb-6 text-evo-gold dark:text-evo-red">Quick Links</h4>
+                    <ul class="space-y-4 text-xs font-bold uppercase tracking-wider text-white/70 dark:text-gray-400">
+                        <li><button onclick="openLatestArticle()" class="hover:text-evo-gold dark:hover:text-evo-red transition text-left uppercase">This Month</button></li>
                         <li><button onclick="openKeyDatesModal()" class="hover:text-evo-gold dark:hover:text-evo-red transition text-left uppercase">Key Dates</button></li>
                         <li><button onclick="openCategoriesModal()" class="hover:text-evo-gold dark:hover:text-evo-red transition text-left uppercase">Categories</button></li>
                         <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdgFK_ObKUiZD4vtlXhcmA5hqgmuoaps5mW_qr-LDSH8mHOsQ/viewform?usp=dialog" target="_blank" class="hover:text-evo-gold dark:hover:text-evo-red transition text-left uppercase">Become a writer</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-white font-bold uppercase text-xs tracking-widest mb-6 text-evo-gold dark:text-evo-red">Townley Grammar</h4>
+                    <h4 class="text-white dark:text-white font-black uppercase text-xs tracking-widest mb-6 text-evo-gold dark:text-evo-red">Townley Grammar</h4>
                     <div class="flex space-x-6">
-                        <a href="https://www.townleygrammar.org.uk/" target="_blank" class="hover:text-evo-gold dark:hover:text-evo-red transition transform hover:scale-110">
+                        <a href="https://www.townleygrammar.org.uk/" target="_blank" class="text-white/70 dark:text-gray-500 hover:text-evo-gold dark:hover:text-evo-red transition transform hover:scale-110">
                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M2 20h20v2H2v-2zm2-8h2v7H4v-7zm5 0h2v7H9v-7zm5 0h2v7h-2v-7zm5 0h2v7h-2v-7zM12 2L2 7v2h20V7L12 2z"/>
                             </svg>
@@ -838,8 +878,8 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 dark:border-evo-red/20">
-                <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/50 mb-4 md:mb-0">
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 dark:border-gray-800">
+                <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/50 dark:text-gray-600 mb-4 md:mb-0">
                     Townley group est 2025
                 </div>
                 <button onclick="handleDevClick()" class="text-[10px] font-bold uppercase text-white/50 hover:text-evo-gold dark:hover:text-evo-red transition">
@@ -922,7 +962,8 @@
                 content: "They may not use wizarding spells, but the materials behind this year’s Nobel Prize in Chemistry can be just as astonishing as magic. In 2025, scientists Makoto Fujita, Omar Yaghi, and Susumu Kitagawa were awarded the Nobel Prize for developing Metal - Organic Frameworks, or MOFs which are materials so porous and spacious inside that they’ve been compared to Hermione Granger’s handbag. At first glance, a MOF crystal looks tiny, but under the microscope it’s a labyrinth of nanoscale pores and tunnels. This gives it a huge internal surface area and just a teaspoon of MOF material can have surface area of an entire football pitch! That means these frameworks can trap, store, and separate gases or liquids incredibly efficiently. Scientists are already using MOFs to tackle some of the biggest challenges facing our planet. They can capture carbon dioxide from the air, store clean hydrogen fuel, purify water, and even pull moisture out of desert air to make drinkable water. So while Hermione’s handbag may be a work of fiction, MOFs are proof that chemistry can create its own kind of magic, using clever design and molecular architecture to help shape a more sustainable future.",
                 author: "Elleanore P 12.11",
                 date: "Dec 18, 2025",
-                isStatic: true
+                isStatic: true,
+                specialClass: "border-2 border-evo-gold/30"
             },
             {
                 title: "From Weird to Wired: The Quantum Leap That Won a Nobel",
@@ -933,28 +974,6 @@
                 content: "Quantum physics is famously strange. In the quantum world, particles can be in two places at once, pass through barriers they should not, and absorb energy in tiny, fixed amounts. For decades, this weirdness seemed confined to atoms and subatomic particles, far removed from everyday life. But this year’s Nobel Prize in Physics went to three scientists who brought that weirdness into the real world. John Clarke, Michel Devoret, and John Martinis built tiny superconducting circuits so sensitive that they actually follow the rules of quantum mechanics. In their experiments, electrons tunnelled through barriers and energy levels “jumped” between discrete steps, behaviours normally seen only inside atoms. Why does that matter? Because this breakthrough helped lay the foundation for quantum computing, machines that use the strange rules of quantum physics to process information in ways no classical computer ever could. It has also opened doors to ultra-precise sensors, new materials, and technologies we can barely imagine yet. So while quantum physics might still sound weird, these Nobel winners proved it does not have to stay abstract. With the right tools (and temperatures near absolute zero), the once-mysterious quantum world can now be engineered, quite literally turning the weird into the wired.",
                 author: "Elleanore P 12.11",
                 date: "Dec 18, 2025",
-                isStatic: true
-            },
-            {
-                title: "Student Council Leads the Way",
-                cat: "News",
-                subject: "Community",
-                yearGroup: "All",
-                img: "https://placehold.co/600x400/5A0C10/EEE?text=Student+Council",
-                content: "From charity drives to school improvements, see what the Student Council has been working on this term to make our community a better place for everyone.",
-                author: "Editor",
-                date: "Nov 02, 2025",
-                isStatic: true
-            },
-            {
-                title: "Should School Start Later?",
-                cat: "Opinion",
-                subject: "Lifestyle",
-                yearGroup: "All",
-                img: "https://placehold.co/600x400/333/EEE?text=School+Start+Time",
-                content: "We asked students and teachers whether pushing the school start time back would improve mental health and academic performance. Here is what they had to say.",
-                author: "Editor",
-                date: "Oct 15, 2025",
                 isStatic: true
             }
         ];
@@ -1123,19 +1142,19 @@
                     ? `<button onclick="deleteArticle('${art.id}')" class="text-gray-400 hover:text-red-600 p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900 transition" title="Delete Article">
                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                        </button>`
-                    : `<span class="text-xs text-gray-400 font-bold p-2 bg-black/5 rounded">STATIC</span>`;
+                    : `<span class="text-xs text-gray-400 font-bold p-2 bg-black/5 dark:bg-black/20 rounded">STATIC</span>`;
 
                 const row = `
-                <div class="flex justify-between items-center bg-white dark:bg-gray-700 p-4 rounded-2xl border border-black/5 dark:border-gray-600 hover:border-evo-gold/30 transition shadow-sm hover:shadow-md cursor-default">
+                <div class="flex justify-between items-center bg-gray-50 dark:bg-gray-700 p-4 rounded-xl border border-gray-100 dark:border-gray-600 hover:border-evo-gold/30 transition shadow-sm hover:shadow-md cursor-default">
                     <div class="flex items-center space-x-4">
-                        <img src="${art.img}" class="w-14 h-14 rounded-xl object-cover bg-gray-100">
+                        <img src="${art.img}" class="w-14 h-14 rounded-lg object-cover bg-gray-200 dark:bg-gray-800">
                         <div>
                             <h4 class="font-bold text-dark-text dark:text-white leading-tight">${art.title}</h4>
-                            <div class="text-[10px] uppercase font-bold text-gray-500 flex flex-wrap gap-2 mt-1">
-                                <span class="text-evo-red dark:text-evo-red">${art.cat}</span>
-                                <span class="flex items-center text-gray-300">•</span>
+                            <div class="text-[10px] uppercase font-bold text-gray-400 flex flex-wrap gap-2 mt-1">
+                                <span class="text-evo-red px-2 py-0.5 bg-red-50 dark:bg-gray-800 rounded">${art.cat}</span>
+                                <span class="flex items-center text-gray-300 dark:text-gray-500">•</span>
                                 <span>${art.yearGroup || 'All'}</span>
-                                <span class="flex items-center text-gray-300">•</span>
+                                <span class="flex items-center text-gray-300 dark:text-gray-500">•</span>
                                 <span>${art.author}</span>
                             </div>
                         </div>
@@ -1239,10 +1258,10 @@
             document.getElementById('reader-image').src = data.img;
             
             const cats = data.cat.split(',');
-            const catDisplay = cats.join(', ');
+            const catDisplay = cats.join(' <span class="brand-slash text-sm">//</span> ');
             let fullCatString = catDisplay;
             if (data.subject && data.subject !== "") {
-                fullCatString += ` / ${data.subject}`;
+                fullCatString += ` <span class="brand-slash text-sm">//</span> ${data.subject}`;
             }
 
             document.getElementById('reader-category').innerHTML = fullCatString;
@@ -1280,6 +1299,28 @@
             if(document.getElementById('nav-search')) document.getElementById('nav-search').value = ""; 
             loadArticles();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.openLatestArticle = function() {
+            const articles = getAllArticles();
+            if (articles.length > 0) {
+                const latest = articles[0];
+                const catString = Array.isArray(latest.cat) ? latest.cat.join(',') : latest.cat;
+
+                const mockElement = {
+                    dataset: {
+                        title: latest.title,
+                        cat: catString,
+                        subject: latest.subject || "",
+                        year: latest.yearGroup || "All",
+                        img: latest.img,
+                        content: latest.content,
+                        author: latest.author,
+                        date: latest.date
+                    }
+                };
+                openArticle(mockElement);
+            }
         }
 
         window.handleGlobalBack = function() {
@@ -1352,4 +1393,142 @@
         function generateCardHTML(article) {
             const year = article.yearGroup || "All";
             const subject = article.subject || "";
-            const isNewBadge = article.isNew ? '<span class="bg-evo-red text-white text-[10px] font-bold px-2
+            const specialClass = article.specialClass || ""; 
+            const isNewBadge = article.isNew ? '<div class="absolute top-4 left-4 bg-evo-red text-white text-[10px] font-bold px-3 py-1 uppercase tracking-tighter shadow-md">New</div>' : '';
+            
+            const cats = Array.isArray(article.cat) ? article.cat : [article.cat];
+            const catString = cats.join(' <span class="brand-slash text-sm">//</span> '); 
+            const catData = cats.join(',');
+
+            return `
+            <div class="evo-card rounded-3xl overflow-hidden group ${specialClass}" 
+                onclick="openArticle(this)"
+                data-title="${article.title}"
+                data-cat="${catData}"
+                data-subject="${subject}"
+                data-year="${year}"
+                data-img="${article.img}"
+                data-content="${article.content}"
+                data-author="${article.author}"
+                data-date="${article.date}"
+            >
+                <div class="relative overflow-hidden">
+                    <img src="${article.img}" class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
+                    ${isNewBadge}
+                    <div class="absolute bottom-4 right-4 bg-black/80 text-white text-[10px] font-bold px-3 py-1.5 rounded-md backdrop-blur-md uppercase shadow-lg">
+                        ${year}
+                    </div>
+                </div>
+                <div class="p-8">
+                    <p class="text-evo-gold uppercase text-xs font-bold mb-3 tracking-widest flex items-center">${catString}</p>
+                    <h3 class="block text-2xl font-black uppercase leading-tight hover:text-evo-red dark:hover:text-evo-red transition duration-200 mb-4 italic text-dark-text dark:text-white">
+                        ${article.title}
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 line-clamp-3 leading-relaxed">${article.content}</p>
+                    <div class="flex justify-between items-center text-[10px] text-gray-500 dark:text-gray-400 font-bold border-t border-gray-100 dark:border-gray-700 pt-4">
+                        <span class="flex items-center text-dark-text dark:text-gray-300"><span class="w-2 h-2 bg-evo-red rounded-full mr-2"></span>BY ${article.author.toUpperCase()}</span>
+                        <span>${article.date}</span>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+
+        window.loadArticles = function() {
+            const grid = document.getElementById('articles-grid');
+            const heroSection = document.getElementById('this-month');
+            const noResults = document.getElementById('no-results');
+            
+            grid.innerHTML = '';
+            heroSection.innerHTML = '';
+            
+            const allArticles = getAllArticles();
+
+            const monthFilter = document.getElementById('filter-month').value;
+            const catFilter = document.getElementById('filter-category').value;
+            const yearFilter = document.getElementById('filter-year').value;
+
+            const filtered = allArticles.filter(art => {
+                const matchesMonth = monthFilter === 'All' || art.date.includes(monthFilter);
+                const artCats = Array.isArray(art.cat) ? art.cat : [art.cat];
+                const matchesCat = catFilter === 'All' || artCats.includes(catFilter);
+                const matchesYear = yearFilter === 'All' || (art.yearGroup && art.yearGroup === yearFilter);
+                return matchesMonth && matchesCat && matchesYear;
+            });
+
+            if(filtered.length === 0) {
+                noResults.classList.remove('hidden');
+                document.getElementById('latest').classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            let heroArt = null;
+            let gridArticles = [];
+
+            if (monthFilter === 'All' && catFilter === 'All' && yearFilter === 'All' && filtered.length > 0) {
+                heroArt = filtered[0];
+                gridArticles = filtered.slice(1);
+            } else {
+                gridArticles = filtered;
+                document.getElementById('this-month').classList.add('hidden');
+            }
+
+            if (heroArt) {
+                document.getElementById('this-month').classList.remove('hidden');
+                const heroYear = heroArt.yearGroup || "All";
+                const heroSubject = heroArt.subject || "";
+                
+                const heroCats = Array.isArray(heroArt.cat) ? heroArt.cat : [heroArt.cat];
+                const heroCatData = heroCats.join(',');
+
+                // Restructured split-layout Hero Section to match provided image reference
+                heroSection.innerHTML = `
+                <div class="flex flex-col lg:flex-row w-full bg-[#FFFDF5] dark:bg-gray-800 rounded-3xl overflow-hidden shadow-2xl group cursor-pointer border border-transparent dark:border-evo-red/30 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300"
+                     onclick="openArticle(this)"
+                     data-title="${heroArt.title}"
+                     data-cat="${heroCatData}"
+                     data-subject="${heroSubject}"
+                     data-year="${heroYear}"
+                     data-img="${heroArt.img}"
+                     data-content="${heroArt.content}"
+                     data-author="${heroArt.author}"
+                     data-date="${heroArt.date}">
+                    
+                    <div class="w-full lg:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center order-2 lg:order-1 relative z-10 bg-[#FFFDF5] dark:bg-gray-800">
+                        <span class="bg-evo-gold text-dark-text text-[10px] font-black px-4 py-1.5 rounded-md uppercase tracking-widest w-max mb-8 shadow-sm">Featured</span>
+                        
+                        <h2 class="text-4xl md:text-5xl lg:text-[3.5rem] font-black text-dark-text dark:text-white mb-6 leading-[1.05] tracking-tight group-hover:text-evo-red dark:group-hover:text-evo-gold transition-colors">
+                            ${heroArt.title}
+                        </h2>
+                        
+                        <p class="text-gray-700 dark:text-gray-300 mb-10 text-base md:text-lg line-clamp-4 leading-relaxed font-medium">
+                            ${heroArt.content}
+                        </p>
+                        
+                        <div class="mt-auto inline-flex items-center group/btn border border-gray-300 dark:border-evo-red/50 rounded-full px-6 py-3 w-max hover:bg-dark-text hover:border-dark-text dark:hover:bg-evo-red dark:hover:border-evo-red transition-all">
+                            <span class="text-xs font-bold text-dark-text dark:text-white group-hover/btn:text-white uppercase tracking-widest mr-3 transition-colors">Read More</span>
+                            <svg class="w-4 h-4 text-dark-text dark:text-white group-hover/btn:text-white transition transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full lg:w-1/2 h-[350px] md:h-[450px] lg:h-auto relative bg-[#111] order-1 lg:order-2 overflow-hidden border-b lg:border-b-0 lg:border-l border-gray-200 dark:border-evo-red/30">
+                        <img src="${heroArt.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100">
+                    </div>
+                </div>
+                `;
+            }
+
+            if (gridArticles.length > 0) {
+                document.getElementById('latest').classList.remove('hidden');
+                gridArticles.forEach(article => {
+                    grid.insertAdjacentHTML('beforeend', generateCardHTML(article));
+                });
+            } else if (!heroArt) {
+                 document.getElementById('latest').classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
