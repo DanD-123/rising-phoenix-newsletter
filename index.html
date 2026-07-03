@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Run, Student Managed</title>
-         
+    
     <script>
         function setupTailwind() {
             tailwind.config = {
-                darkMode: 'class', // Enable class-based dark mode
+                darkMode: 'class', 
                 theme: {
                     extend: {
                         fontFamily: {
                             sans: ['Inter', 'sans-serif'],
                         },
                         colors: {
-                            'evo-gold': '#D4AF37', // Updated to Metallic Gold
-                            'evo-red': '#8B0000', // Darker Crimson Red
+                            'evo-gold': '#D4AF37', 
+                            'evo-red': '#8B0000', 
                             'dark-text': '#111827', 
                             'pastel-grey': '#E5E7EB',
                             'evo-accent': '#8B0000' 
                         },
                         boxShadow: {
                             'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
-                            'glow': '0 0 15px rgba(212, 175, 55, 0.4)' // Updated RGB for Metallic Gold
+                            'glow': '0 0 15px rgba(212, 175, 55, 0.4)' 
                         }
                     }
                 }
@@ -33,22 +33,19 @@
     <script src="https://cdn.tailwindcss.com" onload="setupTailwind()"></script>
     
     <style>
-        /* Custom Font Setup */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
         
         body {
-            background-color: #E5E7EB; /* Light mode default */
+            background-color: #E5E7EB; 
             color: #111827;
-            overflow-x: hidden; /* Prevent horizontal clipping/scroll */
+            overflow-x: hidden; 
         }
         
-        /* Dark Mode Global Styles */
         .dark body {
             background-color: #111827;
             color: #F3F4F6;
         }
 
-        /* Smooth Fade In Animation */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -57,45 +54,28 @@
             animation: fadeIn 0.6s ease-out forwards;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-        }
-        .dark ::-webkit-scrollbar-track {
-            background: #1F2937;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #D4AF37; /* Updated to Gold */
-            border-radius: 4px;
-        }
-        .dark ::-webkit-scrollbar-thumb {
-            background: #6B561D; /* Darker Gold for dark mode */
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #B5952F; 
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        .dark ::-webkit-scrollbar-track { background: #1F2937; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+        .dark ::-webkit-scrollbar-thumb { background: #6B561D; }
+        ::-webkit-scrollbar-thumb:hover { background: #B5952F; }
 
-        /* Text Selection */
         ::selection {
-            background-color: #D4AF37; /* Updated to Metallic Gold */
+            background-color: #D4AF37; 
             color: #ffffff;
         }
 
-        /* Standardized Slash Style */
         .brand-slash {
-            color: #D4AF37 !important; /* Force evo-gold */
+            color: #D4AF37 !important; 
             font-style: italic;
             font-weight: 900;
-            margin-right: 0.15rem; /* Slightly reduced margin for mobile compactness */
+            margin-right: 0.15rem; 
             margin-left: 0.15rem;
             display: inline-block;
-            transform: skewX(-10deg); /* Consistent angle */
+            transform: skewX(-10deg); 
         }
 
-        /* Nav Tab */
         .nav-tab {
             position: relative;
             background: white;
@@ -121,12 +101,11 @@
 
         .nav-tab:hover, .group:hover .nav-tab-trigger {
             top: 2px; 
-            background-color: #D4AF37; /* Updated to Gold on Hover */
+            background-color: #D4AF37; 
             box-shadow: none;
             color: black; 
         }
 
-        /* Dropdown Menu Styling */
         .category-menu {
             display: none;
             position: absolute;
@@ -139,7 +118,7 @@
             padding: 24px;
             z-index: 40;
             border: 1px solid #f3f4f6;
-            border-top: 4px solid #D4AF37; /* Updated to Metallic Gold */
+            border-top: 4px solid #D4AF37; 
             pointer-events: auto;
             opacity: 0;
             transform: translateY(-10px);
@@ -148,7 +127,7 @@
         .dark .category-menu {
             background: #1F2937;
             border-color: #374151;
-            border-top-color: #D4AF37; /* Updated to Metallic Gold */
+            border-top-color: #D4AF37; 
         }
 
         .group:hover .category-menu {
@@ -159,7 +138,6 @@
             gap: 32px;
         }
 
-        /* Card Styles */
         .evo-card {
             background-color: white;
             border-radius: 16px;
@@ -174,14 +152,13 @@
 
         .evo-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px -5px rgba(212, 175, 55, 0.15); /* Gold shadow */
-            border-color: rgba(212, 175, 55, 0.3); /* Gold border */
+            box-shadow: 0 20px 40px -5px rgba(212, 175, 55, 0.15); 
+            border-color: rgba(212, 175, 55, 0.3); 
         }
 
-        /* BUTTONS UPDATED TO GOLD PRIMARY */
         .evo-btn {
-            background-color: #D4AF37; /* Gold Default */
-            color: #000000; /* Black Text */
+            background-color: #D4AF37; 
+            color: #000000; 
             padding: 0.75rem 2.5rem;
             font-weight: 900;
             text-transform: uppercase;
@@ -191,8 +168,8 @@
             overflow: hidden;
         }
         .evo-btn:hover {
-            background-color: #8B0000; /* Red Hover */
-            color: #ffffff; /* White Text */
+            background-color: #8B0000; 
+            color: #ffffff; 
             box-shadow: 0 10px 20px -5px rgba(212, 175, 55, 0.4); 
         }
         .dark .evo-btn:hover {
@@ -200,7 +177,6 @@
             color: #D4AF37;
         }
 
-        /* Filter Controls */
         .filter-select {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23111827' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
             background-position: right 0.75rem center;
@@ -213,7 +189,6 @@
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
         }
 
-        /* Admin Styles */
         .modal-overlay {
             background-color: rgba(17, 24, 39, 0.7);
             backdrop-filter: blur(8px);
@@ -259,13 +234,21 @@
     </div>
 
     <div id="key-dates-modal" class="hidden fixed inset-0 z-[150] bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl flex flex-col animate-fade-in-up overflow-hidden">
-        <div class="flex justify-between items-center p-8 md:p-12 border-b border-gray-100/50 dark:border-gray-700/50 sticky top-0 z-10">
-             <button onclick="closeKeyDatesModal()" class="text-dark-text dark:text-white hover:text-evo-red p-3 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md rounded-full transition group border border-gray-100 dark:border-gray-700" title="Back">
-                <svg class="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-            </button>
-             <h2 class="text-3xl md:text-6xl font-black uppercase italic text-dark-text dark:text-white text-right tracking-tighter">
+        <div class="flex justify-between items-center p-6 md:p-8 border-b border-gray-100/50 dark:border-gray-700/50 bg-white/80 dark:bg-gray-900/80 backdrop-blur sticky top-0 z-50">
+            <div class="flex items-center gap-4 md:gap-8">
+                <button onclick="closeKeyDatesModal()" class="text-dark-text dark:text-white hover:text-evo-red p-3 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md rounded-full transition group border border-gray-100 dark:border-gray-700" title="Back">
+                    <svg class="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                </button>
+                <button onclick="resetToHome()" class="hidden md:flex items-center gap-2 hover:opacity-80 transition group shrink-0 min-w-0">
+                    <img src="./logo.png" alt="Logo" class="h-8 w-auto object-contain drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/200x80?text=Logo'">
+                    <span class="font-extrabold uppercase text-lg text-dark-text dark:text-white">
+                        <span class="brand-slash text-lg">//</span> Rising <span class="brand-slash text-lg">//</span> <span class="text-evo-gold group-hover:text-dark-text dark:group-hover:text-white transition-colors duration-300">Phoenix</span>
+                    </span>
+                </button>
+            </div>
+            <h2 class="text-2xl md:text-5xl font-black uppercase italic text-dark-text dark:text-white text-right tracking-tighter truncate pl-4">
                  <span class="brand-slash">//</span> Key <span class="text-evo-gold">Dates</span>
-             </h2>
+            </h2>
         </div>
         
         <div class="flex-1 overflow-y-auto p-8 md:p-16">
@@ -404,13 +387,21 @@
 
 
     <div id="categories-modal" class="hidden fixed inset-0 z-[150] bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl flex flex-col animate-fade-in-up overflow-hidden">
-        <div class="flex justify-between items-center p-8 md:p-12 border-b border-gray-100/50 dark:border-gray-700/50 sticky top-0 z-10">
-             <button onclick="closeCategoriesModal()" class="text-dark-text dark:text-white hover:text-evo-red p-3 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md rounded-full transition group border border-gray-100 dark:border-gray-700" title="Back">
-                <svg class="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-            </button>
-             <h2 class="text-3xl md:text-6xl font-black uppercase italic text-dark-text dark:text-white text-right tracking-tighter">
+        <div class="flex justify-between items-center p-6 md:p-8 border-b border-gray-100/50 dark:border-gray-700/50 bg-white/80 dark:bg-gray-900/80 backdrop-blur sticky top-0 z-50">
+            <div class="flex items-center gap-4 md:gap-8">
+                <button onclick="closeCategoriesModal()" class="text-dark-text dark:text-white hover:text-evo-red p-3 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md rounded-full transition group border border-gray-100 dark:border-gray-700" title="Back">
+                    <svg class="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                </button>
+                <button onclick="resetToHome()" class="hidden md:flex items-center gap-2 hover:opacity-80 transition group shrink-0 min-w-0">
+                    <img src="./logo.png" alt="Logo" class="h-8 w-auto object-contain drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/200x80?text=Logo'">
+                    <span class="font-extrabold uppercase text-lg text-dark-text dark:text-white">
+                        <span class="brand-slash text-lg">//</span> Rising <span class="brand-slash text-lg">//</span> <span class="text-evo-gold group-hover:text-dark-text dark:group-hover:text-white transition-colors duration-300">Phoenix</span>
+                    </span>
+                </button>
+            </div>
+            <h2 class="text-2xl md:text-5xl font-black uppercase italic text-dark-text dark:text-white text-right tracking-tighter truncate pl-4">
                  <span class="brand-slash">//</span> Explore <span class="text-evo-gold">Topics</span>
-             </h2>
+            </h2>
         </div>
         
         <div class="flex-1 overflow-y-auto p-8 md:p-16">
@@ -480,22 +471,27 @@
 
     <div id="dashboard-modal" class="hidden fixed inset-0 z-[100] modal-overlay flex justify-center items-center p-4">
         <div class="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-4xl h-[80vh] shadow-2xl border-t-8 border-evo-gold relative flex flex-col overflow-hidden animate-fade-in-up">
-            <div class="bg-gray-50 dark:bg-gray-900 p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-                <div>
+            
+            <div class="bg-gray-50 dark:bg-gray-900 p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 z-10">
+                <div class="flex items-center gap-4">
+                    <button onclick="closeDashboard()" class="text-gray-400 hover:text-black dark:hover:text-white p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                    <button onclick="resetToHome()" class="hidden sm:flex items-center gap-2 hover:opacity-80 transition group border-l border-gray-300 dark:border-gray-600 pl-4">
+                        <span class="font-extrabold uppercase text-sm text-dark-text dark:text-white">
+                            <span class="brand-slash text-sm">//</span> Rising <span class="brand-slash text-sm">//</span> <span class="text-evo-gold">Phoenix</span>
+                        </span>
+                    </button>
+                </div>
+                <div class="text-right">
                     <h2 class="text-2xl font-black uppercase italic text-dark-text dark:text-white">Editor <span class="text-evo-gold">Dashboard</span></h2>
-                    <p class="text-xs text-gray-500 font-bold uppercase tracking-wider mt-1">Manage Content</p>
                     <p id="connection-status" class="text-[10px] font-bold mt-1 text-red-500">○ Disconnected</p>
                 </div>
-                <button onclick="closeDashboard()" class="text-gray-400 hover:text-black dark:hover:text-white p-2">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
             </div>
 
             <div class="flex-1 overflow-y-auto p-6 md:p-8 bg-white dark:bg-gray-800">
-                
                 <div class="flex justify-between items-center mb-8">
                     <h3 class="text-lg font-bold uppercase tracking-widest text-gray-400">Current Articles</h3>
-                    
                     <button onclick="openAddArticleForm()" class="group flex items-center space-x-3 bg-evo-gold hover:bg-black text-white px-6 py-3 rounded-lg shadow-lg transition-all transform hover:scale-105">
                         <div class="bg-white text-evo-gold group-hover:text-black rounded-full p-1">
                             <svg class="w-4 h-4 font-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
@@ -504,8 +500,7 @@
                     </button>
                 </div>
 
-                <div id="dashboard-list" class="space-y-4">
-                    </div>
+                <div id="dashboard-list" class="space-y-4"></div>
                 
                 <div class="mt-8 pt-8 border-t border-gray-100 dark:border-gray-700">
                     <h4 class="text-xs font-bold uppercase text-gray-300 mb-4">Static Content Preview</h4>
@@ -520,11 +515,18 @@
 
     <div id="admin-panel" class="hidden fixed inset-0 z-[110] modal-overlay flex justify-center items-center p-4">
         <div class="bg-white dark:bg-gray-800 rounded-xl w-full max-w-2xl h-[90vh] overflow-y-auto shadow-2xl border-t-4 border-evo-gold relative flex flex-col">
-            <div class="p-8 pb-0 flex justify-between items-center">
-                <button onclick="backToDashboard()" class="text-xs font-bold uppercase text-gray-400 hover:text-evo-red flex items-center">
-                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                    Back to Dashboard
-                </button>
+            <div class="p-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center sticky top-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur z-10">
+                <div class="flex items-center gap-4">
+                    <button onclick="backToDashboard()" class="text-xs font-bold uppercase text-gray-400 hover:text-evo-red flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                        Back
+                    </button>
+                    <button onclick="resetToHome()" class="hidden sm:flex items-center gap-2 hover:opacity-80 transition group border-l border-gray-300 dark:border-gray-600 pl-4">
+                        <span class="font-extrabold uppercase text-xs text-dark-text dark:text-white">
+                            <span class="brand-slash text-xs">//</span> Rising <span class="brand-slash text-xs">//</span> <span class="text-evo-gold">Phoenix</span>
+                        </span>
+                    </button>
+                </div>
                 <h2 class="text-2xl font-black uppercase italic dark:text-white">New <span class="text-evo-gold">Article</span></h2>
             </div>
             
@@ -613,12 +615,20 @@
 
     <div id="read-modal" class="hidden fixed inset-0 z-[200] bg-white dark:bg-gray-900 overflow-y-auto animate-fade-in">
         <div class="fixed top-0 left-0 w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 z-50 px-6 py-4 md:px-12 flex justify-between items-center transition-all duration-300 shadow-sm">
-             <button onclick="closeReader()" class="flex items-center space-x-3 text-dark-text dark:text-white hover:text-evo-red transition group">
-                <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 group-hover:bg-evo-gold group-hover:border-evo-gold group-hover:text-black p-2 rounded-full transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                </div>
-                <span class="font-black uppercase tracking-widest text-xs">Back to Feed</span>
-             </button>
+             <div class="flex items-center gap-4 md:gap-8">
+                 <button onclick="closeReader()" class="flex items-center space-x-3 text-dark-text dark:text-white hover:text-evo-red transition group">
+                    <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 group-hover:bg-evo-gold group-hover:border-evo-gold group-hover:text-black p-2 rounded-full transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    </div>
+                    <span class="font-black uppercase tracking-widest text-xs hidden sm:block">Back to Feed</span>
+                 </button>
+                 <button onclick="resetToHome()" class="hidden md:flex items-center gap-2 hover:opacity-80 transition group shrink-0 min-w-0 border-l border-gray-200 dark:border-gray-700 pl-8">
+                    <img src="./logo.png" alt="Logo" class="h-8 w-auto object-contain drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/200x80?text=Logo'">
+                    <span class="font-extrabold uppercase text-sm text-dark-text dark:text-white">
+                        <span class="brand-slash text-sm">//</span> Rising <span class="brand-slash text-sm">//</span> <span class="text-evo-gold group-hover:text-dark-text dark:group-hover:text-white transition-colors duration-300">Phoenix</span>
+                    </span>
+                 </button>
+             </div>
              
              <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-300 hidden md:block">
                  Reading Mode
@@ -657,14 +667,14 @@
 
                      <div class="hidden md:block opacity-50">
                          <hr class="border-gray-100 dark:border-gray-700 my-6">
-                         <img src="https://placehold.co/100x100?text=Phoenix" class="w-12 h-12 mb-4 opacity-50 grayscale invert dark:invert-0">
+                         <img src="./logo.png" class="h-12 w-auto mb-4 opacity-50 grayscale invert dark:invert-0" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Phoenix'">
                          <p class="text-[10px] text-gray-400 font-bold uppercase leading-relaxed">Townley Grammar School<br>Student Rising Phoenix Publication</p>
                      </div>
                  </div>
 
                  <div class="md:col-span-9">
                      <div id="reader-content" class="prose prose-lg dark:prose-invert prose-slate max-w-none text-gray-700 dark:text-gray-300 leading-relaxed font-serif first-letter:text-6xl first-letter:font-black first-letter:text-evo-gold first-letter:mr-3 first-letter:float-left first-letter:mt-[-10px]">
-                         </div>
+                     </div>
                      
                      <div class="mt-20 pt-12 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
                          <button onclick="closeReader()" class="text-xs font-bold uppercase text-gray-400 hover:text-evo-red transition flex items-center gap-2">
@@ -684,15 +694,12 @@
     <header class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-24 gap-2 md:gap-6 overflow-hidden">
-                <div class="flex items-center gap-2 md:gap-4 text-base sm:text-lg md:text-2xl lg:text-3xl font-extrabold tracking-widest uppercase text-dark-text dark:text-white focus:outline-none transition min-w-0">
-                    <label for="logo-upload" class="cursor-pointer relative group/logo inline-block shrink-0" title="Upload Custom Logo">
-                        <img id="site-logo" src="uploaded:image_04a6cf.png" alt="Rising Phoenix Logo" class="h-10 md:h-14 w-auto max-w-[100px] sm:max-w-[150px] md:max-w-[200px] object-contain drop-shadow-sm group-hover/logo:opacity-50 transition-opacity" onerror="this.onerror=null; this.src='https://placehold.co/200x80?text=Logo'">
-                        <input type="file" id="logo-upload" accept="image/jpeg, image/png" class="hidden">
-                    </label>
-                    <button onclick="resetToHome()" class="tracking-tight hover:opacity-80 transition group truncate shrink">
+                <button onclick="resetToHome()" class="flex items-center gap-2 md:gap-4 text-base sm:text-lg md:text-2xl lg:text-3xl font-extrabold tracking-widest uppercase text-dark-text dark:text-white focus:outline-none hover:opacity-80 transition min-w-0 group shrink-0 cursor-pointer">
+                    <img id="site-logo" src="./logo.png" alt="Townley Logo" class="h-10 md:h-14 w-auto max-w-[100px] sm:max-w-[150px] md:max-w-[200px] object-contain drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/200x80?text=Logo'">
+                    <span class="truncate shrink">
                         <span class="brand-slash text-lg md:text-3xl lg:text-4xl mr-1 group-hover:text-evo-red transition-colors duration-300">//</span> Rising <span class="brand-slash text-lg md:text-3xl lg:text-4xl mx-1 group-hover:text-evo-red transition-colors duration-300">//</span> <span class="text-evo-gold group-hover:text-dark-text dark:group-hover:text-white transition-colors duration-300">Phoenix</span>
-                    </button>
-                </div>
+                    </span>
+                </button>
                 
                 <div class="hidden md:flex items-center space-x-4 lg:space-x-6 shrink-0">
                     <div class="relative hidden lg:block group">
@@ -700,7 +707,7 @@
                         <svg class="w-4 h-4 absolute right-4 top-3.5 text-gray-400 group-hover:text-evo-gold transition pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
 
-                    <button onclick="handleDevClick()" class="evo-btn text-xs px-6 py-3 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition whitespace-nowrap">Contribute</button>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf0t9qHPQ_VmPPfdX_IYvVlhWdwrV0WKz14Th3BP6JbEbRMLw/viewform?usp=sharing" target="_blank" class="evo-btn text-xs px-6 py-3 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition whitespace-nowrap inline-flex items-center justify-center">Contribute</a>
                 </div>
 
                 <button id="mobile-menu-button" class="md:hidden text-dark-text dark:text-white focus:outline-none p-2 shrink-0">
@@ -754,8 +761,7 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 min-h-screen">
 
         <div id="home-view" class="transition-opacity duration-500 animate-fade-in-up">
-            <section id="this-month" class="mb-24">
-                </section>
+            <section id="this-month" class="mb-24"></section>
 
             <section id="latest" class="mb-24">
                 <div class="flex flex-col xl:flex-row flex-wrap justify-between items-start xl:items-end gap-8 mb-12 border-b border-gray-200 dark:border-gray-700 pb-6">
@@ -765,7 +771,7 @@
                     
                     <div class="w-full xl:w-auto flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 shrink-0">
                         <div class="relative group">
-                             <input type="text" id="search-input" placeholder="Search..." class="w-full md:w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg py-3 px-4 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-evo-gold placeholder-gray-400 dark:text-white shadow-sm transition">
+                            <input type="text" id="search-input" placeholder="Search..." class="w-full md:w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg py-3 px-4 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-evo-gold placeholder-gray-400 dark:text-white shadow-sm transition">
                         </div>
                         
                         <select id="filter-year" class="filter-select w-full md:w-40 min-w-[140px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg py-3 px-4 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-evo-gold shadow-sm cursor-pointer hover:border-gray-300 transition dark:text-white">
@@ -808,8 +814,7 @@
                     </div>
                 </div>
                 
-                <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    </div>
+                <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
                 
                 <div id="no-results" class="hidden text-center py-20 bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm">
                     <p class="text-gray-300 dark:text-gray-500 font-black uppercase tracking-widest text-xl mb-4">No Data Found</p>
@@ -826,8 +831,7 @@
                 </button>
             </div>
             
-            <div id="search-results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                </div>
+            <div id="search-results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"></div>
 
             <div id="search-empty" class="hidden text-center py-32">
                 <p class="text-2xl font-black text-gray-200 uppercase tracking-widest mb-6">No matching articles found.</p>
@@ -852,7 +856,7 @@
                         <li><button onclick="openLatestArticle()" class="hover:text-evo-gold transition text-left uppercase">This Month</button></li>
                         <li><button onclick="openKeyDatesModal()" class="hover:text-evo-gold transition text-left uppercase">Key Dates</button></li>
                         <li><button onclick="openCategoriesModal()" class="hover:text-evo-gold transition text-left uppercase">Categories</button></li>
-                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSf0t9qHPQ_VmPPfdX_IYvVlhWdwrV0WKz14Th3BP6JbEbRMLw/viewform?usp=sharing&ouid=109666865228153244608" target="_blank" class="hover:text-evo-gold transition text-left uppercase">Feedback Form</a></li>
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSf0t9qHPQ_VmPPfdX_IYvVlhWdwrV0WKz14Th3BP6JbEbRMLw/viewform?usp=sharing" target="_blank" class="hover:text-evo-gold transition text-left uppercase">Feedback Form</a></li>
                     </ul>
                 </div>
                 <div>
@@ -878,7 +882,6 @@
     </footer>
 
     <script type="module">
-        // Import Firebase Functions
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
@@ -901,11 +904,9 @@
         const db = getFirestore(app);
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'rising-phoenix-newsletter';
 
-        // Auth State & Data Variables
         let currentUser = null;
         let dbArticles = [];
 
-        // Auth Logic
         async function initAuth() {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
@@ -943,7 +944,6 @@
             });
         }
 
-        // STATIC ARTICLES
         const staticArticles = [
             {
                 title: "MOFs: Why This Year’s Chemistry Nobel Prize Is Like Hermione’s Handbag",
@@ -971,45 +971,17 @@
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Check LocalStorage for Dark Mode
             if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
             } else {
                 document.documentElement.classList.remove('dark');
             }
 
-            // Mobile Menu
             const button = document.getElementById('mobile-menu-button');
             const menu = document.getElementById('mobile-menu');
             if(button && menu) {
                 button.addEventListener('click', () => {
                     menu.classList.toggle('hidden');
-                });
-            }
-
-            // --- Custom Logo Upload Logic ---
-            const logoInput = document.getElementById('logo-upload');
-            const siteLogo = document.getElementById('site-logo');
-            const savedLogo = localStorage.getItem('custom_site_logo');
-
-            // Load saved logo if exists
-            if (savedLogo && siteLogo) {
-                siteLogo.src = savedLogo;
-            }
-
-            if (logoInput && siteLogo) {
-                logoInput.addEventListener('change', function(e) {
-                    const file = e.target.files[0];
-                    if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
-                        const reader = new FileReader();
-                        reader.onload = function(event) {
-                            const base64String = event.target.result;
-                            siteLogo.src = base64String;
-                            // Save to local storage for persistence
-                            localStorage.setItem('custom_site_logo', base64String);
-                        };
-                        reader.readAsDataURL(file);
-                    }
                 });
             }
 
@@ -1039,6 +1011,7 @@
         
         // ---------------- DYNAMIC CALENDAR LOGIC ----------------
         function updateDynamicCalendar() {
+            // Evaluates dynamically on load. Any event with a data-end-date before today will be permanently hidden from the list.
             const today = new Date();
             today.setHours(0,0,0,0);
             
@@ -1046,9 +1019,7 @@
                 const endDateStr = el.getAttribute('data-end-date');
                 if (endDateStr) {
                     const endDate = new Date(endDateStr);
-                    // Hide the element if the end date is completely in the past
                     if (endDate < today) {
-                        // If it's a list item link, hide the parent li to clear up bullets/spacing
                         if(el.tagName.toLowerCase() === 'a' && el.parentElement.tagName.toLowerCase() === 'li') {
                             el.parentElement.style.display = 'none';
                         } else {
@@ -1059,7 +1030,6 @@
             });
         }
 
-        // ---------------- DARK MODE LOGIC ----------------
         window.toggleDarkMode = function() {
             if (document.documentElement.classList.contains('dark')) {
                 document.documentElement.classList.remove('dark');
@@ -1070,7 +1040,6 @@
             }
         }
 
-        // ---------------- AUTH & NAV LOGIC ----------------
         window.handleDevClick = function() {
             if(localStorage.getItem('evo_is_admin') === 'true') {
                 openDashboard();
@@ -1105,7 +1074,6 @@
             });
         }
 
-        // ---------------- KEY DATES MODAL LOGIC ----------------
         window.openKeyDatesModal = function() {
             document.getElementById('key-dates-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -1116,7 +1084,6 @@
             document.body.style.overflow = 'auto';
         }
 
-        // ---------------- CATEGORIES MODAL LOGIC ----------------
         window.openCategoriesModal = function() {
             document.getElementById('categories-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -1136,7 +1103,6 @@
             document.getElementById('latest').scrollIntoView({behavior: 'smooth'});
         }
 
-        // ---------------- DASHBOARD LOGIC ----------------
         window.openDashboard = function() {
             document.getElementById('dashboard-modal').classList.remove('hidden');
             renderDashboardList();
@@ -1195,7 +1161,6 @@
             }
         }
 
-        // ---------------- ARTICLE WRITER LOGIC ----------------
         window.openAddArticleForm = function() {
             document.getElementById('dashboard-modal').classList.add('hidden');
             document.getElementById('admin-panel').classList.remove('hidden');
@@ -1263,7 +1228,6 @@
             });
         }
 
-        // ---------------- READER & DATA LOGIC ----------------
         window.closeReader = function() {
             document.getElementById('read-modal').classList.add('hidden');
             document.body.style.overflow = 'auto'; 
