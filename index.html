@@ -56,13 +56,17 @@
 
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #700000; }
-        .dark ::-webkit-scrollbar-track { background: #1F2937; }
+        .dark ::-webkit-scrollbar-track { background: #111827; }
         ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
-        .dark ::-webkit-scrollbar-thumb { background: #6B561D; }
+        .dark ::-webkit-scrollbar-thumb { background: #700000; } /* Red accent scrollbar in dark mode */
         ::-webkit-scrollbar-thumb:hover { background: #B5952F; }
 
         ::selection {
             background-color: #D4AF37; 
+            color: #ffffff;
+        }
+        .dark ::selection {
+            background-color: #700000; 
             color: #ffffff;
         }
 
@@ -74,6 +78,9 @@
             margin-left: 0.15rem;
             display: inline-block;
             transform: skewX(-10deg); 
+        }
+        .dark .brand-slash {
+            color: #700000 !important; /* Red accent in dark mode */
         }
 
         .nav-tab {
@@ -106,6 +113,10 @@
             box-shadow: none;
             color: black; 
         }
+        .dark .nav-tab:hover, .dark .group:hover .nav-tab-trigger {
+            background-color: #700000; /* Red hover accent in dark mode */
+            color: white; 
+        }
 
         .category-menu {
             display: none;
@@ -128,7 +139,7 @@
         .dark .category-menu {
             background: #1F2937;
             border-color: #374151;
-            border-top-color: #D4AF37; 
+            border-top-color: #700000; /* Red top border accent in dark mode */
         }
 
         .group:hover .category-menu {
@@ -156,6 +167,10 @@
             box-shadow: 0 20px 40px -5px rgba(212, 175, 55, 0.15); 
             border-color: rgba(212, 175, 55, 0.3); 
         }
+        .dark .evo-card:hover {
+            box-shadow: 0 20px 40px -5px rgba(112, 0, 0, 0.3); /* Red glow in dark mode */
+            border-color: rgba(112, 0, 0, 0.5); 
+        }
 
         .evo-btn {
             background-color: #D4AF37; 
@@ -173,9 +188,13 @@
             color: #ffffff; 
             box-shadow: 0 10px 20px -5px rgba(212, 175, 55, 0.4); 
         }
+        .dark .evo-btn {
+            background-color: #700000; /* Red button in dark mode */
+            color: #ffffff;
+        }
         .dark .evo-btn:hover {
             background-color: white;
-            color: #D4AF37;
+            color: #700000;
         }
 
         .filter-select {
@@ -199,35 +218,35 @@
 <body class="text-dark-text antialiased selection:bg-evo-gold selection:text-white dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
 
     <div class="fixed top-28 right-6 z-[90] flex flex-col space-y-4">
-        <button onclick="handleGlobalBack()" class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm text-dark-text dark:text-white p-3 rounded-full shadow-lg border border-white/50 dark:border-gray-700 hover:bg-white hover:scale-110 transition-all duration-300 group" title="Back">
+        <button onclick="handleGlobalBack()" class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm text-dark-text dark:text-white p-3 rounded-full shadow-lg border border-white/50 dark:border-evo-red/50 hover:bg-white dark:hover:bg-gray-700 hover:scale-110 transition-all duration-300 group" title="Back">
             <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
         </button>
-        <button onclick="resetToHome()" class="bg-evo-gold/90 backdrop-blur-sm text-black p-3 rounded-full shadow-lg hover:bg-black hover:text-evo-gold hover:scale-110 transition-all duration-300" title="Home">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+        <button onclick="resetToHome()" class="bg-evo-gold/90 dark:bg-evo-red/90 backdrop-blur-sm text-black dark:text-white p-3 rounded-full shadow-lg hover:bg-black dark:hover:bg-white hover:text-evo-gold dark:hover:text-evo-red hover:scale-110 transition-all duration-300" title="Home">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 0h6"></path></svg>
         </button>
     </div>
 
-    <button onclick="toggleDarkMode()" class="fixed bottom-6 right-6 z-[100] bg-white dark:bg-gray-800 text-dark-text dark:text-evo-gold p-4 rounded-full shadow-2xl border-2 border-gray-100 dark:border-gray-700 hover:scale-110 transition-transform duration-300" title="Toggle Dark Mode">
+    <button onclick="toggleDarkMode()" class="fixed bottom-6 right-6 z-[100] bg-white dark:bg-gray-800 text-dark-text dark:text-evo-red p-4 rounded-full shadow-2xl border-2 border-gray-100 dark:border-evo-red/50 hover:scale-110 transition-transform duration-300" title="Toggle Dark Mode">
         <svg id="theme-sun" class="w-6 h-6 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
         <svg id="theme-moon" class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
     </button>
 
     <div id="login-modal" class="hidden fixed inset-0 z-[100] modal-overlay flex justify-center items-center p-4">
-        <div class="bg-white dark:bg-gray-800 p-10 rounded-2xl max-w-sm w-full shadow-2xl border-t-8 border-evo-gold relative animate-fade-in-up">
-            <button onclick="closeLogin()" class="absolute top-4 right-4 text-gray-400 hover:text-black dark:hover:text-white transition">
+        <div class="bg-white dark:bg-gray-800 p-10 rounded-2xl max-w-sm w-full shadow-2xl border-t-8 border-evo-gold dark:border-evo-red relative animate-fade-in-up">
+            <button onclick="closeLogin()" class="absolute top-4 right-4 text-gray-400 hover:text-black dark:hover:text-evo-red transition">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <h2 class="text-3xl font-black uppercase mb-2 text-center italic tracking-tighter dark:text-white">Developer</h2>
-            <p class="text-center text-xs font-bold text-evo-gold uppercase tracking-widest mb-8">Secure Access</p>
+            <p class="text-center text-xs font-bold text-evo-gold dark:text-evo-red uppercase tracking-widest mb-8">Secure Access</p>
             <div id="login-error" class="hidden bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-3 rounded-lg text-xs font-bold mb-6 text-center border border-red-100 dark:border-red-900">Invalid Credentials</div>
             <form id="login-form" class="space-y-5">
                 <div>
                     <label class="block text-[10px] font-black uppercase text-gray-400 tracking-wider mb-2">Username</label>
-                    <input type="text" id="username" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-evo-gold focus:bg-white dark:focus:bg-gray-600 transition font-bold text-sm text-gray-900 dark:text-white">
+                    <input type="text" id="username" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-evo-gold focus:bg-white dark:focus:ring-evo-red transition font-bold text-sm text-gray-900 dark:text-white">
                 </div>
                 <div>
                     <label class="block text-[10px] font-black uppercase text-gray-400 tracking-wider mb-2">Password</label>
-                    <input type="password" id="password" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-evo-gold focus:bg-white dark:focus:bg-gray-600 transition font-bold text-sm text-gray-900 dark:text-white">
+                    <input type="password" id="password" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-evo-gold focus:bg-white dark:focus:ring-evo-red transition font-bold text-sm text-gray-900 dark:text-white">
                 </div>
                 <button type="submit" class="w-full evo-btn mt-2 rounded-lg shadow-lg">Login</button>
             </form>
@@ -235,147 +254,147 @@
     </div>
 
     <div id="key-dates-modal" class="hidden fixed inset-0 z-[150] bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl flex flex-col animate-fade-in-up overflow-hidden">
-        <div class="flex justify-between items-center p-6 md:p-8 border-b border-gray-100/50 dark:border-gray-700/50 bg-white/80 dark:bg-gray-900/80 backdrop-blur sticky top-0 z-50">
+        <div class="flex justify-between items-center p-6 md:p-8 border-b border-gray-100/50 dark:border-evo-red/20 bg-white/80 dark:bg-gray-900/80 backdrop-blur sticky top-0 z-50">
             <div class="flex items-center gap-4 md:gap-8">
-                <button onclick="closeKeyDatesModal()" class="text-dark-text dark:text-white hover:text-evo-red p-3 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md rounded-full transition group border border-gray-100 dark:border-gray-700" title="Back">
+                <button onclick="closeKeyDatesModal()" class="text-dark-text dark:text-white hover:text-evo-red dark:hover:text-evo-red p-3 bg-gray-50 dark:bg-gray-800 shadow-sm hover:shadow-md rounded-full transition group border border-gray-100 dark:border-gray-700" title="Back">
                     <svg class="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 </button>
                 <button onclick="resetToHome()" class="hidden md:flex items-center gap-2 hover:opacity-80 transition group shrink-0 min-w-0">
                     <img src="./logo.png" alt="Logo" class="h-8 w-auto object-contain drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/200x80?text=Logo'"> 
                     <span class="font-extrabold uppercase text-lg text-dark-text dark:text-white">
-                        <span class="brand-slash text-lg">//</span> Rising <span class="brand-slash text-lg">//</span> <span class="text-evo-gold group-hover:text-dark-text dark:group-hover:text-white transition-colors duration-300">Phoenix</span>
+                        <span class="brand-slash text-lg">//</span> Rising <span class="brand-slash text-lg">//</span> <span class="text-evo-gold group-hover:text-dark-text dark:group-hover:text-evo-red transition-colors duration-300">Phoenix</span>
                     </span>
                 </button>
             </div>
             <h2 class="text-2xl md:text-5xl font-black uppercase italic text-dark-text dark:text-white text-right tracking-tighter truncate pl-4">
-                 <span class="brand-slash">//</span> Key <span class="text-evo-gold">Dates</span>
+                 <span class="brand-slash">//</span> Key <span class="text-evo-gold dark:text-evo-red">Dates</span>
             </h2>
         </div>
         
-        <div class="flex-1 overflow-y-auto p-8 md:p-16">
+        <div class="flex-1 overflow-y-auto p-8 md:p-16 text-dark-text dark:text-white">
             <div class="max-w-4xl mx-auto space-y-12 pb-24">
                 
                 <section>
-                    <h3 class="text-xs font-black uppercase tracking-[0.3em] text-evo-red mb-2 border-l-4 border-evo-red pl-4">Term Dates & Holidays 2026/7</h3>
-                    <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-8 italic bg-gray-100 dark:bg-gray-800 p-3 rounded border-l-4 border-evo-gold">Click on any date or event below to add it directly to your Google Calendar! Past events are hidden automatically.</p>
+                    <h3 class="text-xs font-black uppercase tracking-[0.3em] text-evo-red dark:text-evo-red mb-2 border-l-4 border-evo-red dark:border-evo-red pl-4">Term Dates & Holidays 2026/7</h3>
+                    <p class="text-xs font-bold text-gray-500 dark:text-gray-400 mb-8 italic bg-gray-100 dark:bg-gray-800 p-3 rounded border-l-4 border-evo-gold dark:border-evo-red">Click on any date or event below to add it directly to your Google Calendar! Past events are hidden automatically.</p>
                     <div class="space-y-4">
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Christmas+Holiday&dates=20261221/20270102" target="_blank" data-end-date="2027-01-01" class="calendar-event block bg-gray-50 dark:bg-gray-800/50 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 flex justify-between items-center hover:border-evo-gold transition group cursor-pointer">
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Christmas+Holiday&dates=20261221/20270102" target="_blank" data-end-date="2027-01-01" class="calendar-event block bg-gray-50 dark:bg-gray-800/50 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 flex justify-between items-center hover:border-evo-gold dark:hover:border-evo-red transition shadow-sm group cursor-pointer">
                             <div>
-                                <h4 class="font-black text-lg dark:text-white group-hover:text-evo-gold transition">Christmas Holiday</h4>
+                                <h4 class="font-black text-lg text-dark-text dark:text-white group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Christmas Holiday</h4>
                                 <p class="text-sm text-gray-500 uppercase font-bold tracking-wider">Mon 21 Dec 2026 - Fri 1 Jan 2027</p>
                             </div>
-                            <span class="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded text-[10px] font-black uppercase dark:text-gray-300">Holiday</span>
+                            <span class="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded text-[10px] font-black uppercase text-dark-text dark:text-gray-300">Holiday</span>
                         </a>
 
                         <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 block-term">
-                            <h4 class="text-xl font-black italic uppercase text-evo-gold mb-6 tracking-tighter">// Spring Term 2026/7</h4>
-                            <ul class="space-y-2">
+                            <h4 class="text-xl font-black italic uppercase text-evo-gold dark:text-evo-red mb-6 tracking-tighter">// Spring Term 2026/7</h4>
+                            <ul class="space-y-2 text-dark-text dark:text-white">
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=ACADEMY+DAY+2&dates=20270104/20270105" target="_blank" data-end-date="2027-01-04" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
-                                        <span class="font-black text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Jan 4, 2027</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Monday - ACADEMY DAY 2</span>
+                                        <span class="font-black text-evo-red dark:text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Jan 4, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Monday - ACADEMY DAY 2</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Students+Return&dates=20270105/20270106" target="_blank" data-end-date="2027-01-05" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
-                                        <span class="font-black text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Jan 5, 2027</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Tuesday - Students Return</span>
+                                        <span class="font-black text-evo-red dark:text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Jan 5, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Tuesday - Students Return</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=ACADEMY+DAY+3&dates=20270202/20270203" target="_blank" data-end-date="2027-02-02" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
-                                        <span class="font-black text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Feb 2, 2027</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Tuesday - ACADEMY DAY 3</span>
+                                        <span class="font-black text-evo-red dark:text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Feb 2, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Tuesday - ACADEMY DAY 3</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Break+up+for+February+half-term&dates=20270212/20270213" target="_blank" data-end-date="2027-02-12" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
-                                        <span class="font-black text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Feb 12, 2027</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Friday - Break up for February half-term</span>
+                                        <span class="font-black text-evo-red dark:text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Feb 12, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Friday - Break up for February half-term</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=February+half-term+holiday&dates=20270215/20270220" target="_blank" data-end-date="2027-02-19" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition italic opacity-80 hover:opacity-100">
                                         <span class="font-black min-w-[100px] text-sm group-hover:text-evo-gold transition">Feb 15 - 19</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">February half-term holiday</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">February half-term holiday</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Students+return+for+Spring+Term+2&dates=20270222/20270223" target="_blank" data-end-date="2027-02-22" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
-                                        <span class="font-black text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Feb 22, 2027</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Monday - All students return for Spring Term 2</span>
+                                        <span class="font-black text-evo-red dark:text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Feb 22, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Monday - All students return for Spring Term 2</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Final+day+of+Spring+Term&dates=20270325/20270326" target="_blank" data-end-date="2027-03-25" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
-                                        <span class="font-black text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Mar 25, 2027</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Thursday - Final day of Spring Term</span>
+                                        <span class="font-black text-evo-red dark:text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Mar 25, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Thursday - Final day of Spring Term</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Easter+Holiday&dates=20270326/20270410" target="_blank" data-end-date="2027-04-09" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition italic opacity-80 hover:opacity-100">
                                         <span class="font-black min-w-[100px] text-sm group-hover:text-evo-gold transition">Mar 26 - Apr 9</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Easter Holiday (inc. Good Friday & Easter Monday)</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Easter Holiday (inc. Good Friday & Easter Monday)</span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
 
                         <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 block-term">
-                            <h4 class="text-xl font-black italic uppercase text-evo-gold mb-6 tracking-tighter">// Summer Term 2026/7</h4>
-                            <ul class="space-y-2">
+                            <h4 class="text-xl font-black italic uppercase text-evo-gold dark:text-evo-red mb-6 tracking-tighter">// Summer Term 2026/7</h4>
+                            <ul class="space-y-2 text-dark-text dark:text-white">
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=All+students+return+for+Summer+Term+1&dates=20270412/20270413" target="_blank" data-end-date="2027-04-12" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
-                                        <span class="font-black text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Apr 12, 2027</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Monday - All students return for Summer Term 1</span>
+                                        <span class="font-black text-evo-red dark:text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Apr 12, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Monday - All students return for Summer Term 1</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=INSET+DAY+4&dates=20270414/20270415" target="_blank" data-end-date="2027-04-14" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
-                                        <span class="font-black text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Apr 14, 2027</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Wednesday - INSET DAY 4</span>
+                                        <span class="font-black text-evo-red dark:text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Apr 14, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Wednesday - INSET DAY 4</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=May+Bank+Holiday&dates=20270503/20270504" target="_blank" data-end-date="2027-05-03" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
-                                        <span class="font-black text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">May 3, 2027</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Monday - May Bank Holiday</span>
+                                        <span class="font-black text-evo-red dark:text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">May 3, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Monday - May Bank Holiday</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Break+up+for+May+half-term&dates=20270528/20270529" target="_blank" data-end-date="2027-05-28" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
-                                        <span class="font-black text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">May 28, 2027</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Friday - Break up for the May half-term</span>
+                                        <span class="font-black text-evo-red dark:text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">May 28, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Friday - Break up for the May half-term</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=May+half-term+holiday&dates=20270531/20270605" target="_blank" data-end-date="2027-06-04" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition italic opacity-80 hover:opacity-100">
                                         <span class="font-black min-w-[100px] text-sm group-hover:text-evo-gold transition">May 31 - Jun 4</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">May half-term holiday</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">May half-term holiday</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=INSET+DAY+5&dates=20270607/20270608" target="_blank" data-end-date="2027-06-07" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
-                                        <span class="font-black text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Jun 7, 2027</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Monday - INSET DAY 5</span>
+                                        <span class="font-black text-evo-red dark:text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Jun 7, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Monday - INSET DAY 5</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Students+return+for+Summer+Term+2&dates=20270608/20270609" target="_blank" data-end-date="2027-06-08" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
-                                        <span class="font-black text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Jun 8, 2027</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Tuesday - All students return for Summer Term 2</span>
+                                        <span class="font-black text-evo-red dark:text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Jun 8, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Tuesday - All students return for Summer Term 2</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Break+up+for+Summer+(End+of+Term)&dates=20270720/20270721" target="_blank" data-end-date="2027-07-20" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
-                                        <span class="font-black text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Jul 20, 2027</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Tuesday - Break up for Summer (End of Student Term)</span>
+                                        <span class="font-black text-evo-red dark:text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Jul 20, 2027</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Tuesday - Break up for Summer (End of Student Term)</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Academy+Days+4+and+5&dates=20270721/20270723" target="_blank" data-end-date="2027-07-22" class="calendar-event flex gap-4 group w-full hover:bg-gray-50 dark:hover:bg-gray-700/50 p-2 -mx-2 rounded transition">
-                                        <span class="font-black text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Jul 21 - 22</span>
-                                        <span class="font-bold dark:text-white uppercase text-sm group-hover:text-evo-gold transition">Wed & Thu - Academy Days 4 and 5</span>
+                                        <span class="font-black text-evo-red dark:text-evo-red min-w-[100px] text-sm group-hover:text-evo-gold transition">Jul 21 - 22</span>
+                                        <span class="font-bold uppercase text-sm group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Wed & Thu - Academy Days 4 and 5</span>
                                     </a>
                                 </li>
                             </ul>
@@ -388,82 +407,72 @@
 
 
     <div id="categories-modal" class="hidden fixed inset-0 z-[150] bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl flex flex-col animate-fade-in-up overflow-hidden">
-        <div class="flex justify-between items-center p-6 md:p-8 border-b border-gray-100/50 dark:border-gray-700/50 bg-white/80 dark:bg-gray-900/80 backdrop-blur sticky top-0 z-50">
+        <div class="flex justify-between items-center p-6 md:p-8 border-b border-gray-100/50 dark:border-evo-red/20 bg-white/80 dark:bg-gray-900/80 backdrop-blur sticky top-0 z-50">
             <div class="flex items-center gap-4 md:gap-8">
-                <button onclick="closeCategoriesModal()" class="text-dark-text dark:text-white hover:text-evo-red p-3 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md rounded-full transition group border border-gray-100 dark:border-gray-700" title="Back">
+                <button onclick="closeCategoriesModal()" class="text-dark-text dark:text-white hover:text-evo-red dark:hover:text-evo-red p-3 bg-gray-50 dark:bg-gray-800 shadow-sm hover:shadow-md rounded-full transition group border border-gray-100 dark:border-gray-700" title="Back">
                     <svg class="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                 </button>
                 <button onclick="resetToHome()" class="hidden md:flex items-center gap-2 hover:opacity-80 transition group shrink-0 min-w-0">
                     <img src="./logo.png" alt="Logo" class="h-8 w-auto object-contain drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/200x80?text=Logo'">
                     <span class="font-extrabold uppercase text-lg text-dark-text dark:text-white">
-                        <span class="brand-slash text-lg">//</span> Rising <span class="brand-slash text-lg">//</span> <span class="text-evo-gold group-hover:text-dark-text dark:group-hover:text-white transition-colors duration-300">Phoenix</span>
+                        <span class="brand-slash text-lg">//</span> Rising <span class="brand-slash text-lg">//</span> <span class="text-evo-gold group-hover:text-dark-text dark:group-hover:text-evo-red transition-colors duration-300">Phoenix</span>
                     </span>
                 </button>
             </div>
             <h2 class="text-2xl md:text-5xl font-black uppercase italic text-dark-text dark:text-white text-right tracking-tighter truncate pl-4">
-                 <span class="brand-slash">//</span> Explore <span class="text-evo-gold">Topics</span>
+                 <span class="brand-slash">//</span> Explore <span class="text-evo-gold dark:text-evo-red">Topics</span>
             </h2>
         </div>
         
         <div class="flex-1 overflow-y-auto p-8 md:p-16">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1600px] mx-auto">
-                <button onclick="filterByCategory('Arts')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
-                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold group-hover:text-white transition">
+                <button onclick="filterByCategory('Arts')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-white transition">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
                     </div>
                     <div>
-                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold transition">Filter By</span>
-                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red transition duration-300">Arts</h3>
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Filter By</span>
+                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red dark:group-hover:text-evo-gold transition duration-300">Arts</h3>
                     </div>
                 </button>
 
-                <button onclick="filterByCategory('Current Affairs')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
-                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold group-hover:text-white transition">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
-                    </div>
-                    <div>
-                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold transition">Filter By</span>
-                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red transition duration-300">Current Affairs</h3>
-                    </div>
-                </button>
-
-                <button onclick="filterByCategory('Humanities')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
-                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold group-hover:text-white transition">
+                <button onclick="filterByCategory('Humanities')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-white transition">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
                     <div>
-                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold transition">Filter By</span>
-                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red transition duration-300">Humanities</h3>
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Filter By</span>
+                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red dark:group-hover:text-evo-gold transition duration-300">Humanities</h3>
                     </div>
                 </button>
 
-                <button onclick="filterByCategory('Opinion Pieces')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
-                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold group-hover:text-white transition">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                <button onclick="filterByCategory('Key Information')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-white transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
                     <div>
-                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold transition">Filter By</span>
-                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red transition duration-300">Opinion Pieces</h3>
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Filter By</span>
+                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red dark:group-hover:text-evo-gold transition duration-300">Key Info</h3>
                     </div>
                 </button>
 
-                <button onclick="filterByCategory('Science')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
-                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold group-hover:text-white transition">
+                <button onclick="filterByCategory('School Events')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-white transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Filter By</span>
+                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red dark:group-hover:text-evo-gold transition duration-300">Events</h3>
+                    </div>
+                </button>
+
+                <button onclick="filterByCategory('STEM')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold dark:hover:border-evo-red transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:text-white transition">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
                     </div>
                     <div>
-                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold transition">Filter By</span>
-                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red transition duration-300">Science</h3>
-                    </div>
-                </button>
-
-                <button onclick="filterByCategory('Tech')" class="bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-sm hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-evo-gold transition-all duration-300 group text-left h-56 flex flex-col justify-between hover:-translate-y-2">
-                    <div class="w-12 h-12 bg-gray-50 dark:bg-gray-700 rounded-full flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-evo-gold group-hover:text-white transition">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <div>
-                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold transition">Filter By</span>
-                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red transition duration-300">Tech</h3>
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block group-hover:text-evo-gold dark:group-hover:text-evo-red transition">Filter By</span>
+                        <h3 class="text-4xl font-black uppercase italic text-gray-800 dark:text-white group-hover:text-evo-red dark:group-hover:text-evo-gold transition duration-300">STEM</h3>
                     </div>
                 </button>
             </div>
@@ -471,7 +480,7 @@
     </div>
 
     <div id="dashboard-modal" class="hidden fixed inset-0 z-[100] modal-overlay flex justify-center items-center p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-4xl h-[80vh] shadow-2xl border-t-8 border-evo-gold relative flex flex-col overflow-hidden animate-fade-in-up">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-4xl h-[80vh] shadow-2xl border-t-8 border-evo-gold dark:border-evo-red relative flex flex-col overflow-hidden animate-fade-in-up">
             
             <div class="bg-gray-50 dark:bg-gray-900 p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 z-10">
                 <div class="flex items-center gap-4">
@@ -480,12 +489,12 @@
                     </button>
                     <button onclick="resetToHome()" class="hidden sm:flex items-center gap-2 hover:opacity-80 transition group border-l border-gray-300 dark:border-gray-600 pl-4">
                         <span class="font-extrabold uppercase text-sm text-dark-text dark:text-white">
-                            <span class="brand-slash text-sm">//</span> Rising <span class="brand-slash text-sm">//</span> <span class="text-evo-gold">Phoenix</span>
+                            <span class="brand-slash text-sm">//</span> Rising <span class="brand-slash text-sm">//</span> <span class="text-evo-gold dark:text-evo-red">Phoenix</span>
                         </span>
                     </button>
                 </div>
                 <div class="text-right">
-                    <h2 class="text-2xl font-black uppercase italic text-dark-text dark:text-white">Editor <span class="text-evo-gold">Dashboard</span></h2>
+                    <h2 class="text-2xl font-black uppercase italic text-dark-text dark:text-white">Editor <span class="text-evo-gold dark:text-evo-red">Dashboard</span></h2>
                     <p id="connection-status" class="text-[10px] font-bold mt-1 text-red-500">○ Disconnected</p>
                 </div>
             </div>
@@ -493,29 +502,22 @@
             <div class="flex-1 overflow-y-auto p-6 md:p-8 bg-white dark:bg-gray-800">
                 <div class="flex justify-between items-center mb-8">
                     <h3 class="text-lg font-bold uppercase tracking-widest text-gray-400">Current Articles</h3>
-                    <button onclick="openAddArticleForm()" class="group flex items-center space-x-3 bg-evo-gold hover:bg-black text-white px-6 py-3 rounded-lg shadow-lg transition-all transform hover:scale-105">
-                        <div class="bg-white text-evo-gold group-hover:text-black rounded-full p-1">
+                    <button onclick="openAddArticleForm()" class="group flex items-center space-x-3 bg-evo-gold hover:bg-black dark:bg-evo-red dark:hover:bg-white dark:hover:text-evo-red text-white px-6 py-3 rounded-lg shadow-lg transition-all transform hover:scale-105">
+                        <div class="bg-white text-evo-gold dark:text-evo-red group-hover:text-black dark:group-hover:text-evo-red rounded-full p-1">
                             <svg class="w-4 h-4 font-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
                         </div>
-                        <span class="font-black uppercase tracking-wider text-sm text-black">Add Article</span>
+                        <span class="font-black uppercase tracking-wider text-sm text-black group-hover:text-white dark:text-white dark:group-hover:text-evo-red transition">Add Article</span>
                     </button>
                 </div>
 
                 <div id="dashboard-list" class="space-y-4"></div>
-                
-                <div class="mt-8 pt-8 border-t border-gray-100 dark:border-gray-700">
-                    <h4 class="text-xs font-bold uppercase text-gray-300 mb-4">Static Content Preview</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 opacity-60">
-                         <div class="border border-gray-200 dark:border-gray-600 p-4 rounded bg-gray-50 dark:bg-gray-700 dark:text-gray-300"><span class="text-xs font-bold text-evo-red block">Science</span>Hermione's Handbag</div>
-                         <div class="border border-gray-200 dark:border-gray-600 p-4 rounded bg-gray-50 dark:bg-gray-700 dark:text-gray-300"><span class="text-xs font-bold text-evo-red block">Science</span>Quantum Leap</div>
-                    </div>
-                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Admin Panel / Add Article -->
     <div id="admin-panel" class="hidden fixed inset-0 z-[110] modal-overlay flex justify-center items-center p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-xl w-full max-w-2xl h-[90vh] overflow-y-auto shadow-2xl border-t-4 border-evo-gold relative flex flex-col">
+        <div class="bg-white dark:bg-gray-800 rounded-xl w-full max-w-2xl h-[90vh] overflow-y-auto shadow-2xl border-t-4 border-evo-gold dark:border-evo-red relative flex flex-col">
             <div class="p-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center sticky top-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur z-10">
                 <div class="flex items-center gap-4">
                     <button onclick="backToDashboard()" class="text-xs font-bold uppercase text-gray-400 hover:text-evo-red flex items-center">
@@ -524,11 +526,11 @@
                     </button>
                     <button onclick="resetToHome()" class="hidden sm:flex items-center gap-2 hover:opacity-80 transition group border-l border-gray-300 dark:border-gray-600 pl-4">
                         <span class="font-extrabold uppercase text-xs text-dark-text dark:text-white">
-                            <span class="brand-slash text-xs">//</span> Rising <span class="brand-slash text-xs">//</span> <span class="text-evo-gold">Phoenix</span>
+                            <span class="brand-slash text-xs">//</span> Rising <span class="brand-slash text-xs">//</span> <span class="text-evo-gold dark:text-evo-red">Phoenix</span>
                         </span>
                     </button>
                 </div>
-                <h2 class="text-2xl font-black uppercase italic dark:text-white">New <span class="text-evo-gold">Article</span></h2>
+                <h2 class="text-2xl font-black uppercase italic dark:text-white">New <span class="text-evo-gold dark:text-evo-red">Article</span></h2>
             </div>
             
             <div class="p-8 flex-1">
@@ -536,35 +538,31 @@
                     <div class="grid grid-cols-1 gap-6">
                         <div>
                             <label class="block text-xs font-bold uppercase mb-1 text-gray-500">Title</label>
-                            <input type="text" id="post-title" required class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold font-bold text-gray-900 dark:text-white" placeholder="E.g. The Future of AI">
+                            <input type="text" id="post-title" required class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold dark:focus:ring-evo-red font-bold text-gray-900 dark:text-white" placeholder="E.g. The Future of AI">
                         </div>
                         
                         <div>
                             <label class="block text-xs font-bold uppercase mb-2 text-gray-500">Categories (Select Multiple)</label>
                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 bg-gray-50 dark:bg-gray-700 p-4 rounded border border-gray-200 dark:border-gray-600">
                                 <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" name="post-cat" value="Arts" class="form-checkbox text-evo-gold rounded focus:ring-evo-gold">
+                                    <input type="checkbox" name="post-cat" value="Arts" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold dark:focus:ring-evo-red">
                                     <span class="text-sm font-medium text-gray-900 dark:text-gray-200">Arts</span>
                                 </label>
                                 <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" name="post-cat" value="Current Affairs" class="form-checkbox text-evo-gold rounded focus:ring-evo-gold">
-                                    <span class="text-sm font-medium text-gray-900 dark:text-gray-200">Current Affairs</span>
-                                </label>
-                                <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" name="post-cat" value="Humanities" class="form-checkbox text-evo-gold rounded focus:ring-evo-gold">
+                                    <input type="checkbox" name="post-cat" value="Humanities" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold dark:focus:ring-evo-red">
                                     <span class="text-sm font-medium text-gray-900 dark:text-gray-200">Humanities</span>
                                 </label>
                                 <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" name="post-cat" value="Opinion Pieces" class="form-checkbox text-evo-gold rounded focus:ring-evo-gold">
-                                    <span class="text-sm font-medium text-gray-900 dark:text-gray-200">Opinion Pieces</span>
+                                    <input type="checkbox" name="post-cat" value="Key Information" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold dark:focus:ring-evo-red">
+                                    <span class="text-sm font-medium text-gray-900 dark:text-gray-200">Key Information</span>
                                 </label>
                                 <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" name="post-cat" value="Science" class="form-checkbox text-evo-gold rounded focus:ring-evo-gold">
-                                    <span class="text-sm font-medium text-gray-900 dark:text-gray-200">Science</span>
+                                    <input type="checkbox" name="post-cat" value="School Events" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold dark:focus:ring-evo-red">
+                                    <span class="text-sm font-medium text-gray-900 dark:text-gray-200">School Events</span>
                                 </label>
                                 <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="checkbox" name="post-cat" value="Tech" class="form-checkbox text-evo-gold rounded focus:ring-evo-gold">
-                                    <span class="text-sm font-medium text-gray-900 dark:text-gray-200">Tech</span>
+                                    <input type="checkbox" name="post-cat" value="STEM" class="form-checkbox text-evo-gold dark:text-evo-red rounded focus:ring-evo-gold dark:focus:ring-evo-red">
+                                    <span class="text-sm font-medium text-gray-900 dark:text-gray-200">STEM</span>
                                 </label>
                             </div>
                         </div>
@@ -572,38 +570,53 @@
 
                     <div>
                         <label class="block text-xs font-bold uppercase mb-1 text-gray-500">Specific Subject (Optional)</label>
-                        <input type="text" id="post-subject" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold font-bold text-gray-900 dark:text-white" placeholder="E.g. Chemistry, History, Art">
+                        <input type="text" id="post-subject" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold dark:focus:ring-evo-red font-bold text-gray-900 dark:text-white" placeholder="E.g. Chemistry, History, Art">
+                    </div>
+
+                    <div>
+                         <label class="block text-xs font-bold uppercase mb-1 text-gray-500">Target Year Group</label>
+                         <select id="post-year" class="filter-select w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold dark:focus:ring-evo-red text-gray-900 dark:text-white">
+                             <option value="All">All Years</option>
+                             <option value="Year 7">Year 7</option>
+                             <option value="Year 8">Year 8</option>
+                             <option value="Year 9">Year 9</option>
+                             <option value="Year 10">Year 10</option>
+                             <option value="Year 11">Year 11</option>
+                             <option value="Year 12">Year 12</option>
+                             <option value="Year 13">Year 13</option>
+                             <option value="Staff">Staff</option>
+                         </select>
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold uppercase mb-1 text-gray-500">Image URL</label>
-                        <input type="text" id="post-image" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold text-gray-900 dark:text-white" placeholder="https://...">
+                        <input type="text" id="post-image" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold dark:focus:ring-evo-red text-gray-900 dark:text-white" placeholder="https://...">
                         <p class="text-[10px] text-gray-400 mt-1">Leave blank for a random placeholder.</p>
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold uppercase mb-1 text-gray-500">Summary / Content</label>
-                        <textarea id="post-content" required rows="6" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold text-gray-900 dark:text-white" placeholder="Write the full article content here..."></textarea>
+                        <textarea id="post-content" required rows="6" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold dark:focus:ring-evo-red text-gray-900 dark:text-white" placeholder="Write the full article content here..."></textarea>
                     </div>
 
                     <div>
                          <label class="block text-xs font-bold uppercase mb-1 text-gray-500">Publisher / Author</label>
-                         <input type="text" id="post-author" value="Editor" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold text-gray-900 dark:text-white">
+                         <input type="text" id="post-author" value="Editor" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 p-3 rounded focus:outline-none focus:ring-1 focus:ring-evo-gold dark:focus:ring-evo-red text-gray-900 dark:text-white">
                     </div>
 
                     <div class="pt-4 border-t border-gray-100 dark:border-gray-700">
-                        <button type="submit" class="w-full evo-btn text-center">Publish Article</button>
+                        <button type="submit" class="w-full evo-btn text-center rounded dark:bg-evo-red dark:text-white dark:hover:bg-white dark:hover:text-evo-red">Publish Article</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <div id="read-modal" class="hidden fixed inset-0 z-[200] bg-white dark:bg-gray-900 overflow-y-auto animate-fade-in">
-        <div class="fixed top-0 left-0 w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 z-50 px-6 py-4 md:px-12 flex justify-between items-center transition-all duration-300 shadow-sm">
+    <div id="read-modal" class="hidden fixed inset-0 z-[200] bg-[#FFFDF5] dark:bg-gray-900 overflow-y-auto animate-fade-in">
+        <div class="fixed top-0 left-0 w-full bg-[#FFFDF5]/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 z-50 px-6 py-4 md:px-12 flex justify-between items-center transition-all duration-300 shadow-sm">
              <div class="flex items-center gap-4 md:gap-8">
-                 <button onclick="closeReader()" class="flex items-center space-x-3 text-dark-text dark:text-white hover:text-evo-red transition group">
-                    <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 group-hover:bg-evo-gold group-hover:border-evo-gold group-hover:text-black p-2 rounded-full transition">
+                 <button onclick="closeReader()" class="flex items-center space-x-3 text-dark-text dark:text-white hover:text-evo-red dark:hover:text-evo-gold transition group">
+                    <div class="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 group-hover:bg-evo-gold dark:group-hover:bg-evo-red group-hover:border-evo-gold dark:group-hover:border-evo-red group-hover:text-black dark:group-hover:text-white p-2 rounded-full transition">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                     </div>
                     <span class="font-black uppercase tracking-widest text-xs hidden sm:block">Back to Feed</span>
@@ -611,18 +624,18 @@
                  <button onclick="resetToHome()" class="hidden md:flex items-center gap-2 hover:opacity-80 transition group shrink-0 min-w-0 border-l border-gray-200 dark:border-gray-700 pl-8">
                     <img src="./logo.png" alt="Logo" class="h-8 w-auto object-contain drop-shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/200x80?text=Logo'">
                     <span class="font-extrabold uppercase text-sm text-dark-text dark:text-white">
-                        <span class="brand-slash text-sm">//</span> Rising <span class="brand-slash text-sm">//</span> <span class="text-evo-gold group-hover:text-dark-text dark:group-hover:text-white transition-colors duration-300">Phoenix</span>
+                        <span class="brand-slash text-sm">//</span> Rising <span class="brand-slash text-sm">//</span> <span class="text-evo-gold group-hover:text-dark-text dark:group-hover:text-evo-red transition-colors duration-300">Phoenix</span>
                     </span>
                  </button>
              </div>
              
-             <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-300 hidden md:block">
+             <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500 hidden md:block">
                  Reading Mode
              </div>
         </div>
 
         <div class="max-w-5xl mx-auto pt-24 pb-20 px-4 md:px-8">
-             <div class="h-[50vh] md:h-[65vh] w-full rounded-3xl overflow-hidden shadow-2xl mb-16 relative group">
+             <div class="h-[50vh] md:h-[65vh] w-full rounded-3xl overflow-hidden shadow-2xl mb-16 relative group border dark:border-gray-800">
                  <img id="reader-image" src="" class="w-full h-full object-cover transition duration-1000 ease-in-out group-hover:scale-105">
                  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                  <div class="absolute bottom-0 left-0 p-8 md:p-16 w-full">
@@ -635,9 +648,9 @@
              </div>
 
              <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
-                 <div class="md:col-span-3 space-y-8 md:sticky md:top-32 h-fit border-t md:border-t-0 md:border-r border-gray-100 dark:border-gray-700 pt-8 md:pt-0 pr-4">
+                 <div class="md:col-span-3 space-y-8 md:sticky md:top-32 h-fit border-t md:border-t-0 md:border-r border-gray-200 dark:border-gray-700 pt-8 md:pt-0 pr-4">
                      <div class="flex items-center space-x-4 md:block md:space-x-0">
-                         <div class="w-14 h-14 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center text-gray-400 mb-0 md:mb-4 shadow-inner">
+                         <div class="w-14 h-14 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full flex items-center justify-center text-gray-400 mb-0 md:mb-4 shadow-inner">
                              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                          </div>
                          <div>
@@ -648,22 +661,22 @@
                      
                      <div>
                          <p class="text-[10px] font-black uppercase text-gray-400 tracking-widest mb-1">Published On</p>
-                         <p id="reader-date" class="font-bold text-dark-text dark:text-white font-mono text-sm text-evo-gold">Date</p>
+                         <p id="reader-date" class="font-bold text-dark-text dark:text-white font-mono text-sm text-evo-gold dark:text-evo-red">Date</p>
                      </div>
 
                      <div class="hidden md:block opacity-50">
-                         <hr class="border-gray-100 dark:border-gray-700 my-6">
+                         <hr class="border-gray-200 dark:border-gray-700 my-6">
                          <img src="./logo.png" class="h-12 w-auto mb-4 opacity-50 grayscale invert dark:invert-0" onerror="this.onerror=null; this.src='https://placehold.co/100x100?text=Phoenix'">
-                         <p class="text-[10px] text-gray-400 font-bold uppercase leading-relaxed">Townley Grammar School<br>Student Rising Phoenix Publication</p>
+                         <p class="text-[10px] text-gray-500 font-bold uppercase leading-relaxed">Townley Grammar School<br>Student Rising Phoenix Publication</p>
                      </div>
                  </div>
 
                  <div class="md:col-span-9">
-                     <div id="reader-content" class="prose prose-lg dark:prose-invert prose-slate max-w-none text-gray-700 dark:text-gray-300 leading-relaxed font-serif first-letter:text-6xl first-letter:font-black first-letter:text-evo-gold first-letter:mr-3 first-letter:float-left first-letter:mt-[-10px]">
+                     <div id="reader-content" class="prose prose-lg dark:prose-invert prose-slate max-w-none text-gray-800 dark:text-gray-300 leading-relaxed font-serif first-letter:text-6xl first-letter:font-black first-letter:text-evo-red dark:first-letter:text-evo-gold first-letter:mr-3 first-letter:float-left first-letter:mt-[-10px]">
                      </div>
                      
-                     <div class="mt-20 pt-12 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
-                         <button onclick="closeReader()" class="text-xs font-bold uppercase text-gray-400 hover:text-evo-red transition flex items-center gap-2">
+                     <div class="mt-20 pt-12 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                         <button onclick="closeReader()" class="text-xs font-bold uppercase text-gray-400 hover:text-evo-red dark:hover:text-evo-gold transition flex items-center gap-2">
                              <span class="bg-gray-100 dark:bg-gray-800 p-2 rounded-full">←</span> Back to Articles
                          </button>
                          <div class="flex space-x-2">
@@ -677,7 +690,8 @@
         </div>
     </div>
 
-    <header class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800 transition-all duration-300">
+    <!-- Header -->
+    <header class="bg-[#FFFDF5]/95 dark:bg-gray-900/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-800 transition-all duration-300">
         <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-24 gap-2 md:gap-6 overflow-hidden">
                 <button onclick="resetToHome()" class="flex items-center gap-2 md:gap-4 text-base sm:text-lg md:text-2xl lg:text-3xl font-extrabold tracking-widest uppercase text-dark-text dark:text-white focus:outline-none hover:opacity-80 transition min-w-0 group shrink-0 cursor-pointer">
@@ -689,7 +703,7 @@
                 
                 <div class="hidden md:flex items-center space-x-4 lg:space-x-6 shrink-0">
                     <div class="relative hidden lg:block group">
-                        <input type="text" id="nav-search" placeholder="Search..." class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full py-2.5 px-5 text-sm font-bold focus:ring-2 focus:ring-evo-gold focus:border-transparent focus:bg-white dark:focus:bg-gray-700 w-48 transition-all shadow-inner placeholder-gray-400 dark:text-white text-gray-900">
+                        <input type="text" id="nav-search" placeholder="Search..." class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-full py-2.5 px-5 text-sm font-bold focus:ring-2 focus:ring-evo-gold focus:border-transparent text-dark-text dark:text-white w-48 transition-all shadow-inner placeholder-gray-400">
                         <svg class="w-4 h-4 absolute right-4 top-3.5 text-gray-400 group-hover:text-evo-gold transition pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
 
@@ -704,30 +718,29 @@
 
         <nav class="hidden md:flex max-w-[1600px] mx-auto px-8 space-x-4 pointer-events-none pb-0">
             <div class="pointer-events-auto flex space-x-3">
-                <button onclick="openLatestArticle()" class="nav-tab inline-block hover:text-evo-gold text-gray-500">This Month's Issue</button>
-                <button onclick="openKeyDatesModal()" class="nav-tab inline-block hover:text-evo-gold text-gray-500">Key Dates</button>
+                <button onclick="openLatestArticle()" class="nav-tab inline-block hover:text-evo-gold text-gray-700 dark:text-gray-400">This Half-Term's Issue</button>
+                <button onclick="openKeyDatesModal()" class="nav-tab inline-block hover:text-evo-gold text-gray-700 dark:text-gray-400">Key Dates</button>
                 
                 <div class="relative group">
-                    <button onclick="openCategoriesModal()" class="nav-tab nav-tab-gold text-evo-gold inline-block pointer-events-auto hover:bg-black hover:text-evo-gold flex items-center gap-2 border-b-4 border-evo-gold">
+                    <button onclick="openCategoriesModal()" class="nav-tab nav-tab-gold text-evo-gold inline-block pointer-events-auto hover:bg-black hover:text-evo-gold flex items-center gap-2 border-b-4 border-evo-gold dark:hover:bg-evo-red dark:hover:border-evo-red">
                         Categories
                         <svg class="w-3 h-3 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     
                     <div class="category-menu pointer-events-auto">
                         <div>
-                            <h4 class="text-[10px] font-black uppercase tracking-widest text-evo-gold mb-4 border-b border-gray-100 dark:border-gray-700 pb-2">Categories</h4>
+                            <h4 class="text-[10px] font-black uppercase tracking-widest text-evo-gold dark:text-evo-red mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">Categories</h4>
                             <ul class="space-y-3">
-                                <li><button onclick="filterByCategory('Arts')" class="text-sm font-bold text-gray-600 dark:text-gray-300 hover:text-evo-gold hover:translate-x-1 transition-all text-left w-full">Arts</button></li>
-                                <li><button onclick="filterByCategory('Current Affairs')" class="text-sm font-bold text-gray-600 dark:text-gray-300 hover:text-evo-gold hover:translate-x-1 transition-all text-left w-full">Current Affairs</button></li>
-                                <li><button onclick="filterByCategory('Humanities')" class="text-sm font-bold text-gray-600 dark:text-gray-300 hover:text-evo-gold hover:translate-x-1 transition-all text-left w-full">Humanities</button></li>
+                                <li><button onclick="filterByCategory('Arts')" class="text-sm font-bold text-gray-700 dark:text-gray-300 hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Arts</button></li>
+                                <li><button onclick="filterByCategory('Humanities')" class="text-sm font-bold text-gray-700 dark:text-gray-300 hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Humanities</button></li>
+                                <li><button onclick="filterByCategory('Key Information')" class="text-sm font-bold text-gray-700 dark:text-gray-300 hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">Key Information</button></li>
                             </ul>
                         </div>
                         <div>
-                            <h4 class="text-[10px] font-black uppercase tracking-widest text-transparent mb-4 border-b border-gray-100 dark:border-gray-700 pb-2 select-none">.</h4>
+                            <h4 class="text-[10px] font-black uppercase tracking-widest text-transparent mb-4 border-b border-gray-200 dark:border-gray-700 pb-2 select-none">.</h4>
                             <ul class="space-y-3">
-                                <li><button onclick="filterByCategory('Opinion Pieces')" class="text-sm font-bold text-gray-600 dark:text-gray-300 hover:text-evo-gold hover:translate-x-1 transition-all text-left w-full">Opinion Pieces</button></li>
-                                <li><button onclick="filterByCategory('Science')" class="text-sm font-bold text-gray-600 dark:text-gray-300 hover:text-evo-gold hover:translate-x-1 transition-all text-left w-full">Science</button></li>
-                                <li><button onclick="filterByCategory('Tech')" class="text-sm font-bold text-gray-600 dark:text-gray-300 hover:text-evo-gold hover:translate-x-1 transition-all text-left w-full">Tech</button></li>
+                                <li><button onclick="filterByCategory('School Events')" class="text-sm font-bold text-gray-700 dark:text-gray-300 hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">School Events</button></li>
+                                <li><button onclick="filterByCategory('STEM')" class="text-sm font-bold text-gray-700 dark:text-gray-300 hover:text-evo-gold dark:hover:text-evo-red hover:translate-x-1 transition-all text-left w-full">STEM</button></li>
                             </ul>
                         </div>
                     </div>
@@ -735,92 +748,94 @@
             </div>
         </nav>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 absolute w-full shadow-2xl p-4 z-40">
+        <div id="mobile-menu" class="hidden md:hidden bg-[#FFFDF5] dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 absolute w-full shadow-2xl p-4 z-40">
             <div class="space-y-2">
-                <button onclick="openLatestArticle()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-bold text-dark-text dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-evo-gold">This Month's Issue</button>
-                <button onclick="openKeyDatesModal()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-bold text-dark-text dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-evo-gold">Key Dates</button>
-                <button onclick="openCategoriesModal()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-bold text-dark-text dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-evo-gold">Categories</button>
+                <button onclick="openLatestArticle()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-bold text-dark-text dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-evo-gold dark:hover:text-evo-red">This Half-Term's Issue</button>
+                <button onclick="openKeyDatesModal()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-bold text-dark-text dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-evo-gold dark:hover:text-evo-red">Key Dates</button>
+                <button onclick="openCategoriesModal()" class="block w-full text-left px-4 py-3 rounded-xl text-base font-bold text-dark-text dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-evo-gold dark:hover:text-evo-red">Categories</button>
             </div>
         </div>
     </header>
 
     <main class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-12 min-h-screen">
-
         <div id="home-view" class="transition-opacity duration-500 animate-fade-in-up">
             <section id="this-month" class="mb-24"></section>
 
             <section id="latest" class="mb-24">
-                <div class="flex flex-col xl:flex-row flex-wrap justify-between items-start xl:items-end gap-8 mb-12 border-b border-gray-200 dark:border-gray-700 pb-6">
+                <div class="flex flex-col xl:flex-row flex-wrap justify-between items-start xl:items-end gap-8 mb-12 border-b border-white/20 dark:border-gray-700 pb-6">
                     <h2 class="text-3xl md:text-5xl font-black uppercase italic flex items-center mb-6 md:mb-0 tracking-tighter text-white shrink-0">
                         <span class="brand-slash text-4xl md:text-6xl mr-4">//</span> Latest <span class="text-evo-gold ml-3">Stories</span>
                     </h2>
                     
                     <div class="w-full xl:w-auto flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 shrink-0">
                         <div class="relative group">
-                            <input type="text" id="search-input" placeholder="Search..." class="w-full md:w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg py-3 px-4 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-evo-gold placeholder-gray-400 text-gray-900 dark:text-white shadow-sm transition">
+                            <input type="text" id="search-input" placeholder="Search..." class="w-full md:w-48 bg-[#FFFDF5] dark:bg-gray-800 border border-transparent dark:border-gray-700 rounded-lg py-3 px-4 text-sm font-bold text-dark-text focus:outline-none focus:ring-2 focus:ring-evo-gold placeholder-gray-500 dark:text-white shadow-sm transition">
                         </div>
-
-                        <select id="filter-category" class="filter-select w-full md:w-64 min-w-[160px] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg py-3 px-4 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-evo-gold shadow-sm cursor-pointer hover:border-gray-300 transition text-gray-900 dark:text-white">
+                        
+                        <select id="filter-category" class="filter-select w-full md:w-64 min-w-[160px] bg-[#FFFDF5] dark:bg-gray-800 border border-transparent dark:border-gray-700 rounded-lg py-3 px-4 text-sm font-bold text-dark-text focus:outline-none focus:ring-2 focus:ring-evo-gold shadow-sm cursor-pointer hover:border-gray-300 transition dark:text-white">
                             <option value="All">All Categories</option>
                             <option value="Arts">Arts</option>
-                            <option value="Current Affairs">Current Affairs</option>
                             <option value="Humanities">Humanities</option>
-                            <option value="Opinion Pieces">Opinion Pieces</option>
-                            <option value="Science">Science</option>
-                            <option value="Tech">Tech</option>
+                            <option value="Key Information">Key Information</option>
+                            <option value="School Events">School Events</option>
+                            <option value="STEM">STEM</option>
                         </select>
                     </div>
                 </div>
                 
                 <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"></div>
                 
-                <div id="no-results" class="hidden text-center py-20 bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm">
-                    <p class="text-gray-300 dark:text-gray-500 font-black uppercase tracking-widest text-xl mb-4">No Data Found</p>
+                <div id="no-results" class="hidden text-center py-20 bg-[#FFFDF5] dark:bg-gray-800 rounded-3xl border border-transparent dark:border-gray-700 shadow-sm">
+                    <p class="text-gray-500 dark:text-gray-400 font-black uppercase tracking-widest text-xl mb-4">No Data Found</p>
                     <button onclick="resetFilters()" class="text-evo-gold font-bold underline hover:text-black dark:hover:text-white transition">Clear All Filters</button>
                 </div>
             </section>
         </div>
 
         <div id="search-view" class="hidden animate-fade-in-up">
-            <div class="flex items-center justify-between mb-12 border-b border-gray-200 dark:border-gray-700 pb-6">
-                <h2 class="text-3xl md:text-4xl font-black uppercase italic text-white tracking-tighter">Search: <span id="search-query-display" class="text-evo-gold">...</span></h2>
-                <button onclick="resetToHome()" class="text-gray-300 hover:text-evo-gold font-bold uppercase text-xs tracking-widest flex items-center transition group">
+            <div class="flex items-center justify-between mb-12 border-b border-white/20 dark:border-gray-700 pb-6">
+                <h2 class="text-3xl md:text-4xl font-black uppercase italic text-white dark:text-white tracking-tighter">Search: <span id="search-query-display" class="text-evo-gold dark:text-evo-red">...</span></h2>
+                <button onclick="resetToHome()" class="text-white/80 hover:text-evo-gold font-bold uppercase text-xs tracking-widest flex items-center transition group">
                     <span class="mr-2 group-hover:-translate-x-1 transition-transform">&larr;</span> Back to Home
                 </button>
             </div>
             
             <div id="search-results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"></div>
 
-            <div id="search-empty" class="hidden text-center py-32">
-                <p class="text-2xl font-black text-white uppercase tracking-widest mb-6">No matching articles found.</p>
+            <div id="search-empty" class="hidden text-center py-32 bg-black/10 rounded-3xl border border-white/10 mt-8">
+                <p class="text-2xl font-black text-white/90 uppercase tracking-widest mb-6">No matching articles found.</p>
                 <button onclick="resetToHome()" class="evo-btn rounded-full">Return Home</button>
             </div>
         </div>
 
     </main>
 
-    <footer class="bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 transition-colors duration-300">
+    <footer class="bg-black/20 dark:bg-gray-900 border-t border-white/10 dark:border-gray-800 transition-colors duration-300">
         <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-2">
-                    <a href="#" class="text-3xl font-extrabold tracking-widest uppercase text-dark-text dark:text-white mb-6 block">
-                        <span class="brand-slash">//</span> RISING <span class="brand-slash">//</span> <span class="text-evo-gold">PHOENIX</span>
+                    <a href="#" class="text-3xl font-extrabold tracking-widest uppercase text-white dark:text-white mb-6 block">
+                        <span class="brand-slash">//</span> RISING <span class="brand-slash">//</span> <span class="text-evo-gold dark:text-evo-red">PHOENIX</span>
                     </a>
-                    <p class="text-sm mt-6 text-gray-500 dark:text-gray-400 max-w-sm leading-relaxed font-medium">The Rising <span class="brand-slash text-sm">//</span> Phoenix is a year 12 run school newsletter. Dan D 12.11 Site Developer. Elleanore P 12.11 Organiser. Isabelle Wright 12. Head of Club</p>
+                    <p class="text-sm mt-6 text-white/70 dark:text-gray-400 max-w-sm leading-relaxed font-medium">
+                        The Rising <span class="brand-slash text-sm">//</span> Phoenix is a student run online publication, released every half term.<br><br>
+                        Site Developer: Dan D (12.11)<br>
+                        Editors and organisers: Elleanore P (12.11) and Isabelle W (12.7)
+                    </p>
                 </div>
                 <div>
-                    <h4 class="text-dark-text dark:text-white font-black uppercase text-xs tracking-widest mb-6 text-evo-gold">Quick Links</h4>
-                    <ul class="space-y-4 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                        <li><button onclick="openLatestArticle()" class="hover:text-evo-gold transition text-left uppercase">This Month</button></li>
-                        <li><button onclick="openKeyDatesModal()" class="hover:text-evo-gold transition text-left uppercase">Key Dates</button></li>
-                        <li><button onclick="openCategoriesModal()" class="hover:text-evo-gold transition text-left uppercase">Categories</button></li>
-                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc5Y8q21aghIr-45e9h1eq5KPG3L1DKdhg0Eb62jJJkz8g8jQ/viewform?usp=dialog" target="_blank" class="hover:text-evo-gold transition text-left uppercase">Become a writer</a></li>
+                    <h4 class="text-white dark:text-white font-black uppercase text-xs tracking-widest mb-6 text-evo-gold dark:text-evo-red">Quick Links</h4>
+                    <ul class="space-y-4 text-xs font-bold uppercase tracking-wider text-white/70 dark:text-gray-400">
+                        <li><button onclick="openLatestArticle()" class="hover:text-evo-gold dark:hover:text-evo-red transition text-left uppercase">This Half-Term</button></li>
+                        <li><button onclick="openKeyDatesModal()" class="hover:text-evo-gold dark:hover:text-evo-red transition text-left uppercase">Key Dates</button></li>
+                        <li><button onclick="openCategoriesModal()" class="hover:text-evo-gold dark:hover:text-evo-red transition text-left uppercase">Categories</button></li>
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc5Y8q21aghIr-45e9h1eq5KPG3L1DKdhg0Eb62jJJkz8g8jQ/viewform?usp=dialog" target="_blank" class="hover:text-evo-gold dark:hover:text-evo-red transition text-left uppercase">Become a writer</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-dark-text dark:text-white font-black uppercase text-xs tracking-widest mb-6 text-evo-gold">Townley Grammar</h4>
+                    <h4 class="text-white dark:text-white font-black uppercase text-xs tracking-widest mb-6 text-evo-gold dark:text-evo-red">Townley Grammar</h4>
                     <div class="flex space-x-6">
-                        <a href="https://www.townleygrammar.org.uk/" target="_blank" class="text-gray-300 dark:text-gray-500 hover:text-evo-gold transition transform hover:scale-110">
+                        <a href="https://www.townleygrammar.org.uk/" target="_blank" class="text-white/70 dark:text-gray-500 hover:text-evo-gold dark:hover:text-evo-red transition transform hover:scale-110">
                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M2 20h20v2H2v-2zm2-8h2v7H4v-7zm5 0h2v7H9v-7zm5 0h2v7h-2v-7zm5 0h2v7h-2v-7zM12 2L2 7v2h20V7L12 2z"/>
                             </svg>
@@ -828,11 +843,11 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-100 dark:border-gray-700">
-                <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-300 dark:text-gray-600 mb-4 md:mb-0">
-                    Townley Groupe  est 2025 
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 dark:border-gray-800">
+                <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/50 dark:text-gray-600 mb-4 md:mb-0">
+                    Townley group est 2025
                 </div>
-                <button onclick="handleDevClick()" class="text-[10px] font-bold uppercase text-gray-400 hover:text-evo-gold transition">
+                <button onclick="handleDevClick()" class="text-[10px] font-bold uppercase text-white/50 hover:text-evo-gold dark:hover:text-evo-red transition">
                     Developer Access
                 </button>
             </div>
@@ -904,26 +919,102 @@
 
         const staticArticles = [
             {
-                title: "MOFs: Why This Year’s Chemistry Nobel Prize Is Like Hermione’s Handbag",
-                cat: "Science",
-                subject: "Chemistry",
-                yearGroup: "Year 12",
-                img: "https://placehold.co/600x400/222/CCAC00?text=Chemistry+Nobel",
-                content: "They may not use wizarding spells, but the materials behind this year’s Nobel Prize in Chemistry can be just as astonishing as magic. In 2025, scientists Makoto Fujita, Omar Yaghi, and Susumu Kitagawa were awarded the Nobel Prize for developing Metal - Organic Frameworks, or MOFs which are materials so porous and spacious inside that they’ve been compared to Hermione Granger’s handbag. At first glance, a MOF crystal looks tiny, but under the microscope it’s a labyrinth of nanoscale pores and tunnels. This gives it a huge internal surface area and just a teaspoon of MOF material can have surface area of an entire football pitch! That means these frameworks can trap, store, and separate gases or liquids incredibly efficiently. Scientists are already using MOFs to tackle some of the biggest challenges facing our planet. They can capture carbon dioxide from the air, store clean hydrogen fuel, purify water, and even pull moisture out of desert air to make drinkable water. So while Hermione’s handbag may be a work of fiction, MOFs are proof that chemistry can create its own kind of magic, using clever design and molecular architecture to help shape a more sustainable future.",
-                author: "Elleanore P 12.11",
-                date: "Dec 18, 2025",
-                isStatic: true,
-                specialClass: "border-2 border-evo-gold/30"
+                title: "Introducing our new Head Girl and Head Boy: Aaliyah and Ashwin",
+                cat: "Key Information",
+                subject: "School News",
+                yearGroup: "All",
+                img: "https://placehold.co/600x400/5A0C10/FFF?text=Head+Girl+%26+Boy",
+                content: `Hi everyone, we are the new Head Girl and Head Boy at Townley, Aaliyah and Ashwin. This year, we are focused on making Townley an even more commendable place than it already is by promoting a stronger sense of community between year groups and encouraging every student to make the most of the opportunities available to them.\n\nSo far, we have had a successful Sixth Form Induction day, with the highlight being the fantastic uniform parade organised by the Gold tie and Prefect team! It was brilliant to see everyone working together to welcome prospective Year 12 students and help them get a feel for Townley.\n\nMost importantly, we want to hear from you. If you have any worries, or just want to speak to someone, please don't hesitate to speak to us or any prefect. We are also very eager to hear any ideas you have for improving school life, fundraising events or activities you'd like to see, or even any events in general. We hope everyone has an amazing end to this year, and we look forward to making this next year an enjoyable and successful year for the whole Townley community.`,
+                author: "Aaliyah & Ashwin",
+                date: "Jul 12, 2026",
+                isStatic: true
             },
             {
-                title: "From Weird to Wired: The Quantum Leap That Won a Nobel",
-                cat: "Science",
-                subject: "Physics",
+                title: "Why I can’t gossip in Bytes",
+                cat: "STEM",
+                subject: "Maths",
                 yearGroup: "Year 12",
-                img: "https://placehold.co/600x400/111/EEE?text=Quantum+Physics",
-                content: "Quantum physics is famously strange. In the quantum world, particles can be in two places at once, pass through barriers they should not, and absorb energy in tiny, fixed amounts. For decades, this weirdness seemed confined to atoms and subatomic particles, far removed from everyday life. But this year’s Nobel Prize in Physics went to three scientists who brought that weirdness into the real world. John Clarke, Michel Devoret, and John Martinis built tiny superconducting circuits so sensitive that they actually follow the rules of quantum mechanics. In their experiments, electrons tunnelled through barriers and energy levels “jumped” between discrete steps, behaviours normally seen only inside atoms. Why does that matter? Because this breakthrough helped lay the foundation for quantum computing, machines that use the strange rules of quantum physics to process information in ways no classical computer ever could. It has also opened doors to ultra-precise sensors, new materials, and technologies we can barely imagine yet. So while quantum physics might still sound weird, these Nobel winners proved it does not have to stay abstract. With the right tools (and temperatures near absolute zero), the once-mysterious quantum world can now be engineered, quite literally turning the weird into the wired.",
-                author: "Elleanore P 12.11",
-                date: "Dec 18, 2025",
+                img: "https://placehold.co/600x400/111/EEE?text=Maths+%26+Encryption",
+                content: `Every time you log into Netflix, Tik Tok, Instagram, Amazon, X, Google, Snap, Icloud, Flo, Disney +, Ebay, Outlook, and whatever else you use to procrastinate, maths has been saving you. Not the x2-13x+42 maths. The maths which they talk about around the fireplace in a maths convention. One involving prime numbers so large that even the world’s most powerful computers can't break them.\n\nWhy I can't gossip in Bytes\nOn a Friday lunch time, there is no doubt that Bytes is packed and busy. Anything that happened in the day I’ll have to save for the group chat later because I know that there’s always someone who’s going to hear me. I can't even write a sneaky note and pass it over because what if someone else comes and snatches it away and reads it to the whole cafeteria?\n\nThis is the internet’s problem. Every time you send information online, it passes through countless servers, routers, and cables, all of which are extremely vulnerable to eavesdroppers and hackers. So how do you share a secret when everyone is listening?\n\nEncryption is…\nWe’ve all seen how Whatsapp says “Your messages are end to end encrypted”, but what does that actually mean? If you just sent your plain messages over the internet, everyone could potentially find out about how you haven’t done your Sparx in 2 months, and so we need some sort of padlock to hide the message. If both you and the receiver know the code to the padlock, then sending it over to them should be easy, you just send the message with the padlock and the other person who knows the code unlocks it - this is symmetric encryption. But how do you tell your friend what the code is without everyone else figuring out? This is why symmetric encryption is not secure enough, and why asymmetric encryption is needed.\n\nI can explain asymmetric encryption with an analogy. Imagine you have a padlock and a key. You send copies of your padlock to everyone who wants to send a message to you, whilst you and only you keep the key. When someone wants to send a message to you, they put it in a box and close the padlock before sending it over. This means no one on the way can open the box since they don't have the key. Once it arrives at your house, you use your key to open the box, retrieving the message kept safely inside. This is how it works: the padlock is the public key and the key is the private key. You never give out your private key to anyone, and in turn your messages are kept safe.\n\nIn 1977, three researchers - Rivest, Shamir, and Adleman - invented a system now known as RSA. It's the mathematical equivalent of a padlock that anyone can use, but only one person can open. It allows you to publish the padlock for the whole world to see, and it still doesn't help anyone break in.\n\nConclusion\nThe next time you enter your password or buy something online, take a moment to appreciate the maths working behind the scenes. A system built on ideas from some guy from the 18th century in Europe and created by some more guys in 1977 genuinely probably saved your life or something. Depends how much you value your Tik Tok account. All of this links to a certain old man who lived roughly 2301 years ago. But that’s a story for another time.`,
+                author: "Han Yun S (12.7)",
+                date: "Jul 10, 2026",
+                isStatic: true
+            },
+            {
+                title: "CAN THE GOVERNMENT REALLY DELIVER ON ALL OF ITS PROMISES?",
+                cat: "Humanities",
+                subject: "Economics",
+                yearGroup: "All",
+                img: "https://placehold.co/600x400/222/CCAC00?text=Gov+Promises",
+                content: `At every election, politicians make a long list of promises, including lower prices, lower taxes, more jobs, stronger economic growth and lower inflation. At first glance, it sounds like a simple enough task for any government. However, in reality, these goals do not always fit together well, and improving one can often worsen another.\n\nMost governments have three main objectives: low unemployment, steady economic growth and low inflation. Low unemployment means more people are working and earning a living. Economic growth means the economy produces more goods and services, which often leads to higher incomes and higher spending. Inflation is when the price levels in the economy rise, leading to everyday goods becoming more expensive over time.\n\nThe problem is that these objectives often clash. For example, if the government tries to reduce inflation, it may support an increase in interest rates by the Bank of England, which makes borrowing more expensive for households and businesses. This likely means that people will spend less and economic growth will slow down. This was seen in the UK in the early 2020s, when inflation rose sharply after Covid-19 and the energy crisis. The higher interest rates in this period helped to slow inflation, but daily costs such as mortgages and loans became a lot more expensive.\n\nAdditionally, there is a clash between tax cuts and public services. If the government chooses to lower taxes (such as income tax or VAT), people have more money to spend, which can boost economic growth in the short term. However, it also means that the government receives less revenue from taxes to fund public services such as the NHS, schools and transport, which could cause more long-term issues (such as declining services).\n\nThis shows that governments rarely have the option to improve everything at once. Instead, they must decide which problems to prioritise and accept that every decision comes with a cost. Economic policies are often based on making trade-offs rather than finding perfect solutions. Perhaps the real question isn’t whether governments can keep every promise, but which promises they should prioritise.`,
+                author: "Lily C (12.4)",
+                date: "Jul 8, 2026",
+                isStatic: true
+            },
+            {
+                title: "The use of nanocarriers in drug delivery",
+                cat: "STEM",
+                subject: "Biology",
+                yearGroup: "Year 12",
+                img: "https://placehold.co/600x400/333/EEE?text=Nanocarriers",
+                content: `Drug Delivery:\nDrug delivery refers to the methods and technologies used to transport a pharmaceutical compound into the body, with the primary goal of reaching a specific target site in order to achieve the desired effects safely. Common forms of drug delivery include tablets, capsules or creams. However, there are many major issues such as biological barriers like the blood-brain barrier, which make it difficult for many compounds to get by; compounds being broken down within the body; or compounds building up in non-target tissues, causing unwanted side effects from occurring. Many of these issues have been solved through the research into using nanoparticles as carriers for therapeutic agents within the body.\n\nNanoparticles and nanocarriers:\nNanoparticles are microscopic particles ranging from 1-100 nanometers, as a result they have a large surface area to volume ratio, which improves their solubility and reactivity, making them efficient chemical catalysts. These characteristics have led to the research of using nanoparticles within drug delivery in order to improve the absorbance and effectiveness of the therapeutic agents currently used in modern treatments. This has been done by engineering specific ligands (usually antigens, proteins or other small molecules) onto the surface of the nanoparticles, allowing them to bind to specific receptors found on the surface of the target cell.\n\nAs a result of these new discoveries, nanoparticles have been used as drug delivery agents through either encapsulating or through conjugating the therapeutic agent. Encapsulation involves trapping the therapeutic agent within the nanoparticle, preventing the breakdown of the drugs by the liver or other metabolic reactions which take place in the body. It allows for greater control over the release of the drug, improving the effectiveness of the drug within the body.\n\nConjugating is when the therapeutic agent is chemically bound to the surface of the nanoparticle allowing for cells to be easily targeted preventing unwanted interactions between the therapeutic agent and healthy cells or tissues. An example of this is folic acid-conjugated nanoparticles, where folic acid is conjugated to the surface of the nanoparticle. This is used to target cancer cells, which tend to overexpress the folate receptor as a result of the need to undergo rapid cell division. This leads to the conjugated nanoparticle binding to the folate receptor and administering the therapeutic drugs to the targeted cells.`,
+                author: "Teresa R (12.6)",
+                date: "Jul 5, 2026",
+                isStatic: true
+            },
+            {
+                title: "Devolution is coming; will it change anything?",
+                cat: "Humanities",
+                subject: "Politics",
+                yearGroup: "All",
+                img: "https://placehold.co/600x400/5A0C10/EEE?text=Devolution",
+                content: `It won’t be long until Andy Burnham is Prime Minister, but what does he actually want and how will it affect Britain’s economy?\n\nWhile he may not be Prime Minister yet, it is becoming clearer that Andy Burnham is the only candidate to succeed Keir Starmer in his job. So far his focus has mostly been on devolution, giving more powers to local governments. So, how will this work, what will be done, and how will this affect you?\n\nWhat exactly is devolution?\nSimply put, devolution is giving more powers to local governments, away from the central government in Westminster. Proponents of it, like Andy Burnham, believe this process will improve the UK’s economic growth, believing it helped the city of Manchester’s economy.\n\nSo does this mean we will see councils passing new laws all over the country, legalising guns in Lancashire, driving at 13 in Birmingham or a 500 mile per hour speed limit in Portsmouth? As fun as this would be, devolution does not actually mean that every council will get the authority to pass its own laws like the governments in Scotland, Wales, and Northern Ireland. Instead, plans for devolution will be a lot more restrained, giving power to local governments to gain more tax revenue and to spend more of this on projects like housing and transport.\n\nWhat will the new PM do and will this help?\nSo far, the agenda for devolution is not especially fleshed out. Burnham has not entered Downing Street as Prime Minister yet, or even fully announced the specifics of any plans for devolution. However, he has promised a new Number 10 North, a new centre to run much of the country and decentralise power from the central civil service located in Whitehall, London.\n\nHow will this affect you?\nFor students of Townley, this probably will not affect your daily lives much. London already has a devolved mayor and assembly. Local councils like Bexley, with greater funding, may be able to spend more on local events, or perhaps there will be less potholes in Bexley's roads. With the plans for devolution being still in early stages, the only thing that is certain is that Andy Burnham will have a lot of work cut out for him to make devolution work.`,
+                author: "Christian W (12.4)",
+                date: "Jul 3, 2026",
+                isStatic: true
+            },
+            {
+                title: "Meet the team",
+                cat: "Key Information",
+                subject: "General",
+                yearGroup: "All",
+                img: "https://placehold.co/600x400/111/D4AF37?text=Meet+The+Team",
+                content: `Welcome to The Rising Phoenix - your new go-to place for everything happening around school, from big events to the interesting articles students actually want to read. Behind the scenes, a small team has been working hard to bring this to life. Here's who's running the show:\n\nDan D (12.11) - Site Developer\nDan is the mastermind behind the website itself - designing, building, and keeping everything running smoothly behind the scenes. Without Dan, none of this would exist!\n\nIsabelle W (12.7) and Elleanore P (12.11) - Editors\nThe editing duo behind the scenes, giving every article a final read-through before it's published. They're also responsible for organising the publication as a whole, including encouraging students to get involved, and deciding when each new issue is released.\n\nTogether, this team is looking forward to sharing student voices, school news, and interesting reads every half-term. So watch this space - there's always something new in the works!`,
+                author: "Editor",
+                date: "Jul 1, 2026",
+                isStatic: true
+            },
+            {
+                title: "Inflation in 2026: Why Everything Feels More Expensive Right Now",
+                cat: "Humanities",
+                subject: "Economics",
+                yearGroup: "All",
+                img: "https://placehold.co/600x400/222/EEE?text=Inflation",
+                content: `Open any newspaper, scroll any news app, or just listen in at the dinner table, and you'll hear the same word coming up again and again: inflation. It gets blamed for expensive food shops, painful energy bills, and a general feeling that money doesn't stretch as far as it used to. But what actually is inflation, and why does it matter?\n\nWhat is inflation?\nIn theory, inflation is simple: it’s the rate at which prices rise. Right now in the UK, prices are about 2.8% higher than they were a year ago. That sounds fairly small on its own, but it adds up. Over the last three years, UK prices have climbed by more than 20%. So £100 saved a few years ago now only buys what around £80 would have bought back then.\n\nYour money itself doesn't shrink, but what it can actually buy does. If your income stays the same while prices keep rising (whether that's a student loan, a pension, or a salary that hasn't gone up), you're effectively worse off every year.\n\nSo how does it compare to previous levels?\nIf 2.8% sounds tame, that's because it is (compared to 2022, anyway). Back then, inflation hit 11.1%, the highest it had been in 41 years. Energy bills and food prices shot up after Russia invaded Ukraine and gas prices spiralled, and pretty much everyone felt it. The "cost of living crisis" became a phrase you couldn't get away from.\n\nWhat it actually looks like\nA figure like "2.8%" sounds abstract, but in real life it's the small stuff. Someone swapping their weekly shop for a smaller trolley. A local café putting its prices up, not because it wants to, but because its own costs (energy, ingredients, wages) have increased too.\n\nWhy it affects all of us\nFor sixth formers thinking ahead to university loans, first jobs, or first flats, inflation will impact how far a starting salary actually stretches. For parents, it can already be seen in the weekly shop and the energy bills. Even the school feels it, in the cost of everything from trips to textbooks. We all notice it differently depending on what we spend money on, but nobody's exempt.`,
+                author: "Isabelle W",
+                date: "Jun 28, 2026",
+                isStatic: true
+            },
+            {
+                title: "2026 Sports Day",
+                cat: "School Events",
+                subject: "School Events",
+                yearGroup: "All",
+                img: "https://placehold.co/600x400/D4AF37/111?text=Sports+Day",
+                content: `Our annual sports day on Wednesday was a total success, bringing together students and staff through the vibrant house spirit and competition. The morning track events kicked off with a burst of energy starting with the 800m races for years 7-10, it was great to see the amazing effort all the contestants brought to the track as well as all the support from the whole school community! Following this, the 100m and 200m sprints commenced with students putting in their all to collect as many points for their houses. To round off the morning events we had a relay race and it was incredibly exciting to see the teachers race against each other in their teams.\n\nIn the afternoon, the focus moved to the field events where competitors showcased immense dedication, strength and power through the javelin, discus, long jump and high jump events. Overall, the day was pleasant with warm weather that created an enjoyable and memorable atmosphere. It was great to see the incredible athletic ability and sportsmanship showcased and congratulations to all the participants and winners!`,
+                author: "Hikmah (12.7)",
+                date: "Jun 25, 2026",
+                isStatic: true
+            },
+            {
+                title: "2026 EOY Art Exhibition: A Year Teeming With Modern-Day Picassos!",
+                cat: "Arts",
+                subject: "School Events",
+                yearGroup: "All",
+                img: "https://placehold.co/600x400/700000/FFF?text=Art+Exhibition",
+                content: `Okay, you got me.\n\nYou won’t find the name ‘Pablo Picasso’ plastered on any Townley student’s birth certificate, but if you attended the 2026 End of Year Art Exhibition, you would, without a doubt, agree that the work on display was astounding!\n\nThis year, the art department decided to switch palettes. They moved away from the usual scene at the Townley theatre to create an immersive, gallery-style experience in the corridors of the 2006 building.\n\nAlongside delicious snacks and drinks to cool visitors down in the summer’s sweltering heat, two groups of Year 10 students entertained our ears with live music. The ambience mixed with the charming chatter of proud artists, and their even prouder friends and family, made the atmosphere truly delightful.\n\nThe art presented this year was created by KS3, GCSE, and A-level students, each dominating a certain section of the 2006 building.\n\nAs an eye-witness, I can safely say that no visitors could look around the KS3’s artwork without wanting to visit the snacks table afterwards. The students created detailed models of a range of foods, using materials like clay, cardboard, acrylic paint, and hot glue to trick even a trained eye. You could tell how much care and time went into creating their culinary masterpieces, and I’m certain each student will go on to create more amazing pieces.\n\nLet’s not forget the intriguing and entertaining perspectives brought by the Yr12 Photography elective students! Sitting across the GCSE artwork, their photographs captured everyone’s gazes, sucking them into a world of greyscale and stark emotion. Their photographs inspired me and others to continue developing our skills and aim for the level the photography elective students were working at.\n\nIt’s okay if you weren’t able to visit the official exhibition on the 2nd of July!\n\nThe GCSE and A-level work continues to glitter in the corridors of the 2006 building, so if you have any time and want to tickle your curiosity, come take a look!`,
+                author: "Tokemi A (12.4)",
+                date: "Jun 20, 2026",
                 isStatic: true
             }
         ];
@@ -1391,15 +1482,16 @@
                 <div class="relative overflow-hidden shrink-0">
                     <img src="${article.img}" class="w-full ${imgHeight} object-cover transition-transform duration-500 group-hover:scale-110">
                     ${isNewBadge}
+                    <!-- Modified Year Badge Layout -->
                     ${year !== "All" ? `<div class="absolute bottom-4 right-4 bg-black/80 text-white text-[10px] font-bold px-3 py-1.5 rounded backdrop-blur-md uppercase shadow-lg z-10">${year}</div>` : ''}
                 </div>
-                <div class="p-6 md:p-8 flex-1 flex flex-col bg-white dark:bg-gray-800 relative z-20">
-                    <p class="text-evo-gold uppercase text-xs font-bold mb-3 tracking-widest flex items-center">${catString}</p>
-                    <h3 class="block text-2xl font-black uppercase leading-tight hover:text-evo-red dark:hover:text-evo-red transition duration-200 mb-4 italic text-dark-text dark:text-white">
+                <div class="p-6 md:p-8 flex-1 flex flex-col bg-[#FFFDF5] dark:bg-gray-800 relative z-20">
+                    <p class="text-evo-gold dark:text-evo-red uppercase text-xs font-bold mb-3 tracking-widest flex items-center">${catString}</p>
+                    <h3 class="block text-2xl font-black uppercase leading-tight hover:text-evo-red dark:hover:text-evo-gold transition duration-200 mb-4 italic text-dark-text dark:text-white">
                         ${article.title}
                     </h3>
                     <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 line-clamp-3 leading-relaxed flex-1">${article.content}</p>
-                    <div class="flex justify-between items-center text-[10px] text-gray-500 font-bold border-t border-gray-100 dark:border-gray-700 pt-4 mt-auto">
+                    <div class="flex justify-between items-center text-[10px] text-gray-500 font-bold border-t border-gray-200 dark:border-gray-700 pt-4 mt-auto">
                         <span class="flex items-center text-dark-text dark:text-gray-300"><span class="w-2 h-2 bg-evo-red rounded-full mr-2"></span>BY ${article.author.toUpperCase()}</span>
                         <span>${article.date}</span>
                     </div>
@@ -1456,7 +1548,7 @@
                 const heroCatData = heroCats.join(',');
 
                 heroSection.innerHTML = `
-                <div class="flex flex-col lg:flex-row w-full bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-2xl group cursor-pointer border border-transparent dark:border-gray-700 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300"
+                <div class="flex flex-col lg:flex-row w-full bg-[#FFFDF5] dark:bg-gray-800 rounded-3xl overflow-hidden shadow-2xl group cursor-pointer border border-transparent dark:border-gray-700 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300"
                      onclick="openArticle(this)"
                      data-title="${heroArt.title}"
                      data-cat="${heroCatData}"
@@ -1467,7 +1559,7 @@
                      data-author="${heroArt.author}"
                      data-date="${heroArt.date}">
                     
-                    <div class="w-full lg:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center order-2 lg:order-1 relative z-10 bg-white dark:bg-gray-800">
+                    <div class="w-full lg:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center order-2 lg:order-1 relative z-10 bg-[#FFFDF5] dark:bg-gray-800">
                         <span class="bg-evo-gold text-dark-text text-[10px] font-black px-4 py-1.5 rounded-md uppercase tracking-widest w-max mb-8 shadow-sm">Featured</span>
                         
                         <h2 class="text-4xl md:text-5xl lg:text-[3.5rem] font-black italic text-dark-text dark:text-white mb-6 leading-[1.05] tracking-tighter group-hover:text-evo-red dark:group-hover:text-evo-gold transition-colors">
@@ -1478,7 +1570,7 @@
                             ${heroArt.content}
                         </p>
                         
-                        <div class="mt-auto inline-flex items-center group/btn border border-gray-200 dark:border-gray-600 rounded-full px-6 py-3 w-max hover:bg-dark-text hover:border-dark-text dark:hover:bg-evo-gold transition-all">
+                        <div class="mt-auto inline-flex items-center group/btn border border-gray-200 dark:border-gray-600 rounded-full px-6 py-3 w-max hover:bg-dark-text hover:border-dark-text dark:hover:bg-evo-red dark:hover:border-evo-red transition-all">
                             <span class="text-xs font-bold text-dark-text dark:text-white group-hover/btn:text-white uppercase tracking-widest mr-3 transition-colors">Read More</span>
                             <svg class="w-4 h-4 text-dark-text dark:text-white group-hover/btn:text-white transition transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </div>
